@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>编译系统 (批处理) &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="next" title="File Navigation and File Management" href="../file_management/file_management.html" />
+    <link rel="prev" title="Search and Replace - Multiple Files" href="../search_and_replace/search_and_replace_files.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../file_management/file_management.html" title="File Navigation and File Management"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../search_and_replace/search_and_replace_files.html" title="Search and Replace - Multiple Files"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="build-systems-batch-processing">
+<h1>编译系统(批处理)<a class="headerlink" href="#build-systems-batch-processing" title="Permalink to this headline">¶</a></h1>
+<p>编译系统让你运行你的文件通过内部程序像
+<strong class="program">make</strong>, <strong class="program">tidy</strong>, 翻译, etc.</p>
+<p>从编译系统调用的可执行文件必须在你的<tt class="xref py py-const docutils literal"><span class="pre">PATH</span>（环境变量）中</tt>. 想了解更多信息关于确保<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> Sublime Text中见到的被设置正确，看<a class="reference internal" href="../reference/build_systems.html#troubleshooting-build-systems"><em>故障诊断编译系统</em></a>.</p>
+<div class="section" id="file-format">
+<h2>文件格式<a class="headerlink" href="#file-format" title="Permalink to this headline">¶</a></h2>
+<p>编译系统是JSON文件并且有着<em>.sublime-build</em>扩展名。</p>
+<div class="section" id="example">
+<h3>例子<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>这儿有一个编译系统的例子:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;cmd&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;-u&quot;</span><span class="p">,</span> <span class="s2">&quot;$file&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;file_regex&quot;</span><span class="o">:</span> <span class="s2">&quot;^[ ]*File \&quot;(...*?)\&quot;, line ([0-9]*)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;selector&quot;</span><span class="o">:</span> <span class="s2">&quot;source.python&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">cmd</span></tt></dt>
+<dd><p class="first">必须。这个选项包含实际命令行将被执行的参数:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="n">python</span> <span class="o">-</span><span class="n">u</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">current</span><span class="o">/</span><span class="nb">file</span><span class="o">.</span><span class="n">ext</span>
+</pre></div>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">file_regex</span></tt></dt>
+<dd>一个Perl样式的正则表达式来捕获外部程序输出的错误信息。这个信息后面将用来帮助你导航这些错误示例通过 <tt class="kbd docutils literal"><span class="pre">F4</span></tt>键。</dd>
+<dt><tt class="docutils literal"><span class="pre">selector</span></tt></dt>
+<dd>如果 <strong>Tools | Build System | Automatic</strong> 选项被设置, Sublime Text
+将会自动找到当前文件相应的编译系统通过匹配<tt class="docutils literal"><span class="pre">选择器</span></tt>从文件的范围。</dd>
+</dl>
+<p>对于选项多说一句，你也可以使用一些编译系统中的变量，像之前使用的<tt class="docutils literal"><span class="pre">$file</span></tt>, 它实际会替换成激活缓冲区的文件名。</p>
+</div>
+</div>
+<div class="section" id="where-to-store-build-systems">
+<h2>哪里存储编译系统<a class="headerlink" href="#where-to-store-build-systems" title="Permalink to this headline">¶</a></h2>
+<p>编译系统必须在<em>Packages</em> 目录下面的哪块儿
+(e. g. <em>Packages/User</em>)。许多包包含着它们自己的编译系统。</p>
+</div>
+<div class="section" id="running-build-systems">
+<h2>运行编译系统<a class="headerlink" href="#running-build-systems" title="Permalink to this headline">¶</a></h2>
+<p>编译系统可以被运行通过按<tt class="kbd docutils literal"><span class="pre">F7</span></tt> 或者点击菜单<strong>Tools | Build</strong>.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">你也许感兴趣</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="../reference/build_systems.html"><em>编译系统参考</em></a></dt>
+<dd>完整文档关于所有可用选项变量，等等。</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Build Systems (Batch Processing)</a><ul>
+<li><a class="reference internal" href="#file-format">File Format</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#where-to-store-build-systems">Where to Store Build Systems</a></li>
+<li><a class="reference internal" href="#running-build-systems">Running Build Systems</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../search_and_replace/search_and_replace_files.html"
+                        title="previous chapter">Search and Replace - Multiple Files</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../file_management/file_management.html"
+                        title="next chapter">File Navigation and File Management</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/file_processing/build_systems.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../file_management/file_management.html" title="File Navigation and File Management"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../search_and_replace/search_and_replace_files.html" title="Search and Replace - Multiple Files"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>Search and Replace - Single File &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="up" title="Search and Replace" href="search_and_replace_overview.html" />
+    <link rel="next" title="Search and Replace - Multiple Files" href="search_and_replace_files.html" />
+    <link rel="prev" title="Search and Replace" href="search_and_replace_overview.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="search_and_replace_files.html" title="Search and Replace - Multiple Files"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="search_and_replace_overview.html" title="Search and Replace"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="search_and_replace_overview.html" accesskey="U">Search and Replace</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="search-and-replace-single-file">
+<h1>查找和替换 - 单文件<a class="headerlink" href="#search-and-replace-single-file" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="searching">
+<span id="snr-search-buffer"></span><h2>搜索<a class="headerlink" href="#searching" title="Permalink to this headline">¶</a></h2>
+<p>要打开缓冲区的<strong>搜索面板</strong> , 按<tt class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">F</span></tt>. 在搜索面版上的选项和搜索行文可以被键盘控制:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>切换正则表达式</td>
+<td><tt class="docutils literal"><span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">R</span></tt></td>
+</tr>
+<tr class="row-even"><td>切换大小写敏感</td>
+<td><tt class="docutils literal"><span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">C</span></tt></td>
+</tr>
+<tr class="row-odd"><td>切换精确匹配</td>
+<td><tt class="docutils literal"><span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">W</span></tt></td>
+</tr>
+<tr class="row-even"><td>查找下一个</td>
+<td><tt class="docutils literal"><span class="pre">Enter</span></tt></td>
+</tr>
+<tr class="row-odd"><td>查找先前的</td>
+<td><tt class="docutils literal"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">Enter</span></tt></td>
+</tr>
+<tr class="row-even"><td>查找所有的</td>
+<td><tt class="docutils literal"><span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">Enter</span></tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="incremental-search">
+<span id="snr-incremental-search-buffer"></span><h2>渐进式搜索<a class="headerlink" href="#incremental-search" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>渐进式搜索面板</strong>可以被唤醒通过<tt class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">I</span></tt>. The only
+和普通搜索面板不同的是只有在键入回车键时才开始搜索<tt class="docutils literal"><span class="pre">Enter</span></tt>
+key: 在渐进式搜索，它选择下一个缓冲区匹配项后会隐藏搜索面板。在渐进式搜索和普通搜索面板之间的选择是一个见仁见智的问题。</p>
+</div>
+<div class="section" id="replacing-text">
+<span id="snr-replace-buffer"></span><h2>替换文本<a class="headerlink" href="#replacing-text" title="Permalink to this headline">¶</a></h2>
+<p>你可以打开替换面板通过<tt class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">H</span></tt>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>替换所有:</td>
+<td><tt class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">Enter</span></tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tips">
+<span id="snr-tips-buffer"></span><h2>提示<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="other-ways-of-searching-in-buffers">
+<h3>其他在缓冲区搜索的方式<a class="headerlink" href="#other-ways-of-searching-in-buffers" title="Permalink to this headline">¶</a></h3>
+<p>跳至任何地方通过提供操作符<tt class="docutils literal"><span class="pre">#</span></tt> 在当前缓冲区内搜索。搜索的内容是<tt class="docutils literal"><span class="pre">#</span></tt>操作符后面的。</p>
+</div>
+<div class="section" id="other-key-bindings-to-search-in-buffers">
+<h3>其他在缓冲区搜索的快捷键<a class="headerlink" href="#other-key-bindings-to-search-in-buffers" title="Permalink to this headline">¶</a></h3>
+<p>这些快捷键在搜索面板隐藏时有效。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="68%" />
+<col width="32%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>用最近搜索的词向前搜索</td>
+<td><tt class="docutils literal"><span class="pre">F3</span></tt></td>
+</tr>
+<tr class="row-even"><td>用最近搜索的词向后搜索</td>
+<td><tt class="docutils literal"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">F3</span></tt></td>
+</tr>
+<tr class="row-odd"><td>用最近搜索的词全文搜索</td>
+<td><tt class="docutils literal"><span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">F3</span></tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="multiline-search">
+<h3>多行搜索<a class="headerlink" href="#multiline-search" title="Permalink to this headline">¶</a></h3>
+<p>你可以输入多行的搜索模式。腰间如一个换行符,按
+<tt class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Enter</span></tt> 在搜索面板中。注意搜索面板是可以缩放的。</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Search and Replace - Single File</a><ul>
+<li><a class="reference internal" href="#searching">Searching</a></li>
+<li><a class="reference internal" href="#incremental-search">Incremental Search</a></li>
+<li><a class="reference internal" href="#replacing-text">Replacing Text</a></li>
+<li><a class="reference internal" href="#tips">Tips</a><ul>
+<li><a class="reference internal" href="#other-ways-of-searching-in-buffers">Other Ways of Searching in Buffers</a></li>
+<li><a class="reference internal" href="#other-key-bindings-to-search-in-buffers">Other Key Bindings to Search in Buffers</a></li>
+<li><a class="reference internal" href="#multiline-search">Multiline Search</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="search_and_replace_overview.html"
+                        title="previous chapter">Search and Replace</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="search_and_replace_files.html"
+                        title="next chapter">Search and Replace - Multiple Files</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/search_and_replace/search_and_replace.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="search_and_replace_files.html" title="Search and Replace - Multiple Files"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="search_and_replace_overview.html" title="Search and Replace"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="search_and_replace_overview.html" >Search and Replace</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

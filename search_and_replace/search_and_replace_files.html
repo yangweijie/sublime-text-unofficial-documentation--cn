@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>搜索替换 - Multiple Files &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="up" title="Search and Replace" href="search_and_replace_overview.html" />
+    <link rel="next" title="Build Systems (Batch Processing)" href="../file_processing/build_systems.html" />
+    <link rel="prev" title="Search and Replace - Single File" href="search_and_replace.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../file_processing/build_systems.html" title="Build Systems (Batch Processing)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="search_and_replace.html" title="Search and Replace - Single File"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="search_and_replace_overview.html" accesskey="U">Search and Replace</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="search-and-replace-multiple-files">
+<h1>搜索和替换 - 多个文件<a class="headerlink" href="#search-and-replace-multiple-files" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="searching">
+<span id="snr-search-files"></span><h2>搜索<a class="headerlink" href="#searching" title="Permalink to this headline">¶</a></h2>
+<p>要打开在多文件中搜索, 按 <tt class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">F</span></tt>. 你可以使用键盘控制搜索面板和搜索行为:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="51%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>切换正则表达式</td>
+<td><tt class="docutils literal"><span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">R</span></tt></td>
+</tr>
+<tr class="row-even"><td>切换大小写敏感</td>
+<td><tt class="docutils literal"><span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">C</span></tt></td>
+</tr>
+<tr class="row-odd"><td>切换精确搜索</td>
+<td><tt class="docutils literal"><span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">W</span></tt></td>
+</tr>
+<tr class="row-even"><td>搜索下一个</td>
+<td><tt class="docutils literal"><span class="pre">Enter</span></tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="search-scope">
+<span id="snr-search-scope-files"></span><h2>搜索范围<a class="headerlink" href="#search-scope" title="Permalink to this headline">¶</a></h2>
+<p><strong>哪里</strong>字段在搜索面板中决定了哪儿去搜索。你可以定义搜索的范围在几个方式上:</p>
+<ul class="simple">
+<li>添加单个目录(Unix类型的路径, 甚至Windows)</li>
+<li>添加/排除的文件基于一个模式</li>
+<li>添加符号位置(<tt class="docutils literal"><span class="pre">&lt;open</span> <span class="pre">folders&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;open</span> <span class="pre">files&gt;</span></tt>)</li>
+</ul>
+<p>你可以结合这些过滤器通过逗号分割它们,举个例子:</p>
+<blockquote>
+<div>/C/Users/Joe/Top Secret,-<a href="#id1"><span class="problematic" id="id2">*</span></a>.html,&lt;open files&gt;</div></blockquote>
+<p>按<strong>...</strong>搜索面板中的按钮来显示一个包含这些按钮的菜单。</p>
+</div>
+<div class="section" id="results-format">
+<span id="snr-results-format-files"></span><h2>结果格式化<a class="headerlink" href="#results-format" title="Permalink to this headline">¶</a></h2>
+<p>在搜索面板中你可以发现下面选项来定制搜索结果的格式:</p>
+<ul class="simple">
+<li>在单独视图/输出面板</li>
+<li>显示上下文</li>
+</ul>
+</div>
+<div class="section" id="navigating-results">
+<span id="snr-results-navigation-files"></span><h2>结果间导航<a class="headerlink" href="#navigating-results" title="Permalink to this headline">¶</a></h2>
+<p>如果找到多个匹配项，你可以使用快捷键线性移动:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="53%" />
+<col width="47%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>下个匹配</td>
+<td><tt class="docutils literal"><span class="pre">F4</span></tt></td>
+</tr>
+<tr class="row-even"><td>前一个匹配</td>
+<td><tt class="docutils literal"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">F4</span></tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Search and Replace - Multiple Files</a><ul>
+<li><a class="reference internal" href="#searching">Searching</a></li>
+<li><a class="reference internal" href="#search-scope">Search Scope</a></li>
+<li><a class="reference internal" href="#results-format">Results Format</a></li>
+<li><a class="reference internal" href="#navigating-results">Navigating Results</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="search_and_replace.html"
+                        title="previous chapter">Search and Replace - Single File</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../file_processing/build_systems.html"
+                        title="next chapter">Build Systems (Batch Processing)</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/search_and_replace/search_and_replace_files.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../file_processing/build_systems.html" title="Build Systems (Batch Processing)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="search_and_replace.html" title="Search and Replace - Single File"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="search_and_replace_overview.html" >Search and Replace</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,759 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>Syntax Definitions &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="up" title="Extending Sublime Text" href="extensibility.html" />
+    <link rel="next" title="Plugins" href="plugins.html" />
+    <link rel="prev" title="Command Palette" href="command_palette.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="plugins.html" title="Plugins"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="command_palette.html" title="Command Palette"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="extensibility.html" accesskey="U">Extending Sublime Text</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="syntax-definitions">
+<h1>Syntax Definitions<a class="headerlink" href="#syntax-definitions" title="Permalink to this headline">¶</a></h1>
+<p>Syntax definitions make Sublime Text aware of programming and markup languages.
+Most noticeably, they work together with colors to provide syntax highlighting.
+Syntax definitions define <em>scopes</em> in a buffer that divide the text in named
+regions. Several editing features in Sublime Text make extensive use of
+this fine-grained contextual information.</p>
+<p>Essentially, syntax definitions consist of regular expressions used to find
+text, and more or less arbitrary, dot-separated strings called <em>scopes</em> or <em>scope
+names</em>. For every occurrence of a given regular expression, Sublime Text gives
+the matching text its corresponding <em>scope name</em>.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>In order to follow this tutorial, you will need to install <a class="reference external" href="https://bitbucket.org/guillermooo/aaapackagedev">AAAPackageDev</a>, a package
+intended to ease the creation of new syntax definitions for Sublime Text. AAAPackageDev
+lives on a public <a class="reference external" href="http://mercurial.selenic.com/">Mercurial</a> repository at <a class="reference external" href="http://bitbucket.org">Bitbucket</a>.</p>
+<p>Download the latest <tt class="docutils literal"><span class="pre">.sublime-package</span></tt> file and install it as described in
+<a class="reference internal" href="packages.html#installation-of-sublime-packages"><em>Installation of .sublime-package Files</em></a>.</p>
+<div class="sidebar">
+<p class="first sidebar-title">Mercurial and Bitbucket</p>
+<p class="last">Mercurial is a distributed version control system (DVCS). Bitbucket is an
+online service that provides hosting for Mercurial repositories. If you want
+to install Mercurial, there are freely available command-line and graphical
+<a class="reference external" href="http://mercurial.selenic.com/downloads/">clients</a>.</p>
+</div>
+</div>
+<div class="section" id="file-format">
+<h2>File format<a class="headerlink" href="#file-format" title="Permalink to this headline">¶</a></h2>
+<p>Sublime uses <a class="reference external" href="http://en.wikipedia.org/wiki/Property_list">property list</a> files (Plist) to store syntax definitions. Because
+editing XML files is a cumbersome task, though, we&#8217;ll be using <a class="reference external" href="http://en.wikipedia.org/wiki/JSON">JSON</a> instead and
+converting it to Plist afterwards. This is where the AAAPackageDev package mentioned
+above comes in.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you experience unexpected errors during this tutorial, chances are
+AAAPackageDev is to blame. Don&#8217;t immediately think your problem is due to a
+bug in Sublime Text.</p>
+</div>
+<p>By all means, do edit the Plist files by hand if you prefer to work in XML, but
+keep always in mind the differing needs with regards to escape sequences, etc.</p>
+</div>
+<div class="section" id="scopes">
+<span id="scopes-and-scope-selectors"></span><h2>Scopes<a class="headerlink" href="#scopes" title="Permalink to this headline">¶</a></h2>
+<p>Scopes are a key concept in Sublime Text. Essentially, they are named text
+regions in a buffer. They don&#8217;t do anything by themselves, but Sublime Text peeks
+at them when it needs contextual information.</p>
+<p>For instance, when you trigger a snippet, Sublime Text checks the scope the snippet&#8217;s
+bound to and looks at the caret&#8217;s position in the file. If the caret&#8217;s current
+scope matches the snippet&#8217;s scope selector, Sublime Text fires the snippet off.
+Otherwise, nothing happens.</p>
+<div class="sidebar">
+<p class="first sidebar-title">Scopes vs Scope Selectors</p>
+<p class="last">There&#8217;s a slight difference between <em>scopes</em> and <em>scope selectors</em>: scopes are
+the names defined in a syntax definition, whilst scope selectors are used in
+items like snippets and key bindings to target scopes. When creating a new syntax
+definition, you care about scopes; when you want to constrain a snippet to a
+certain scope, you use a scope selector.</p>
+</div>
+<p>Scopes can be nested to allow for a high degree of granularity. You can drill down
+the hierarchy very much like with CSS selectors. For instance, thanks to scope
+selectors, you could have a key binding activated only within single quoted strings
+in python source code, but not inside single quoted strings in any other language.</p>
+<p>Sublime Text implements the idea of scopes from Texmate, a text editor for Mac.
+<a class="reference external" href="http://manual.macromates.com/en/">Textmate&#8217;s online manual</a> contains further information about scope selectors
+that&#8217;s useful for Sublime Text users too.</p>
+</div>
+<div class="section" id="how-syntax-definitions-work">
+<h2>How Syntax Definitions Work<a class="headerlink" href="#how-syntax-definitions-work" title="Permalink to this headline">¶</a></h2>
+<p>At their core, syntax definitions are arrays of regular expressions paired with
+scope names. Sublime Text will try to match these patterns against a buffer&#8217;s text
+and attach the corresponding scope name to all occurrences. These pairs of regular
+expressions and scope names are known as <em>rules</em>.</p>
+<p>Rules are applied in order, one line at a time. Each rule consumes the matched
+text region, which will therefore be excluded from the next rule&#8217;s matching attempt
+(save for a few exceptions). In practical terms, this means that you should take
+care to go from more specific rules to more general ones when you create a new
+syntax definition. Otherwise, a greedy regular expression might swallow parts
+you&#8217;d like to have styled differently.</p>
+<p>Syntax definitions from separate files can be combined, and they can be recursively
+applied too.</p>
+</div>
+<div class="section" id="your-first-syntax-definition">
+<h2>Your First Syntax Definition<a class="headerlink" href="#your-first-syntax-definition" title="Permalink to this headline">¶</a></h2>
+<p>By way of example, let&#8217;s create a syntax definition for Sublime Text snippets.
+We&#8217;ll be styling the actual snippet content, not the <tt class="docutils literal"><span class="pre">.sublime-snippet</span></tt> file.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since syntax definitions are primarily used to enable syntax highlighting,
+we&#8217;ll use <em>to style</em> as in <em>to break down a source code file into
+scopes</em>. Keep in mind, however, that colors are a different thing to syntax
+definitions and that scopes have many more uses besides syntax highlighting.</p>
+</div>
+<p>These are the elements we want to style in a snippet:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Variables (<tt class="docutils literal"><span class="pre">$PARAM1</span></tt>, <tt class="docutils literal"><span class="pre">$USER_NAME</span></tt>…)</li>
+<li>Simple fields (<tt class="docutils literal"><span class="pre">$0</span></tt>, <tt class="docutils literal"><span class="pre">$1</span></tt>…)</li>
+<li>Complex fields with place holders (<tt class="docutils literal"><span class="pre">${1:Hello}</span></tt>)</li>
+<li>Nested fields (<tt class="docutils literal"><span class="pre">${1:Hello</span> <span class="pre">${2:World}!}</span></tt>)</li>
+<li>Escape sequences (<tt class="docutils literal"><span class="pre">\\$</span></tt>, <tt class="docutils literal"><span class="pre">\\&lt;</span></tt>…)</li>
+<li>Illegal sequences (<tt class="docutils literal"><span class="pre">$</span></tt>, <tt class="docutils literal"><span class="pre">&lt;</span></tt>…)</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Before continuing, make sure you&#8217;ve installed the AAAPackageDev package
+as explained further above.</p>
+</div>
+<div class="section" id="creating-a-new-syntax-definition">
+<h3>Creating A New Syntax Definition<a class="headerlink" href="#creating-a-new-syntax-definition" title="Permalink to this headline">¶</a></h3>
+<p>To create a new syntax definition, follow these steps:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Go to <strong>Tools | Packages | Package Development | New Syntax Definition</strong></li>
+<li>Save the new file to your <tt class="docutils literal"><span class="pre">Packages/User</span></tt> folder as <tt class="docutils literal"><span class="pre">Sublime</span> <span class="pre">Snippets</span> <span class="pre">(Raw).JSON-tmLanguage</span></tt>.</li>
+</ul>
+</div></blockquote>
+<p>You should now see a file like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Syntax Name&quot;</span><span class="p">,</span>
+  <span class="s">&quot;scopeName&quot;</span><span class="p">:</span> <span class="s">&quot;source.syntax_name&quot;</span><span class="p">,</span>
+  <span class="s">&quot;fileTypes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&quot;</span><span class="p">],</span>
+  <span class="s">&quot;patterns&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="p">],</span>
+  <span class="s">&quot;uuid&quot;</span><span class="p">:</span> <span class="s">&quot;ca03e751-04ef-4330-9a6b-9b99aae1c418&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Let&#8217;s examine now the key elements.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">uuid</span></tt></dt>
+<dd>Located at the end, this is a unique identifier for this syntax definition.
+Each new syntax definition gets its own uuid. Don&#8217;t modify them.</dd>
+<dt><tt class="docutils literal"><span class="pre">name</span></tt></dt>
+<dd>The name that Sublime Text will display in the syntax definition drop-down list
+Use a short, descriptive name. Typically, you will be using the programming
+language&#8217;s name you are creating the syntax definition for.</dd>
+<dt><tt class="docutils literal"><span class="pre">scopeName</span></tt></dt>
+<dd>The top level scope for this syntax definition. It takes the form
+<tt class="docutils literal"><span class="pre">source.&lt;lang_name&gt;</span></tt> or <tt class="docutils literal"><span class="pre">text.&lt;lang_name&gt;</span></tt>. For programming languages,
+use <tt class="docutils literal"><span class="pre">source</span></tt>. For markup and everything else, <tt class="docutils literal"><span class="pre">text</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">fileTypes</span></tt></dt>
+<dd>This is a list of file extensions. When opening files of these types,
+Sublime Text will automatically activate this syntax definition for them.</dd>
+<dt><tt class="docutils literal"><span class="pre">patterns</span></tt></dt>
+<dd>Container for your patterns.</dd>
+</dl>
+<p>For our example, fill in the template with the following information:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>   <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Sublime Snippet (Raw)&quot;</span><span class="p">,</span>
+    <span class="s">&quot;scopeName&quot;</span><span class="p">:</span> <span class="s">&quot;source.ssraw&quot;</span><span class="p">,</span>
+    <span class="s">&quot;fileTypes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;ssraw&quot;</span><span class="p">],</span>
+    <span class="s">&quot;patterns&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">],</span>
+    <span class="s">&quot;uuid&quot;</span><span class="p">:</span> <span class="s">&quot;ca03e751-04ef-4330-9a6b-9b99aae1c418&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">JSON is a very strict format, so make sure to get all the commas and quotes right.
+If the conversion to Plist fails, take a look at the output panel for more
+information on the error. We&#8217;ll explain later how to convert a syntax
+definition in JSON to Plist.</p>
+</div>
+</div>
+</div>
+<div class="section" id="analyzing-patterns">
+<h2>Analyzing Patterns<a class="headerlink" href="#analyzing-patterns" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">patterns</span></tt> array can contain several types of elements. We&#8217;ll look at some
+of them in the following sections. If you want to learn more about patterns,
+refer to Textmate&#8217;s online manual.</p>
+<div class="sidebar">
+<p class="first sidebar-title">Regular Expressions&#8217; Syntax In Syntax Definitions</p>
+<p class="last">Sublime Text uses <a class="reference external" href="http://www.geocities.jp/kosako3/oniguruma/doc/RE.txt">Oniguruma</a>&#8216;s syntax for regular expressions in syntax definitions.
+Several existing syntax definitions make use of features supported by this regular
+expression engine that aren&#8217;t part of perl-style regular expressions, hence the
+requirement for Oniguruma.</p>
+</div>
+<div class="section" id="matches">
+<h3>Matches<a class="headerlink" href="#matches" title="Permalink to this headline">¶</a></h3>
+<p>They take this form:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;[Mm]y \s+[Rr]egex&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;string.ssraw&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;comment&quot;</span><span class="o">:</span> <span class="s2">&quot;This comment is optional.&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">match</span></tt></dt>
+<dd>A regular expression Sublime Text will use to try and find matches.</dd>
+<dt><tt class="docutils literal"><span class="pre">name</span></tt></dt>
+<dd>Name of the scope that should be applied to the occurrences of <tt class="docutils literal"><span class="pre">match</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">comment</span></tt></dt>
+<dd>An optional comment about this pattern.</dd>
+</dl>
+<p>Let&#8217;s go back to our example. Make it look like this:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Sublime Snippet (Raw)&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;scopeName&quot;</span><span class="o">:</span> <span class="s2">&quot;source.ssraw&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;fileTypes&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;ssraw&quot;</span><span class="p">],</span>
+  <span class="s2">&quot;patterns&quot;</span><span class="o">:</span> <span class="p">[</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;ca03e751-04ef-4330-9a6b-9b99aae1c418&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That is, make sure the <tt class="docutils literal"><span class="pre">patterns</span></tt> array is empty.</p>
+<p>Now we can begin to add our rules for Sublime snippets. Let&#8217;s start with simple
+fields. These could be matched with a regex like so:</p>
+<div class="highlight-perl"><pre>\$[0-9]+
+# or...
+\$\d+</pre>
+</div>
+<p>However, because we&#8217;re writing our regex in JSON, we need to factor in JSON&#8217;s
+own escaping rules. Thus, our previous example becomes:</p>
+<div class="highlight-js"><pre>\\$\\d+</pre>
+</div>
+<p>With escaping out of the way, we can build our pattern like this:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;\\$\\d+&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;keyword.source.ssraw&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;comment&quot;</span><span class="o">:</span> <span class="s2">&quot;Tab stops like $1, $2...&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="sidebar">
+<p class="first sidebar-title">Choosing the Right Scope Name</p>
+<p>Naming scopes isn&#8217;t obvious sometimes. Check the Textmate online manual
+for guidance on scope names. It is important to re-use the basic categories
+outlined there if you want to achieve the highest compatibility with existing
+colors.</p>
+<p>Colors have hardcoded scope names in them. They could not possibly include
+every scope name you can think of, so they target the standard ones plus some
+rarer ones on occasion. This means that two colors using the same syntax
+definition may render the text differently!</p>
+<p class="last">Bear in mind too that you should use the scope name that best suits your
+needs or preferences. It&#8217;d be perfectly fine to assign a scope like
+<tt class="docutils literal"><span class="pre">constant.numeric</span></tt> to anything other than a number if you have a good
+reason to do so.</p>
+</div>
+<p>And we can add it to our syntax definition too:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>   <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Sublime Snippet (Raw)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;scopeName&quot;</span><span class="o">:</span> <span class="s2">&quot;source.ssraw&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fileTypes&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;ssraw&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;patterns&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;\\$\\d+&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;keyword.source.ssraw&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;comment&quot;</span><span class="o">:</span> <span class="s2">&quot;Tab stops like $1, $2...&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;ca03e751-04ef-4330-9a6b-9b99aae1c418&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We&#8217;re now ready to convert our file to <tt class="docutils literal"><span class="pre">.tmLanguage</span></tt>. Syntax definitions use
+Textmate&#8217;s <tt class="docutils literal"><span class="pre">.tmLanguage</span></tt> extension for compatibility reasons. As explained further
+above, they are simply XML files in the Plist format.</p>
+<p>Follow these steps to perform the conversion:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Select <tt class="docutils literal"><span class="pre">Json</span> <span class="pre">to</span> <span class="pre">tmLanguage</span></tt> in <strong>Tools | Build System</strong></li>
+<li>Press <tt class="kbd docutils literal"><span class="pre">F7</span></tt></li>
+<li>A <tt class="docutils literal"><span class="pre">.tmLanguage</span></tt> file will be generated for you in the same folder as your
+<tt class="docutils literal"><span class="pre">.JSON-tmLanguage</span></tt> file</li>
+<li>Sublime Text will reload the changes to the syntax definition</li>
+</ul>
+</div></blockquote>
+<p>You have now created your first syntax definition. Next, open a new file and save
+it with the extension <tt class="docutils literal"><span class="pre">.ssraw</span></tt>. The buffer&#8217;s syntax name should switch to
+&#8220;Sublime Snippet (Raw)&#8221; automatically, and you should get syntax highlighting if
+you type <tt class="docutils literal"><span class="pre">$1</span></tt> or any other simple snippet field.</p>
+<p>Let&#8217;s proceed to creating another rule for environment variables.</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;\\$[A-Za-z][A-Za-z0-9_]+&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;keyword.source.ssraw&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;comment&quot;</span><span class="o">:</span> <span class="s2">&quot;Variables like $PARAM1, $TM_SELECTION...&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Repeat the steps above to update the <tt class="docutils literal"><span class="pre">.tmLanguage</span></tt> file and restart Sublime Text.</p>
+</div>
+<div class="section" id="fine-tuning-matches">
+<h3>Fine Tuning Matches<a class="headerlink" href="#fine-tuning-matches" title="Permalink to this headline">¶</a></h3>
+<p>You might have noticed that the entire text in <tt class="docutils literal"><span class="pre">$PARAM1</span></tt>, for instance, is styled
+the same way. Depending on your needs or your personal preferences, you may want
+the <tt class="docutils literal"><span class="pre">$</span></tt> to stand out. That&#8217;s where <tt class="docutils literal"><span class="pre">captures</span></tt> come in. Using captures,
+you can break a pattern down into components to target them individually.</p>
+<p>Let&#8217;s rewrite one of our previous patterns to use <tt class="docutils literal"><span class="pre">captures</span></tt>:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;\\$([A-Za-z][A-Za-z0-9_]+)&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;keyword.ssraw&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;captures&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;1&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;constant.numeric.ssraw&quot;</span> <span class="p">}</span>
+   <span class="p">},</span>
+  <span class="s2">&quot;comment&quot;</span><span class="o">:</span> <span class="s2">&quot;Variables like $PARAM1, $TM_SELECTION...&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Captures introduce complexity to your rule, but they are pretty straightforward.
+Notice how numbers refer to parenthesized groups left to right. Of course, you can
+have as many capture groups as you want.</p>
+<p>Arguably, you&#8217;d want the other scope to be visually consistent with this one.
+Go ahead and change it too.</p>
+</div>
+<div class="section" id="begin-end-rules">
+<h3>Begin-End Rules<a class="headerlink" href="#begin-end-rules" title="Permalink to this headline">¶</a></h3>
+<p>Up to now we&#8217;ve been using a simple rule. Although we&#8217;ve seen how to dissect patterns
+into smaller components, sometimes you&#8217;ll want to target a larger portion of your
+source code clearly delimited by start and end marks.</p>
+<p>Literal strings enclosed in quotation marks and other delimited constructs are
+better dealt with with begin-end rules. This is a skeleton for one of these rules:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+  <span class="s">&quot;begin&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+  <span class="s">&quot;end&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Well, at least in their simplest version. Let&#8217;s take a look at one including all
+available options:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+  <span class="s">&quot;begin&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+  <span class="s">&quot;beginCaptures&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;0&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span> <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s">&quot;end&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+  <span class="s">&quot;endCaptures&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;0&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span> <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s">&quot;patterns&quot;</span><span class="p">:</span> <span class="p">[</span>
+     <span class="p">{</span>  <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+        <span class="s">&quot;match&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+                  <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s">&quot;contentName&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Some elements may look familiar, but their combination might be daunting. Let&#8217;s
+see them individually.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">begin</span></tt></dt>
+<dd>Regex for the opening mark for this scope.</dd>
+<dt><tt class="docutils literal"><span class="pre">end</span></tt></dt>
+<dd>Regex for the end mark for this scope.</dd>
+<dt><tt class="docutils literal"><span class="pre">beginCaptures</span></tt></dt>
+<dd>Captures for the <tt class="docutils literal"><span class="pre">begin</span></tt> marker. They work like captures for simple matches. Optional.</dd>
+<dt><tt class="docutils literal"><span class="pre">endCaptures</span></tt></dt>
+<dd>Same as <tt class="docutils literal"><span class="pre">beginCaptures</span></tt> but for the <tt class="docutils literal"><span class="pre">end</span></tt> marker. Optional.</dd>
+<dt><tt class="docutils literal"><span class="pre">contentName</span></tt></dt>
+<dd>Scope for the whole matched region, from the begin marker to the end marker,
+inclusive. This will effectively create nested scopes for <tt class="docutils literal"><span class="pre">beginCaptures</span></tt>,
+<tt class="docutils literal"><span class="pre">endCaptures</span></tt> and <tt class="docutils literal"><span class="pre">patterns</span></tt> defined within this rule. Optional.</dd>
+<dt><tt class="docutils literal"><span class="pre">patterns</span></tt></dt>
+<dd>An array of patterns to match against the begin-end content <strong>only</strong> &#8212;they are not
+matched against the text consumed by <tt class="docutils literal"><span class="pre">begin</span></tt> or <tt class="docutils literal"><span class="pre">end</span></tt>.</dd>
+</dl>
+<p>We&#8217;ll use this rule to style nested complex fields in snippets:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;variable.complex.ssraw&quot;</span><span class="p">,</span>
+   <span class="s">&quot;begin&quot;</span><span class="p">:</span> <span class="s">&quot;(</span><span class="se">\\</span><span class="s">$)(</span><span class="se">\\</span><span class="s">{)([0-9]+):&quot;</span><span class="p">,</span>
+   <span class="s">&quot;beginCaptures&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="s">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;keyword.ssraw&quot;</span> <span class="p">},</span>
+       <span class="s">&quot;3&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;constant.numeric.ssraw&quot;</span> <span class="p">}</span>
+   <span class="p">},</span>
+   <span class="s">&quot;patterns&quot;</span><span class="p">:</span> <span class="p">[</span>
+       <span class="p">{</span> <span class="s">&quot;include&quot;</span><span class="p">:</span> <span class="s">&quot;$self&quot;</span> <span class="p">},</span>
+       <span class="p">{</span>  <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;string.ssraw&quot;</span><span class="p">,</span>
+          <span class="s">&quot;match&quot;</span><span class="p">:</span> <span class="s">&quot;.&quot;</span>
+       <span class="p">}</span>
+   <span class="p">],</span>
+   <span class="s">&quot;end&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">}&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is the most complex pattern we&#8217;ll see in this tutorial. The <tt class="docutils literal"><span class="pre">begin</span></tt> and <tt class="docutils literal"><span class="pre">end</span></tt>
+keys are self-explanatory: they define a region enclosed between <tt class="docutils literal"><span class="pre">${&lt;NUMBER&gt;:</span></tt> and <tt class="docutils literal"><span class="pre">}</span></tt>.
+<tt class="docutils literal"><span class="pre">beginCaptures</span></tt> further divides the begin mark into smaller scopes.</p>
+<p>The most interesting part, however, is <tt class="docutils literal"><span class="pre">patterns</span></tt>. Recursion and the
+importance of ordering have finally made an appearance here.</p>
+<p>We&#8217;ve seen further above that fields can be nested. In order to account for
+this, we need to recursively style nested fields. That&#8217;s what the <tt class="docutils literal"><span class="pre">include</span></tt>
+rule does when furnished the <tt class="docutils literal"><span class="pre">$self</span></tt> value: it recursively applies our entire
+syntax definition to the portion of text contained in our begin-end rule, excluding
+the text consumed by both <tt class="docutils literal"><span class="pre">begin</span></tt> and <tt class="docutils literal"><span class="pre">end</span></tt>.</p>
+<p>Remember that matched text is consumed and is excluded from the next match
+attempt.</p>
+<p>To finish off complex fields, we&#8217;ll style place holders as strings. Since
+we&#8217;ve already matched all possible tokens inside a complex field, we can
+safely tell Sublime Text to give any remaining text (<tt class="docutils literal"><span class="pre">.</span></tt>) a literal string scope.</p>
+</div>
+<div class="section" id="final-touches">
+<h3>Final Touches<a class="headerlink" href="#final-touches" title="Permalink to this headline">¶</a></h3>
+<p>Lastly, let&#8217;s style escape sequences and illegal sequences, and wrap up.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>  <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;constant.character.escape.ssraw&quot;</span><span class="p">,</span>
+   <span class="s">&quot;match&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="se">\\\\</span><span class="s">(</span><span class="se">\\</span><span class="s">$|</span><span class="se">\\</span><span class="s">&gt;|</span><span class="se">\\</span><span class="s">&lt;)&quot;</span>
+<span class="p">},</span>
+
+<span class="p">{</span>  <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;invalid.ssraw&quot;</span><span class="p">,</span>
+   <span class="s">&quot;match&quot;</span><span class="p">:</span> <span class="s">&quot;(</span><span class="se">\\</span><span class="s">$|</span><span class="se">\\</span><span class="s">&lt;|</span><span class="se">\\</span><span class="s">&gt;)&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The only hard thing here is getting the number of escape characters right. Other
+than that, the rules are pretty straightforward if you&#8217;re familiar with
+regular expressions.</p>
+<p>However, you must take care to put the second rule after any others matching
+the <tt class="docutils literal"><span class="pre">$</span></tt> character, since otherwise you may not get the desired result.</p>
+<p>Also, note that after adding these two additional rules, our recursive begin-end
+rule above keeps working as expected.</p>
+<p>At long last, here&#8217;s the final syntax definition:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>   <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Sublime Snippet (Raw)&quot;</span><span class="p">,</span>
+    <span class="s">&quot;scopeName&quot;</span><span class="p">:</span> <span class="s">&quot;source.ssraw&quot;</span><span class="p">,</span>
+    <span class="s">&quot;fileTypes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;ssraw&quot;</span><span class="p">],</span>
+    <span class="s">&quot;patterns&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="s">&quot;match&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">$(</span><span class="se">\\</span><span class="s">d+)&quot;</span><span class="p">,</span>
+          <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;keyword.ssraw&quot;</span><span class="p">,</span>
+          <span class="s">&quot;captures&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;constant.numeric.ssraw&quot;</span> <span class="p">}</span>
+           <span class="p">},</span>
+          <span class="s">&quot;comment&quot;</span><span class="p">:</span> <span class="s">&quot;Tab stops like $1, $2...&quot;</span>
+        <span class="p">},</span>
+
+        <span class="p">{</span> <span class="s">&quot;match&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">$([A-Za-z][A-Za-z0-9_]+)&quot;</span><span class="p">,</span>
+          <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;keyword.ssraw&quot;</span><span class="p">,</span>
+          <span class="s">&quot;captures&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;constant.numeric.ssraw&quot;</span> <span class="p">}</span>
+           <span class="p">},</span>
+          <span class="s">&quot;comment&quot;</span><span class="p">:</span> <span class="s">&quot;Variables like $PARAM1, $TM_SELECTION...&quot;</span>
+        <span class="p">},</span>
+
+        <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;variable.complex.ssraw&quot;</span><span class="p">,</span>
+          <span class="s">&quot;begin&quot;</span><span class="p">:</span> <span class="s">&quot;(</span><span class="se">\\</span><span class="s">$)(</span><span class="se">\\</span><span class="s">{)([0-9]+):&quot;</span><span class="p">,</span>
+          <span class="s">&quot;beginCaptures&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;keyword.ssraw&quot;</span> <span class="p">},</span>
+              <span class="s">&quot;3&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;constant.numeric.ssraw&quot;</span> <span class="p">}</span>
+           <span class="p">},</span>
+           <span class="s">&quot;patterns&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="p">{</span> <span class="s">&quot;include&quot;</span><span class="p">:</span> <span class="s">&quot;$self&quot;</span> <span class="p">},</span>
+              <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;string.ssraw&quot;</span><span class="p">,</span>
+                <span class="s">&quot;match&quot;</span><span class="p">:</span> <span class="s">&quot;.&quot;</span>
+              <span class="p">}</span>
+           <span class="p">],</span>
+           <span class="s">&quot;end&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">}&quot;</span>
+        <span class="p">},</span>
+
+        <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;constant.character.escape.ssraw&quot;</span><span class="p">,</span>
+          <span class="s">&quot;match&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="se">\\\\</span><span class="s">(</span><span class="se">\\</span><span class="s">$|</span><span class="se">\\</span><span class="s">&gt;|</span><span class="se">\\</span><span class="s">&lt;)&quot;</span>
+        <span class="p">},</span>
+
+        <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;invalid.ssraw&quot;</span><span class="p">,</span>
+          <span class="s">&quot;match&quot;</span><span class="p">:</span> <span class="s">&quot;(</span><span class="se">\\</span><span class="s">$|</span><span class="se">\\</span><span class="s">&gt;|</span><span class="se">\\</span><span class="s">&lt;)&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">&quot;uuid&quot;</span><span class="p">:</span> <span class="s">&quot;ca03e751-04ef-4330-9a6b-9b99aae1c418&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There are more available constructs and code reuse techniques, but the above
+explanations should get you started with the creation of syntax definitions.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Syntax Definitions</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#file-format">File format</a></li>
+<li><a class="reference internal" href="#scopes">Scopes</a></li>
+<li><a class="reference internal" href="#how-syntax-definitions-work">How Syntax Definitions Work</a></li>
+<li><a class="reference internal" href="#your-first-syntax-definition">Your First Syntax Definition</a><ul>
+<li><a class="reference internal" href="#creating-a-new-syntax-definition">Creating A New Syntax Definition</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analyzing-patterns">Analyzing Patterns</a><ul>
+<li><a class="reference internal" href="#matches">Matches</a></li>
+<li><a class="reference internal" href="#fine-tuning-matches">Fine Tuning Matches</a></li>
+<li><a class="reference internal" href="#begin-end-rules">Begin-End Rules</a></li>
+<li><a class="reference internal" href="#final-touches">Final Touches</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="command_palette.html"
+                        title="previous chapter">Command Palette</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="plugins.html"
+                        title="next chapter">Plugins</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/extensibility/syntaxdefs.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="plugins.html" title="Plugins"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="command_palette.html" title="Command Palette"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="extensibility.html" >Extending Sublime Text</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>Packages &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="up" title="Extending Sublime Text" href="extensibility.html" />
+    <link rel="next" title="Command Line Usage" href="../command_line/command_line.html" />
+    <link rel="prev" title="Plugins" href="plugins.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../command_line/command_line.html" title="Command Line Usage"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="plugins.html" title="Plugins"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="extensibility.html" accesskey="U">Extending Sublime Text</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="packages">
+<h1>Packages<a class="headerlink" href="#packages" title="Permalink to this headline">¶</a></h1>
+<p>Packages are simply directories under <tt class="docutils literal"><span class="pre">Packages</span></tt>. They exist mainly for
+organizational purposes, but Sublime Text follows a few rules when dealing with
+them. More on this later.</p>
+<p>Here&#8217;s a list of typical resources living inside packages:</p>
+<blockquote>
+<div><ul class="simple">
+<li>build systems (<tt class="docutils literal"><span class="pre">.sublime-build</span></tt>)</li>
+<li>key maps (<tt class="docutils literal"><span class="pre">.sublime-keymap</span></tt>)</li>
+<li>macros (<tt class="docutils literal"><span class="pre">.sublime-macro</span></tt>)</li>
+<li>menus (<tt class="docutils literal"><span class="pre">.sublime-menu</span></tt>)</li>
+<li>plugins (<tt class="docutils literal"><span class="pre">.py</span></tt>)</li>
+<li>preferences (<tt class="docutils literal"><span class="pre">.tmPreferences</span></tt>)</li>
+<li>settings (<tt class="docutils literal"><span class="pre">.sublime-settings</span></tt>)</li>
+<li>syntax definitions (<tt class="docutils literal"><span class="pre">.tmLanguage</span></tt>)</li>
+<li>snippets (<tt class="docutils literal"><span class="pre">.sublime-snippet</span></tt>)</li>
+<li>themes (<tt class="docutils literal"><span class="pre">.sublime-theme</span></tt>)</li>
+</ul>
+</div></blockquote>
+<p>Some packages may include support files for other packages or core
+features. For example, the spell checker uses <tt class="file docutils literal"><span class="pre">PackagesLanguage</span> <span class="pre">-</span> <span class="pre">English</span></tt>
+as a data store for English dictionaries.</p>
+<div class="section" id="types-of-packages">
+<h2>Types of Packages<a class="headerlink" href="#types-of-packages" title="Permalink to this headline">¶</a></h2>
+<p>In order to talk about packages in this guide, we&#8217;ll divide them in groups.
+This division is artificial and for the sake of clarity in this topic. Sublime
+Text doesn&#8217;t use it in any way.</p>
+<dl class="docutils">
+<dt><strong>core packages</strong></dt>
+<dd>Sublime Text requires these packages in order to work.</dd>
+<dt><strong>shipped packages</strong></dt>
+<dd>Sublime Text includes these packages in every installation, although they are
+not technically required. Shipped packages enhance Sublime Text out of the
+box. They may have been contributed by users or third parties.</dd>
+<dt><strong>user packages</strong></dt>
+<dd>These packages are installed by the user to further extend Sublime Text.
+They are not part of any Sublime Text installation and are always contributed
+by users or third parties.</dd>
+<dt><strong>installed packages</strong></dt>
+<dd>Any package that Sublime Text can restore if deleted.</dd>
+</dl>
+<p>Let&#8217;s emphasize again that you don&#8217;t need to memorize this classification.
+Also, it&#8217;s worth noting that by <em>third party</em> we mainly refer to other editors&#8217;
+users, like Textmate&#8217;s.</p>
+</div>
+<div class="section" id="installation-of-packages">
+<h2>Installation of Packages<a class="headerlink" href="#installation-of-packages" title="Permalink to this headline">¶</a></h2>
+<p>There are two main ways to install packages:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">.sublime-package</span></tt> files</li>
+<li>version control systems</li>
+</ul>
+</div></blockquote>
+<p>Ultimately, installing a package consists simply in placing a directory
+containing Sublime Text resources under <tt class="docutils literal"><span class="pre">Packages</span></tt>. The only thing that
+changes from one system to another is how you copy these files.</p>
+<div class="sidebar">
+<p class="first sidebar-title">Installing Packages vs Installed Packages</p>
+<p>Note that installing a package doesn&#8217;t actually make that package an
+installed package. <em>Installed packages</em> are <tt class="docutils literal"><span class="pre">.sublime-package</span></tt> files
+residing in the <tt class="docutils literal"><span class="pre">Installed</span> <span class="pre">Packages</span></tt> directory. In this guide, we use
+<em>to install a package</em> to mean to copy a package to <tt class="docutils literal"><span class="pre">Packages</span></tt>.</p>
+<p class="last">Sublime Text can restore any package located in <tt class="docutils literal"><span class="pre">Installed</span> <span class="pre">Packages</span></tt>, but
+not every package located in <tt class="docutils literal"><span class="pre">Packages</span></tt>.</p>
+</div>
+<div class="section" id="installation-of-sublime-package-files">
+<span id="installation-of-sublime-packages"></span><h3>Installation of <tt class="docutils literal"><span class="pre">.sublime-package</span></tt> Files<a class="headerlink" href="#installation-of-sublime-package-files" title="Permalink to this headline">¶</a></h3>
+<p>Copy the <tt class="docutils literal"><span class="pre">.sublime-package</span></tt> file to the <tt class="docutils literal"><span class="pre">Installed</span> <span class="pre">Packages</span></tt> directory
+and restart Sublime Text. If the <tt class="docutils literal"><span class="pre">Installed</span> <span class="pre">Packages</span></tt> doesn&#8217;t exist, you can
+create it.</p>
+<p>Note that <tt class="docutils literal"><span class="pre">.sublime-package</span></tt> files are simply <tt class="docutils literal"><span class="pre">.zip</span></tt> archives with a custom
+file extension.</p>
+</div>
+<div class="section" id="installation-of-packages-from-a-version-control-system">
+<h3>Installation of Packages from a Version Control System<a class="headerlink" href="#installation-of-packages-from-a-version-control-system" title="Permalink to this headline">¶</a></h3>
+<p>Explaining how to use version control systems (VCSs) is outside the scope of
+this guide, but there are many user packages available for free on public
+repositories like Google Code, GitHub and Bitbucket.</p>
+<p>Also, there is a <a class="reference external" href="http://github.com/SublimeText">Sublime Text organization</a> at GitHub open to contributors.</p>
+</div>
+</div>
+<div class="section" id="packages-and-magic">
+<h2>Packages and Magic<a class="headerlink" href="#packages-and-magic" title="Permalink to this headline">¶</a></h2>
+<p>There&#8217;s little invisible magic involved in the way Sublime Text deals with packages.
+Two notable exceptions are that macros defined in any package appear under
+<strong>Tools | Macros | &lt;Your Package&gt;</strong>, and snippets from any package appear under
+<strong>Tools | Snippets | &lt;Your Package&gt;</strong>.</p>
+<p>As mentioned at the beginning, however, there are some rules for packages.
+For instance, <tt class="docutils literal"><span class="pre">Package/User</span></tt> will never be clobbered during updates of the
+software.</p>
+<div class="sidebar">
+<p class="first sidebar-title">The <tt class="docutils literal"><span class="pre">User</span></tt> Package</p>
+<p class="last">Usually, unpackaged resources are stored in <tt class="docutils literal"><span class="pre">Packages/User</span></tt>. If you
+have a few loose snippets, macros or plugins, this is a good place to keep
+them.</p>
+</div>
+<div class="section" id="merging-and-order-of-precedence">
+<span id="id1"></span><h3>Merging and Order of Precedence<a class="headerlink" href="#merging-and-order-of-precedence" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">Packages/Default</span></tt> and <tt class="docutils literal"><span class="pre">Packages/User</span></tt> also receive a special treatment when
+merging files (e. g. <tt class="docutils literal"><span class="pre">.sublime-keymap</span></tt> and <tt class="docutils literal"><span class="pre">.sublime-settings</span></tt> files). Before
+the merging can take place, the files have to be arranged in an order. To that end,
+Sublime Text sorts them alphabetically by name with the exception of files
+contained in <tt class="docutils literal"><span class="pre">Default</span></tt> and <tt class="docutils literal"><span class="pre">User</span></tt>: <tt class="docutils literal"><span class="pre">Default</span></tt> will always go to the front
+of the list, and <tt class="docutils literal"><span class="pre">User</span></tt> to the end.</p>
+</div>
+</div>
+<div class="section" id="restoring-packages">
+<h2>Restoring Packages<a class="headerlink" href="#restoring-packages" title="Permalink to this headline">¶</a></h2>
+<p>Sublime Text keeps a copy of all installed packages so it can recreate them when
+needed. This means it will be able to reinstall core packages, shipped packages
+and user packages alike. However, only user packages installed as a <tt class="docutils literal"><span class="pre">sublime-package</span></tt>
+are added to the registry of installed packages. Packages installed in alternative
+ways will be completely lost if you delete them.</p>
+<div class="section" id="reverting-sublime-text-to-its-default-configuration">
+<h3>Reverting Sublime Text to Its Default Configuration<a class="headerlink" href="#reverting-sublime-text-to-its-default-configuration" title="Permalink to this headline">¶</a></h3>
+<p>To revert Sublime Text to its default configuration, delete the data directory
+and restart the editor. Keep in mind, though, that the <tt class="docutils literal"><span class="pre">Installed</span> <span class="pre">Packages</span></tt>
+directory will be deleted too, so you will lose all installed packages.</p>
+<p>Always make sure to back up your data before taking an extreme measure like this
+one.</p>
+</div>
+</div>
+<div class="section" id="the-installed-packages-directory">
+<h2>The <tt class="docutils literal"><span class="pre">Installed</span> <span class="pre">Packages</span></tt> Directory<a class="headerlink" href="#the-installed-packages-directory" title="Permalink to this headline">¶</a></h2>
+<p>You will find this directory in the data directory. It contains a copy of every
+<tt class="docutils literal"><span class="pre">sublime-package</span></tt> installed. Used to restore <tt class="docutils literal"><span class="pre">Packages</span></tt>.</p>
+</div>
+<div class="section" id="the-pristine-packages-directory">
+<h2>The <tt class="docutils literal"><span class="pre">Pristine</span> <span class="pre">Packages</span></tt> Directory<a class="headerlink" href="#the-pristine-packages-directory" title="Permalink to this headline">¶</a></h2>
+<p>You will find this directoy in the data directory. It contains a copy of every
+shipped and core package. Used to restore <tt class="docutils literal"><span class="pre">Packages</span></tt>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Packages</a><ul>
+<li><a class="reference internal" href="#types-of-packages">Types of Packages</a></li>
+<li><a class="reference internal" href="#installation-of-packages">Installation of Packages</a><ul>
+<li><a class="reference internal" href="#installation-of-sublime-package-files">Installation of <tt class="docutils literal"><span class="pre">.sublime-package</span></tt> Files</a></li>
+<li><a class="reference internal" href="#installation-of-packages-from-a-version-control-system">Installation of Packages from a Version Control System</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#packages-and-magic">Packages and Magic</a><ul>
+<li><a class="reference internal" href="#merging-and-order-of-precedence">Merging and Order of Precedence</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#restoring-packages">Restoring Packages</a><ul>
+<li><a class="reference internal" href="#reverting-sublime-text-to-its-default-configuration">Reverting Sublime Text to Its Default Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-installed-packages-directory">The <tt class="docutils literal"><span class="pre">Installed</span> <span class="pre">Packages</span></tt> Directory</a></li>
+<li><a class="reference internal" href="#the-pristine-packages-directory">The <tt class="docutils literal"><span class="pre">Pristine</span> <span class="pre">Packages</span></tt> Directory</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="plugins.html"
+                        title="previous chapter">Plugins</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../command_line/command_line.html"
+                        title="next chapter">Command Line Usage</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/extensibility/packages.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../command_line/command_line.html" title="Command Line Usage"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="plugins.html" title="Plugins"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="extensibility.html" >Extending Sublime Text</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

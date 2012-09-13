@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>Commands &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="Keyboard Shortcuts - Windows/Linux" href="keyboard_shortcuts_win.html" />
+    <link rel="prev" title="Python API" href="api.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="keyboard_shortcuts_win.html" title="Keyboard Shortcuts - Windows/Linux"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="Python API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" accesskey="U">Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="commands">
+<h1>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This list of commands is a work in progress.</p>
+</div>
+<div class="section" id="about-paths-in-command-arguments">
+<h2>About Paths in Command Arguments<a class="headerlink" href="#about-paths-in-command-arguments" title="Permalink to this headline">¶</a></h2>
+<p>Some commands take paths as parameters. Among these, some support snippet-like
+syntax, while others don&#8217;t. A command of the first kind would take a parameter
+like <em>${packages}/SomeDir/SomeFile.Ext</em> whereas a command of the second kind
+would take a parameter like <em>Packages/SomeDir/SomeFile.Ext</em>.</p>
+<p>Generally, newer commands support the snippet-like syntax.</p>
+<p>Often, relative paths in arguments to commands are assumed to start at the
+<tt class="docutils literal"><span class="pre">Data</span></tt> directory.</p>
+<div class="section" id="variables-in-paths-as-arguments">
+<h3>Variables in Paths as Arguments<a class="headerlink" href="#variables-in-paths-as-arguments" title="Permalink to this headline">¶</a></h3>
+<p>The same variables available to build systems are expanded in arguments to
+commands. See <a class="reference internal" href="build_systems.html#build-system-variables"><em>Build System Variables</em></a> for more information.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Commands<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>build</strong></dt>
+<dd><p class="first">Runs a build system.</p>
+<ul class="last simple">
+<li><strong>variant</strong> [String]: Optional. The name of the variant to be run.</li>
+</ul>
+</dd>
+<dt><strong>run_macro_file</strong></dt>
+<dd><p class="first">Runs a <em>.sublime-macro</em> file.</p>
+<ul class="last simple">
+<li><strong>file</strong> [String]: Path to the macro file.</li>
+</ul>
+</dd>
+<dt><strong>insert_snippet</strong></dt>
+<dd><p class="first">Inserts a snippet from a string or <em>.sublime-snippet</em> file.</p>
+<ul class="last simple">
+<li><strong>contents</strong> [String]: Snippet as a string to be inserted.</li>
+<li><strong>name</strong> [String]: Path to the <em>.sublime-snippet</em> file to be inserted.</li>
+</ul>
+</dd>
+<dt><strong>insert</strong></dt>
+<dd><p class="first">Inserts a string.</p>
+<ul class="last simple">
+<li><strong>characters</strong> [String]: String to be inserted.</li>
+</ul>
+</dd>
+<dt><strong>move</strong></dt>
+<dd><p class="first">Advances the caret by predefined units.</p>
+<ul class="last simple">
+<li><strong>by</strong> [Enum]: Values: <em>characters</em>, <em>words</em>, <em>word_ends</em>, <em>subwords</em>, <em>subword_ends</em>, <em>lines</em>, <em>pages</em>, <em>stops</em>.</li>
+<li><strong>forward</strong> [Bool]: Whether to advance or reverse in the buffer.</li>
+<li><strong>word_begin</strong> [Bool]</li>
+<li><strong>empty_line</strong> [Bool]</li>
+<li><strong>punct_begin</strong> [Bool]</li>
+<li><strong>separators</strong> [Bool]</li>
+</ul>
+</dd>
+<dt><strong>move_to</strong></dt>
+<dd><p class="first">Advances the caret to predefined locations.</p>
+<ul class="last simple">
+<li><strong>to</strong> [Enum]: Values: <em>bol</em>, <em>eol</em>, <em>bof</em>, <em>eof</em>, <em>brackets</em>.</li>
+<li><strong>extend</strong> [Bool]: Whether to extend the selection. Defaults to <tt class="docutils literal"><span class="pre">false</span></tt>.</li>
+</ul>
+</dd>
+<dt><strong>new_window</strong></dt>
+<dd>Opens a new window.</dd>
+<dt><strong>close_window</strong></dt>
+<dd>Closes the active window.</dd>
+<dt><strong>switch_file</strong></dt>
+<dd><p class="first">Switches between two files with the same name and different extensions.</p>
+<ul class="last simple">
+<li><strong>extensions</strong> [[String]]: Extensions (without leading dot) for which switching will be enabled.</li>
+</ul>
+</dd>
+<dt><strong>close</strong></dt>
+<dd>Closes the active view.</dd>
+<dt><strong>close_file</strong></dt>
+<dd>Closes the active view and, under certain circumsances, the whole application.
+XXX Sounds kinda wrong.</dd>
+<dt><strong>toggle_sidebar</strong></dt>
+<dd>Shows or hides the sidebar.</dd>
+<dt><strong>toggle_full_screen</strong></dt>
+<dd>Toggles full screen mode on or off.</dd>
+<dt><strong>toggle_distraction_free</strong></dt>
+<dd>Toggles distraction free mode on or off.</dd>
+<dt><strong>left_delete</strong></dt>
+<dd>Deletes the character right before the caret.</dd>
+<dt><strong>right_delete</strong></dt>
+<dd>Deletes the character right after the caret.</dd>
+<dt><strong>undo</strong></dt>
+<dd>Undoes the latest action.</dd>
+<dt><strong>redo</strong></dt>
+<dd>Reapplies the latest undone action.</dd>
+<dt><strong>redo_or_repeat</strong></dt>
+<dd>Performs the latest action again.</dd>
+<dt><strong>soft_undo</strong></dt>
+<dd>Undoes each action stepping through granular edits.</dd>
+<dt><strong>soft_redo</strong></dt>
+<dd>Redoes each action stepping through granular edits.</dd>
+<dt><strong>cut</strong></dt>
+<dd>Removes the selected text and sends it to the system clipboard. Put
+differently, it cuts.</dd>
+<dt><strong>copy</strong></dt>
+<dd>Sends the selected text to to the system clipboard.</dd>
+<dt><strong>paste</strong></dt>
+<dd>Inserts the clipboard contents after the caret.</dd>
+<dt><strong>paste_and_indent</strong></dt>
+<dd>Inserts the clipboard contents after the caret and indents contextually.</dd>
+<dt><strong>select_lines</strong></dt>
+<dd><p class="first">Adds a line to the current selection.</p>
+<ul class="last simple">
+<li><strong>forward</strong> [Bool]: Whether to add the next or previous line. Defaults to
+<tt class="docutils literal"><span class="pre">true</span></tt>.</li>
+</ul>
+</dd>
+<dt><strong>scroll_lines</strong></dt>
+<dd><p class="first">Scrolls lines in the view.</p>
+<ul class="last simple">
+<li><strong>amount</strong> [Float]: Positive values scroll lines down and negative values scroll lines up.</li>
+</ul>
+</dd>
+<dt><strong>prev_view</strong></dt>
+<dd>Switches to the previous view.</dd>
+<dt><strong>next_view</strong></dt>
+<dd>Switches to the next view.</dd>
+<dt><strong>next_view_in_stack</strong></dt>
+<dd>Switches to the most recently active view.</dd>
+<dt><strong>previous_view_in_stack</strong></dt>
+<dd>Switches to the view that was active before the most recently active view.
+I don&#8217;t think this is very clear or even true.</dd>
+<dt><strong>select_all</strong></dt>
+<dd>Select the view&#8217;s content.</dd>
+<dt><strong>split_selection_into_lines</strong></dt>
+<dd>Unsurprisingly, it splits the selection into lines.</dd>
+<dt><strong>single_selection</strong></dt>
+<dd>Collapses multiple selections into a single selection.</dd>
+<dt><strong>clear_fields</strong></dt>
+<dd>Breaks out of the active snippet field cycle.</dd>
+<dt><strong>hide_panel</strong></dt>
+<dd><p class="first">Hides the active panel.</p>
+<ul class="simple">
+<li><strong>cancel</strong> [Bool]: Notifies the panel to restore the selection to what it</li>
+</ul>
+<p class="last">was when the panel was opened. (Only incremental find panel.)</p>
+</dd>
+<dt><strong>hide_overlay</strong></dt>
+<dd>Hides the active overlay.</dd>
+<dt><strong>hide_auto_complete</strong></dt>
+<dd>Hides the auto complete list.</dd>
+<dt><strong>insert_best_completion</strong></dt>
+<dd><p class="first">Inserts the best completion that can be inferred from the current context.
+XXX Probably useless. XXX</p>
+<ul class="last simple">
+<li><strong>default</strong> [String]: String to insert failing a best completion.</li>
+</ul>
+</dd>
+<dt><strong>replace_completion_with_next_completion</strong></dt>
+<dd>XXX Useless for users. XXX</dd>
+<dt><strong>reindent</strong></dt>
+<dd>XXX ??? XXX</dd>
+<dt><strong>indent</strong></dt>
+<dd>Increments indentation.</dd>
+<dt><strong>next_field</strong></dt>
+<dd>Advances the caret to the text snippet field in the current snippet field
+cycle.</dd>
+<dt><strong>prev_field</strong></dt>
+<dd>Moves the caret to the previous snippet field in the current snippet field
+cycle.</dd>
+<dt><strong>commit_completion</strong></dt>
+<dd>Inserts into the buffer the item that&#8217;s currently selected in the auto
+complete list. XXX Probably not useful for users. XXX</dd>
+<dt><strong>unindent</strong></dt>
+<dd>Unindents.</dd>
+<dt><strong>toggle_overwrite</strong></dt>
+<dd>Toggles overwriting on or off.</dd>
+<dt><strong>expand_selection</strong></dt>
+<dd><p class="first">Extends the selection up to predifined limits.</p>
+<ul class="last simple">
+<li><strong>to</strong> [Enum]: Values: bol, hardbol, eol, hardeol, bof, eof, brackets, line.</li>
+</ul>
+</dd>
+<dt><strong>find_under_expand</strong></dt>
+<dd>Adds a new selection based on the current selection or expands the
+selection to the current word.</dd>
+<dt><strong>close_tag</strong></dt>
+<dd>Surrounds the current inner text with the appropiate tags.</dd>
+<dt><strong>toggle_record_macro</strong></dt>
+<dd>Starts or stops the macro recorder.</dd>
+<dt><strong>run_macro</strong></dt>
+<dd>Runs the macro stored in the macro buffer.</dd>
+<dt><strong>show_overlay</strong></dt>
+<dd><p class="first">Shows an overlay.</p>
+<ul class="last simple">
+<li><strong>overlay</strong> [Enum]: Values: goto, command_palette</li>
+<li><strong>show_files</strong> [Bool]: Optimize overlay display for displaying paths.</li>
+</ul>
+</dd>
+<dt><strong>show_panel</strong></dt>
+<dd><p class="first">Shows a panel.</p>
+<ul class="last simple">
+<li><strong>panel</strong> [Enum]: Values: incremental_find, find, replace, find_in_files, console</li>
+<li><strong>reverse</strong> [Bool]: Whether to search backwards in the buffer.</li>
+<li><strong>toggle</strong> [Bool]: Whether to hide the panel if it&#8217;s already visible.</li>
+</ul>
+</dd>
+<dt><strong>find_next</strong></dt>
+<dd>Finds the next occurrence of the current search term.</dd>
+<dt><strong>find_prev</strong></dt>
+<dd>Finds the previous occurrence of the current search term.</dd>
+<dt><strong>find_under</strong></dt>
+<dd>Finds the next occurrence of the current selection or the current word.</dd>
+<dt><strong>find_under_prev</strong></dt>
+<dd>Finds the previous occurrence of the current selection or the current word.</dd>
+<dt><strong>find_all_under</strong></dt>
+<dd>Finds all occurrences of the current selection or the current word.</dd>
+<dt><strong>slurp_find_string</strong></dt>
+<dd>Copies the current selection or word into the &#8220;find&#8221; field of the find
+panel.</dd>
+<dt><strong>slurp_replace_string</strong></dt>
+<dd>Copies the current selection or word into the &#8220;replace&#8221; field of the find
+and replace panel.</dd>
+<dt><strong>next_result</strong></dt>
+<dd>Advance to the next captured result.</dd>
+<dt><strong>prev_result</strong></dt>
+<dd>Move to the previous captured result.</dd>
+<dt><strong>toggle_setting</strong></dt>
+<dd><p class="first">Toggles the value of a boolean setting.</p>
+<ul class="last simple">
+<li><strong>setting</strong> [String]: The name of the setting to be toggled.</li>
+</ul>
+</dd>
+<dt><strong>next_misspelling</strong></dt>
+<dd>Advance to the next misspelling</dd>
+<dt><strong>prev_misspelling</strong></dt>
+<dd>Move to the previous misspelling.</dd>
+<dt><strong>swap_line_down</strong></dt>
+<dd>Swaps the current line with the line below.</dd>
+<dt><strong>swap_line_up</strong></dt>
+<dd>Swaps the current line with the line above.</dd>
+<dt><strong>toggle_comment</strong></dt>
+<dd><p class="first">Comments or uncomments the active lines.</p>
+<ul class="last simple">
+<li><strong>block</strong> [Bool]: Whether to use a block comment.</li>
+</ul>
+</dd>
+<dt><strong>join_lines</strong></dt>
+<dd>Joins the current line with the next one.</dd>
+<dt><strong>duplicate_line</strong></dt>
+<dd>Duplicates the current line.</dd>
+<dt><strong>auto_complete</strong></dt>
+<dd>Opens the auto comeplete list.</dd>
+<dt><strong>replace_completion_with_auto_complete</strong></dt>
+<dd>XXX Useless for users. XXX</dd>
+<dt><strong>show_scope_name</strong></dt>
+<dd>Shows the name for the caret&#8217;s scope in the status bar.</dd>
+<dt><strong>exec</strong></dt>
+<dd><p class="first">Runs an external process asynchronously.</p>
+<p class="last">XXX Document all options.</p>
+</dd>
+<dt><strong>transpose</strong></dt>
+<dd>Makes stuff dance.</dd>
+<dt><strong>sort_lines</strong></dt>
+<dd><p class="first">Sorts lines.</p>
+<ul class="last simple">
+<li><strong>case_sensitive</strong> [Bool]: Whether the sort should be case sensitive.</li>
+</ul>
+</dd>
+<dt><strong>set_layout</strong></dt>
+<dd>XXX</dd>
+<dt><strong>focus_group</strong></dt>
+<dd>XXX</dd>
+<dt><strong>move_to_group</strong></dt>
+<dd>XXX</dd>
+<dt><strong>select_by_index</strong></dt>
+<dd>XXX</dd>
+<dt><strong>next_bookmark</strong></dt>
+<dd>Select the next bookmarked region.</dd>
+<dt><strong>prev_bookmark</strong></dt>
+<dd>Select the previous bookmarked region.</dd>
+<dt><strong>toggle_bookmark</strong></dt>
+<dd>Sets or unsets a bookmark for the active region(s). (Bookmarks can be
+accessed via the regions API using <tt class="docutils literal"><span class="pre">&quot;bookmarks&quot;</span></tt> as the key.)</dd>
+<dt><strong>clear_bookmarks</strong></dt>
+<dd>Removes all bookmarks.</dd>
+<dt><strong>select_all_bookmarks</strong></dt>
+<dd>Selects all bookmarked regions.</dd>
+<dt><strong>wrap_lines</strong></dt>
+<dd><p class="first">Wraps lines. By default, it wraps lines at the first ruler&#8217;s column.</p>
+<ul class="last simple">
+<li><strong>width</strong> [Int]: Specifies the column at which lines should be wrapped.</li>
+</ul>
+</dd>
+<dt><strong>upper_case</strong></dt>
+<dd>Makes the selection upper case.</dd>
+<dt><strong>lower_case</strong></dt>
+<dd>Makes the selection lower case.</dd>
+<dt><strong>set_mark</strong></dt>
+<dd>XXX</dd>
+<dt><strong>select_to_mark</strong></dt>
+<dd>XXX</dd>
+<dt><strong>delete_to_mark</strong></dt>
+<dd>XXX</dd>
+<dt><strong>swap_with_mark</strong></dt>
+<dd>XXX</dd>
+<dt><strong>yank</strong></dt>
+<dd>XXX</dd>
+<dt><strong>show_at_center</strong></dt>
+<dd>XXX</dd>
+<dt><strong>increase_font_size</strong></dt>
+<dd>Increases the font size.</dd>
+<dt><strong>decrease_font_size</strong></dt>
+<dd>Decreases the font size.</dd>
+<dt><strong>fold</strong></dt>
+<dd>XXX</dd>
+<dt><strong>unfold</strong></dt>
+<dd>XXX</dd>
+<dt><strong>fold_by_level</strong></dt>
+<dd>XXX</dd>
+<dt><strong>context_menu</strong></dt>
+<dd>Shows the context menu.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Commands</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#about-paths-in-command-arguments">About Paths in Command Arguments</a><ul>
+<li><a class="reference internal" href="#variables-in-paths-as-arguments">Variables in Paths as Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Commands</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="previous chapter">Python API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="keyboard_shortcuts_win.html"
+                        title="next chapter">Keyboard Shortcuts - Windows/Linux</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/reference/commands.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="keyboard_shortcuts_win.html" title="Keyboard Shortcuts - Windows/Linux"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="Python API"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" >Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>Key Bindings &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="Settings (Reference)" href="settings.html" />
+    <link rel="prev" title="Build Systems" href="build_systems.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="settings.html" title="Settings (Reference)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="build_systems.html" title="Build Systems"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" accesskey="U">Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="key-bindings">
+<h1>Key Bindings<a class="headerlink" href="#key-bindings" title="Permalink to this headline">¶</a></h1>
+<p>Key bindings map key presses to commands.</p>
+<div class="section" id="file-format">
+<h2>File Format<a class="headerlink" href="#file-format" title="Permalink to this headline">¶</a></h2>
+<p>Key bindings are stored in <tt class="docutils literal"><span class="pre">.sublime-keymap</span></tt> files and defined in JSON. All
+key map file names need to follow this pattern: <tt class="docutils literal"><span class="pre">Default</span> <span class="pre">(&lt;platform&gt;).sublime-keymap</span></tt>.
+Otherwise, Sublime Text will ignore them.</p>
+<div class="section" id="platform-specific-key-maps">
+<h3>Platform-Specific Key Maps<a class="headerlink" href="#platform-specific-key-maps" title="Permalink to this headline">¶</a></h3>
+<p>Each platform gets its own key map:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">Default</span> <span class="pre">(Windows).sublime-keymap</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">Default</span> <span class="pre">(OSX).sublime-keymap</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">Default</span> <span class="pre">(Linux).sublime-keymap</span></tt></li>
+</ul>
+<p>Separate key maps exist to abide by different vendor-specific <a class="reference external" href="http://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction">HCI</a> guidelines.</p>
+</div>
+<div class="section" id="structure-of-a-key-binding">
+<h3>Structure of a Key Binding<a class="headerlink" href="#structure-of-a-key-binding" title="Permalink to this headline">¶</a></h3>
+<p>Key maps are arrays of key bindings. Below you&#8217;ll find valid elements in key bindings.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">keys</span></tt></dt>
+<dd>An array of case-sensitive keys to be pressed. Modifiers can be specified
+with the <tt class="docutils literal"><span class="pre">+</span></tt> sign. Chords are built by adding elements to the array,
+e. g. <tt class="docutils literal"><span class="pre">[&quot;ctrl+k&quot;,&quot;ctrl+j&quot;]</span></tt>. Ambiguous chords are resolved with a timeout.</dd>
+<dt><tt class="docutils literal"><span class="pre">command</span></tt></dt>
+<dd>Name of the command to be executed.</dd>
+<dt><tt class="docutils literal"><span class="pre">args</span></tt></dt>
+<dd>Dictionary of arguments to be passed to <tt class="docutils literal"><span class="pre">command</span></tt>. Keys must be the names
+of parameters to <tt class="docutils literal"><span class="pre">command</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">context</span></tt></dt>
+<dd>Array of contexts to selectively enable the key binding. All contexts must
+be true for the key binding to trigger. See <a class="reference internal" href="#context-reference"><em>Structure of a Context</em></a> below.</dd>
+</dl>
+<p>Here&#8217;s an example illustrating most of the features outlined above:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;shift+enter&quot;</span><span class="p">],</span> <span class="s">&quot;command&quot;</span><span class="p">:</span> <span class="s">&quot;insert_snippet&quot;</span><span class="p">,</span> <span class="s">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s">&quot;contents&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="se">\n\t</span><span class="s">$0</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">},</span> <span class="s">&quot;context&quot;</span><span class="p">:</span>
+        <span class="p">[</span>
+                <span class="p">{</span> <span class="s">&quot;key&quot;</span><span class="p">:</span> <span class="s">&quot;setting.auto_indent&quot;</span><span class="p">,</span> <span class="s">&quot;operator&quot;</span><span class="p">:</span> <span class="s">&quot;equal&quot;</span><span class="p">,</span> <span class="s">&quot;operand&quot;</span><span class="p">:</span> <span class="n">true</span> <span class="p">},</span>
+                <span class="p">{</span> <span class="s">&quot;key&quot;</span><span class="p">:</span> <span class="s">&quot;selection_empty&quot;</span><span class="p">,</span> <span class="s">&quot;operator&quot;</span><span class="p">:</span> <span class="s">&quot;equal&quot;</span><span class="p">,</span> <span class="s">&quot;operand&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="s">&quot;match_all&quot;</span><span class="p">:</span> <span class="n">true</span> <span class="p">},</span>
+                <span class="p">{</span> <span class="s">&quot;key&quot;</span><span class="p">:</span> <span class="s">&quot;preceding_text&quot;</span><span class="p">,</span> <span class="s">&quot;operator&quot;</span><span class="p">:</span> <span class="s">&quot;regex_contains&quot;</span><span class="p">,</span> <span class="s">&quot;operand&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">{$&quot;</span><span class="p">,</span> <span class="s">&quot;match_all&quot;</span><span class="p">:</span> <span class="n">true</span> <span class="p">},</span>
+                <span class="p">{</span> <span class="s">&quot;key&quot;</span><span class="p">:</span> <span class="s">&quot;following_text&quot;</span><span class="p">,</span> <span class="s">&quot;operator&quot;</span><span class="p">:</span> <span class="s">&quot;regex_contains&quot;</span><span class="p">,</span> <span class="s">&quot;operand&quot;</span><span class="p">:</span> <span class="s">&quot;^</span><span class="se">\\</span><span class="s">}&quot;</span><span class="p">,</span> <span class="s">&quot;match_all&quot;</span><span class="p">:</span> <span class="n">true</span> <span class="p">}</span>
+        <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="structure-of-a-context">
+<span id="context-reference"></span><h3>Structure of a Context<a class="headerlink" href="#structure-of-a-context" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">key</span></tt></dt>
+<dd>Name of a context operand to query.</dd>
+<dt><tt class="docutils literal"><span class="pre">operator</span></tt></dt>
+<dd>Type of test to perform against <tt class="docutils literal"><span class="pre">key</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">operand</span></tt></dt>
+<dd>Value against which the result of <tt class="docutils literal"><span class="pre">key</span></tt> is tested.</dd>
+<dt><tt class="docutils literal"><span class="pre">match_all</span></tt></dt>
+<dd>Requires the test to succeed for all selections. Defaults to <tt class="docutils literal"><span class="pre">false</span></tt>.</dd>
+</dl>
+<div class="section" id="context-operands">
+<h4>Context Operands<a class="headerlink" href="#context-operands" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">auto_complete_visible</span></tt></dt>
+<dd>Returns <tt class="docutils literal"><span class="pre">true</span></tt> if the autocomplete list is visible.</dd>
+<dt><tt class="docutils literal"><span class="pre">has_next_field</span></tt></dt>
+<dd>Returns <tt class="docutils literal"><span class="pre">true</span></tt> if there&#8217;s a next snippet field available.</dd>
+<dt><tt class="docutils literal"><span class="pre">has_prev_field</span></tt></dt>
+<dd>Returns <tt class="docutils literal"><span class="pre">true</span></tt> if there&#8217;s a previous snippet field available.</dd>
+<dt><tt class="docutils literal"><span class="pre">num_selections</span></tt></dt>
+<dd>Returns the number of selections.</dd>
+<dt><tt class="docutils literal"><span class="pre">overlay_visible</span></tt></dt>
+<dd>Returns <tt class="docutils literal"><span class="pre">true</span></tt> if any overlay is visible.</dd>
+<dt><tt class="docutils literal"><span class="pre">panel_visible</span></tt></dt>
+<dd>Returns <tt class="docutils literal"><span class="pre">true</span></tt> if any panel is visible.</dd>
+<dt><tt class="docutils literal"><span class="pre">following_text</span></tt></dt>
+<dd>Restricts the test to the text following the caret.</dd>
+<dt><tt class="docutils literal"><span class="pre">preceding_text</span></tt></dt>
+<dd>Restricts the test to the text preceding the caret.</dd>
+<dt><tt class="docutils literal"><span class="pre">selection_empty</span></tt></dt>
+<dd>Returns <tt class="docutils literal"><span class="pre">true</span></tt> if the selection is an empty region.</dd>
+<dt><tt class="docutils literal"><span class="pre">setting.x</span></tt></dt>
+<dd>Returns the value of the <tt class="docutils literal"><span class="pre">x</span></tt> setting. <tt class="docutils literal"><span class="pre">x</span></tt> can be any string.</dd>
+<dt><tt class="docutils literal"><span class="pre">text</span></tt></dt>
+<dd>Restricts the test to the selected text.</dd>
+<dt><tt class="docutils literal"><span class="pre">selector</span></tt></dt>
+<dd>Returns the current scope.</dd>
+</dl>
+</div>
+<div class="section" id="context-operators">
+<h4>Context Operators<a class="headerlink" href="#context-operators" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">equal</span></tt>, <tt class="docutils literal"><span class="pre">not_equal</span></tt></dt>
+<dd>Test for equality.</dd>
+<dt><tt class="docutils literal"><span class="pre">regex_match</span></tt>, <tt class="docutils literal"><span class="pre">not_regex_match</span></tt></dt>
+<dd>Match against a regular expression.</dd>
+<dt><tt class="docutils literal"><span class="pre">regex_contains</span></tt>, <tt class="docutils literal"><span class="pre">not_regex_contains</span></tt></dt>
+<dd>Match against a regular expression (containment).</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="section" id="command-mode">
+<h2>Command Mode<a class="headerlink" href="#command-mode" title="Permalink to this headline">¶</a></h2>
+<p>Sublime Text provides a <tt class="docutils literal"><span class="pre">command_mode</span></tt> setting to prevent key presses from
+being sent to the buffer. This is useful to emulate Vim&#8217;s modal behavior.</p>
+</div>
+<div class="section" id="bindable-keys">
+<h2>Bindable Keys<a class="headerlink" href="#bindable-keys" title="Permalink to this headline">¶</a></h2>
+<p>Keys may be specified literally or by name. Below you&#8217;ll find the list of
+valid names:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">up</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">down</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">right</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">left</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">insert</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">home</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">end</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">pageup</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">pagedown</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">backspace</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">delete</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">tab</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">enter</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">pause</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">escape</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">space</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad0</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad2</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad3</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad4</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad5</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad6</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad7</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad8</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad9</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad_period</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad_divide</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad_multiply</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad_minus</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad_plus</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">keypad_enter</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">clear</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f2</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f3</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f4</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f5</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f6</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f7</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f8</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f9</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f10</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f11</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f12</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f13</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f14</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f15</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f16</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f17</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f18</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f19</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">f20</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">sysreq</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">break</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">context_menu</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">browser_back</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">browser_forward</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">browser_refresh</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">browser_stop</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">browser_search</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">browser_favorites</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">browser_home</span></tt></li>
+</ul>
+<div class="section" id="modifiers">
+<h3>Modifiers<a class="headerlink" href="#modifiers" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">shift</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ctrl</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">alt</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">super</span></tt> (Windows key, Command key…)</li>
+</ul>
+</div>
+<div class="section" id="warning-about-bindable-keys">
+<h3>Warning about Bindable Keys<a class="headerlink" href="#warning-about-bindable-keys" title="Permalink to this headline">¶</a></h3>
+<p>If you&#8217;re developing a package, keep this in mind:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">Ctrl+Alt+&lt;alphanum&gt;</span></tt> should not be used on any Windows key bindings.</li>
+<li><tt class="docutils literal"><span class="pre">Option+&lt;alphanum&gt;</span></tt> should not be used on any OS X key bindings.</li>
+</ul>
+<p>In both cases, the user&#8217;s ability to insert non-ascii characters would be
+compromised.</p>
+<p>If you are the end-user, you are free to remap those key combinations.</p>
+</div>
+</div>
+<div class="section" id="keeping-key-maps-organized">
+<h2>Keeping Key Maps Organized<a class="headerlink" href="#keeping-key-maps-organized" title="Permalink to this headline">¶</a></h2>
+<p>Sublime Text ships with default key maps under <tt class="docutils literal"><span class="pre">Packages/Default</span></tt>. Other
+packages may include their own key map files. The recommended storage location
+for your personal key map is <tt class="docutils literal"><span class="pre">Packages/User</span></tt>.</p>
+<p>See <a class="reference internal" href="../extensibility/packages.html#merging-and-order-of-precedence"><em>Merging and Order of Precedence</em></a> for information about how Sublime
+Text sorts files for merging.</p>
+</div>
+<div class="section" id="international-keyboards">
+<h2>International Keyboards<a class="headerlink" href="#international-keyboards" title="Permalink to this headline">¶</a></h2>
+<p>Due to the way Sublime Text maps key names to physical keys, there might be a
+mismatch between the two.</p>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="http://www.sublimetext.com/docs/2/api_reference.html">sublime.log_commands(flag)</a>  to enable command logging. It may help when
+debugging key maps.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Key Bindings</a><ul>
+<li><a class="reference internal" href="#file-format">File Format</a><ul>
+<li><a class="reference internal" href="#platform-specific-key-maps">Platform-Specific Key Maps</a></li>
+<li><a class="reference internal" href="#structure-of-a-key-binding">Structure of a Key Binding</a></li>
+<li><a class="reference internal" href="#structure-of-a-context">Structure of a Context</a><ul>
+<li><a class="reference internal" href="#context-operands">Context Operands</a></li>
+<li><a class="reference internal" href="#context-operators">Context Operators</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#command-mode">Command Mode</a></li>
+<li><a class="reference internal" href="#bindable-keys">Bindable Keys</a><ul>
+<li><a class="reference internal" href="#modifiers">Modifiers</a></li>
+<li><a class="reference internal" href="#warning-about-bindable-keys">Warning about Bindable Keys</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#keeping-key-maps-organized">Keeping Key Maps Organized</a></li>
+<li><a class="reference internal" href="#international-keyboards">International Keyboards</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="build_systems.html"
+                        title="previous chapter">Build Systems</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="settings.html"
+                        title="next chapter">Settings (Reference)</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/reference/key_bindings.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="settings.html" title="Settings (Reference)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="build_systems.html" title="Build Systems"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" >Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

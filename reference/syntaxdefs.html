@@ -1,0 +1,594 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>Syntax Definitions &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="Build Systems" href="build_systems.html" />
+    <link rel="prev" title="Snippets" href="snippets.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="build_systems.html" title="Build Systems"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="snippets.html" title="Snippets"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" accesskey="U">Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="syntax-definitions">
+<h1>Syntax Definitions<a class="headerlink" href="#syntax-definitions" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This topic is a draft and may contain wrong information.</p>
+</div>
+<div class="section" id="compatibility-with-textmate">
+<h2>Compatibility with Textmate<a class="headerlink" href="#compatibility-with-textmate" title="Permalink to this headline">¶</a></h2>
+<p>Sublime Text syntax definitions are generally compatible with Textmate language
+files.</p>
+</div>
+<div class="section" id="file-format">
+<h2>File Format<a class="headerlink" href="#file-format" title="Permalink to this headline">¶</a></h2>
+<p>Syntax definitions are files in the Plist format with the <tt class="docutils literal"><span class="pre">tmLanguage</span></tt> extension.
+In this reference files, however, JSON is used instead and converted into Plist.</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Sublime Snippet (Raw)&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;scopeName&quot;</span><span class="o">:</span> <span class="s2">&quot;source.ssraw&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;fileTypes&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;ssraw&quot;</span><span class="p">],</span>
+  <span class="s2">&quot;patterns&quot;</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span> <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;\\$(\\d+)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;keyword.ssraw&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;captures&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;1&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;constant.numeric.ssraw&quot;</span> <span class="p">}</span>
+         <span class="p">},</span>
+        <span class="s2">&quot;comment&quot;</span><span class="o">:</span> <span class="s2">&quot;Tab stops like $1, $2...&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span> <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;\\$([A-Za-z][A-Za-z0-9_]+)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;keyword.ssraw&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;captures&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;1&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;constant.numeric.ssraw&quot;</span> <span class="p">}</span>
+         <span class="p">},</span>
+        <span class="s2">&quot;comment&quot;</span><span class="o">:</span> <span class="s2">&quot;Variables like $PARAM1, $TM_SELECTION...&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;variable.complex.ssraw&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;begin&quot;</span><span class="o">:</span> <span class="s2">&quot;(\\$)(\\{)([0-9]+):&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;beginCaptures&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;1&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;keyword.control.ssraw&quot;</span> <span class="p">},</span>
+            <span class="s2">&quot;3&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;constant.numeric.ssraw&quot;</span> <span class="p">}</span>
+         <span class="p">},</span>
+         <span class="s2">&quot;patterns&quot;</span><span class="o">:</span> <span class="p">[</span>
+            <span class="p">{</span> <span class="s2">&quot;include&quot;</span><span class="o">:</span> <span class="s2">&quot;$self&quot;</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;string.ssraw&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;.&quot;</span>
+            <span class="p">}</span>
+         <span class="p">],</span>
+         <span class="s2">&quot;end&quot;</span><span class="o">:</span> <span class="s2">&quot;\\}&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;constant.character.escape.ssraw&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;\\\\(\\$|\\&gt;|\\&lt;)&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;invalid.ssraw&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;(\\$|\\&gt;|\\&lt;)&quot;</span>
+      <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;ca03e751-04ef-4330-9a6b-9b99aae1c418&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">name</span></tt></dt>
+<dd>Descriptive name for the syntax definition. Shows up in the syntax definition dropdown menu
+located in the bottom right of Sublime Text interface. It&#8217;s usually the name of the programming
+language or equivalent.</dd>
+<dt><tt class="docutils literal"><span class="pre">scopeName</span></tt></dt>
+<dd>Name of the top-level scope for this syntax definition. Either <tt class="docutils literal"><span class="pre">source.&lt;lang&gt;</span></tt> or <tt class="docutils literal"><span class="pre">text.&lt;lang&gt;</span></tt>.
+Use <tt class="docutils literal"><span class="pre">source</span></tt> for programming languages and <tt class="docutils literal"><span class="pre">text</span></tt> for everything else.</dd>
+<dt><tt class="docutils literal"><span class="pre">fileTypes</span></tt></dt>
+<dd>And array of file type extensions for which this syntax should be automatically activated.
+Include the extensions without the leading dot.</dd>
+<dt><tt class="docutils literal"><span class="pre">uuid</span></tt></dt>
+<dd>Unique indentifier for this syntax definition. Currently ignored.</dd>
+<dt><tt class="docutils literal"><span class="pre">foldingStartMarker</span></tt></dt>
+<dd>Currently ignored. Used for code folding.</dd>
+<dt><tt class="docutils literal"><span class="pre">foldingStopMarker</span></tt></dt>
+<dd>Currently ignored. Used for code folding.</dd>
+<dt><tt class="docutils literal"><span class="pre">patterns</span></tt></dt>
+<dd>Array of patterns to match against the buffer&#8217;s text.</dd>
+<dt><tt class="docutils literal"><span class="pre">repository</span></tt></dt>
+<dd>Array of patterns abstracted out from the patterns element. Useful to keep
+the syntax definition tidy as well as for specialized uses like recursive
+patterns. Optional.</dd>
+</dl>
+</div>
+<div class="section" id="the-patterns-array">
+<h2>The Patterns Array<a class="headerlink" href="#the-patterns-array" title="Permalink to this headline">¶</a></h2>
+<p>Elements contained in the <tt class="docutils literal"><span class="pre">patterns</span></tt> array.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">match</span></tt></dt>
+<dd><p class="first">Contains the following elements:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">match</span></tt></td>
+<td>Pattern to search for.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">name</span></tt></td>
+<td>Scope name to be assigned to matches of <tt class="docutils literal"><span class="pre">match</span></tt>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">comment</span></tt></td>
+<td>Optional. For information only.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">captures</span></tt></td>
+<td>Optional. Refinement of <tt class="docutils literal"><span class="pre">match</span></tt>. See below.</td>
+</tr>
+</tbody>
+</table>
+<p>In turn, <tt class="docutils literal"><span class="pre">captures</span></tt> can contain <em>n</em> of the following pairs of elements:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">0..n</span></tt></td>
+<td>Name of the group referenced.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">name</span></tt></td>
+<td>Scope to be assigned to the group.</td>
+</tr>
+</tbody>
+</table>
+<p>Examples:</p>
+<div class="last highlight-js"><div class="highlight"><pre><span class="c1">// Simple</span>
+
+<span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;constant.character.escape.ssraw&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;\\\\(\\$|\\&gt;|\\&lt;)&quot;</span>
+  <span class="s2">&quot;comment&quot;</span><span class="p">.</span> <span class="s2">&quot;Sequences like \$, \&gt; and \&lt;&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">// With captures</span>
+
+<span class="p">{</span> <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;\\$(\\d+)&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;keyword.ssraw&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;captures&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;1&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;constant.numeric.ssraw&quot;</span> <span class="p">}</span>
+   <span class="p">},</span>
+  <span class="s2">&quot;comment&quot;</span><span class="o">:</span> <span class="s2">&quot;Tab stops like $1, $2...&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">include</span></tt></dt>
+<dd><p class="first">Includes items in the repository, other syntax definitions or the current one.</p>
+<p>References:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>$self</td>
+<td>The current syntax definition.</td>
+</tr>
+<tr class="row-even"><td>#itemName</td>
+<td>itemName in the repository.</td>
+</tr>
+<tr class="row-odd"><td>source.js</td>
+<td>External syntax definitions.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Examples:</p>
+<div class="last highlight-js"><div class="highlight"><pre><span class="c1">// Requires presence of DoubleQuotedStrings element in the repository.</span>
+<span class="p">{</span> <span class="s2">&quot;include&quot;</span><span class="o">:</span> <span class="s2">&quot;#DoubleQuotedStrings&quot;</span> <span class="p">}</span>
+
+<span class="c1">// Recursively includes the current syntax definition.</span>
+<span class="p">{</span> <span class="s2">&quot;include&quot;</span><span class="o">:</span> <span class="s2">&quot;$self&quot;</span> <span class="p">}</span>
+
+<span class="c1">// Includes and external syntax definition.</span>
+<span class="p">{</span> <span class="s2">&quot;include&quot;</span><span class="o">:</span> <span class="s2">&quot;source.js&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">begin..end</span></tt></dt>
+<dd><p class="first">Defines a scope potentially spanning multiple lines</p>
+<p>Contains the following elements:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">begin</span></tt></td>
+<td>The start marker pattern.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">end</span></tt></td>
+<td>The end marker pattern.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">name</span></tt></td>
+<td>Scope name for the whole region.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">beginCaptures</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">captures</span></tt> for <tt class="docutils literal"><span class="pre">begin</span></tt>. See <tt class="docutils literal"><span class="pre">captures</span></tt>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">endCaptures</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">captures</span></tt> for <tt class="docutils literal"><span class="pre">end</span></tt>. See <tt class="docutils literal"><span class="pre">captures</span></tt>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">patterns</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">patterns</span></tt> to be matched against the content.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">contentName</span></tt></td>
+<td>Scope name for the content excluding the markers.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Example:</p>
+<div class="last highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;variable.complex.ssraw&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;begin&quot;</span><span class="o">:</span> <span class="s2">&quot;(\\$)(\\{)([0-9]+):&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;beginCaptures&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;1&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;keyword.control.ssraw&quot;</span> <span class="p">},</span>
+      <span class="s2">&quot;3&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;constant.numeric.ssraw&quot;</span> <span class="p">}</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;patterns&quot;</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span> <span class="s2">&quot;include&quot;</span><span class="o">:</span> <span class="s2">&quot;$self&quot;</span> <span class="p">},</span>
+      <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;string.ssraw&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;match&quot;</span><span class="o">:</span> <span class="s2">&quot;.&quot;</span>
+      <span class="p">}</span>
+   <span class="p">],</span>
+   <span class="s2">&quot;end&quot;</span><span class="o">:</span> <span class="s2">&quot;\\}&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="repository">
+<h2>Repository<a class="headerlink" href="#repository" title="Permalink to this headline">¶</a></h2>
+<p>Can be referenced from <tt class="docutils literal"><span class="pre">patterns</span></tt> or from itself in an <tt class="docutils literal"><span class="pre">include</span></tt> element.
+See <tt class="docutils literal"><span class="pre">include</span></tt> for more information.</p>
+<p>The repository can contain the following elements:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Simple elements:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="s2">&quot;elementName&quot;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s2">&quot;match&quot;</span><span class="o">:</span>  <span class="s2">&quot;some regexp&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span>   <span class="s2">&quot;some.scope.somelang&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Complex elements:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="s2">&quot;elementName&quot;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s2">&quot;patterns&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s2">&quot;match&quot;</span><span class="o">:</span>  <span class="s2">&quot;some regexp&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="o">:</span>   <span class="s2">&quot;some.scope.somelang&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s2">&quot;match&quot;</span><span class="o">:</span>  <span class="s2">&quot;other regexp&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="o">:</span>   <span class="s2">&quot;some.other.scope.somelang&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+<p>Examples:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="s2">&quot;repository&quot;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s2">&quot;numericConstant&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;patterns&quot;</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span> <span class="s2">&quot;match&quot;</span><span class="o">:</span>  <span class="s2">&quot;\\d*(?&lt;!\\.)(\\.)\\d+(d)?(mb|kb|gb)?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span>   <span class="s2">&quot;constant.numeric.double.powershell&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;captures&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;1&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;support.constant.powershell&quot;</span> <span class="p">},</span>
+          <span class="s2">&quot;2&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;support.constant.powershell&quot;</span> <span class="p">},</span>
+          <span class="s2">&quot;3&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;keyword.other.powershell&quot;</span> <span class="p">}</span>
+          <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span> <span class="s2">&quot;match&quot;</span><span class="o">:</span>  <span class="s2">&quot;(?&lt;!\\w)\\d+(d)?(mb|kb|gb)?(?!\\w)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span>   <span class="s2">&quot;constant.numeric.powershell&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;captures&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;1&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;support.constant.powershell&quot;</span> <span class="p">},</span>
+          <span class="s2">&quot;2&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;keyword.other.powershell&quot;</span> <span class="p">}</span>
+          <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;scriptblock&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;begin&quot;</span><span class="o">:</span>  <span class="s2">&quot;\\{&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;end&quot;</span><span class="o">:</span>    <span class="s2">&quot;\\}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span>   <span class="s2">&quot;meta.scriptblock.powershell&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;patterns&quot;</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span> <span class="s2">&quot;include&quot;</span><span class="o">:</span> <span class="s2">&quot;$self&quot;</span> <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="escape-sequences">
+<h2>Escape Sequences<a class="headerlink" href="#escape-sequences" title="Permalink to this headline">¶</a></h2>
+<p>Be sure to escape JSON/XML sequences as needed.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Syntax Definitions</a><ul>
+<li><a class="reference internal" href="#compatibility-with-textmate">Compatibility with Textmate</a></li>
+<li><a class="reference internal" href="#file-format">File Format</a></li>
+<li><a class="reference internal" href="#the-patterns-array">The Patterns Array</a></li>
+<li><a class="reference internal" href="#repository">Repository</a></li>
+<li><a class="reference internal" href="#escape-sequences">Escape Sequences</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="snippets.html"
+                        title="previous chapter">Snippets</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="build_systems.html"
+                        title="next chapter">Build Systems</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/reference/syntaxdefs.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="build_systems.html" title="Build Systems"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="snippets.html" title="Snippets"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" >Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

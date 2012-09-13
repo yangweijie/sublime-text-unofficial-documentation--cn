@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>Settings (Reference) &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="Command Palette" href="command_palette.html" />
+    <link rel="prev" title="Key Bindings" href="key_bindings.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="command_palette.html" title="Command Palette"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="key_bindings.html" title="Key Bindings"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" accesskey="U">Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="settings-reference">
+<h1>Settings (Reference)<a class="headerlink" href="#settings-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="global-settings">
+<h2>Global Settings<a class="headerlink" href="#global-settings" title="Permalink to this headline">¶</a></h2>
+<p><strong>Target file:</strong> <tt class="docutils literal"><span class="pre">Global.sublime-settings</span></tt>.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">theme</span></tt></dt>
+<dd>Theme to be used. Accepts a file base name (e. g.: <tt class="docutils literal"><span class="pre">Default.sublime-theme</span></tt>).</dd>
+<dt><tt class="docutils literal"><span class="pre">remember_open_files</span></tt></dt>
+<dd>Determines whether to reopen the buffers that were open when Sublime Text was last closed.</dd>
+<dt><tt class="docutils literal"><span class="pre">folder_exclude_patterns</span></tt></dt>
+<dd>Excludes the matching folders from the side bar, GoTo Anything, etc.</dd>
+<dt><tt class="docutils literal"><span class="pre">file_exclude_patterns</span></tt></dt>
+<dd>Excludes the matching files from the side bar, GoTo Anything, etc.</dd>
+<dt><tt class="docutils literal"><span class="pre">scroll_speed</span></tt></dt>
+<dd>Set to <tt class="docutils literal"><span class="pre">0</span></tt> to disable smooth scrolling. Set to a value between <tt class="docutils literal"><span class="pre">0</span></tt> and
+<tt class="docutils literal"><span class="pre">1</span></tt> to scroll slower, or set to a value larger than <tt class="docutils literal"><span class="pre">1</span></tt> to scroll faster.</dd>
+<dt><tt class="docutils literal"><span class="pre">show_tab_close_buttons</span></tt></dt>
+<dd>If <tt class="docutils literal"><span class="pre">false</span></tt>, hides the tabs&#8217; close buttons until the mouse is hovered over
+the tab.</dd>
+<dt><tt class="docutils literal"><span class="pre">mouse_wheel_switches_tabs</span></tt></dt>
+<dd>If <tt class="docutils literal"><span class="pre">true</span></tt>, scrolling the mouse wheel will cause tabs to switch if the
+cursor is in the tab area.</dd>
+<dt><tt class="docutils literal"><span class="pre">open_files_in_new_window</span></tt></dt>
+<dd>OS X only. When filters are opened from Finder, or by dragging onto the
+dock icon, this controls if a new window is created or not.</dd>
+</dl>
+</div>
+<div class="section" id="file-settings">
+<h2>File Settings<a class="headerlink" href="#file-settings" title="Permalink to this headline">¶</a></h2>
+<p><strong>Target files:</strong> <tt class="docutils literal"><span class="pre">Base</span> <span class="pre">File.sublime-settings</span></tt>, <tt class="docutils literal"><span class="pre">&lt;file_type&gt;.sublime-settings</span></tt>.</p>
+<div class="section" id="whitespace-and-indentation">
+<h3>Whitespace and Indentation<a class="headerlink" href="#whitespace-and-indentation" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">auto_indent</span></tt></dt>
+<dd>Toggles automatic indentation.</dd>
+<dt><tt class="docutils literal"><span class="pre">tab_size</span></tt></dt>
+<dd>Number of spaces a tab is considered to be equal to.</dd>
+<dt><tt class="docutils literal"><span class="pre">translate_tabs_to_spaces</span></tt></dt>
+<dd>Determines whether to replace a tab character with <tt class="docutils literal"><span class="pre">tab_size</span></tt> number of
+spaces when <tt class="kbd docutils literal"><span class="pre">Tab</span></tt> is pressed.</dd>
+<dt><tt class="docutils literal"><span class="pre">use_tab_stops</span></tt></dt>
+<dd>If <tt class="docutils literal"><span class="pre">translate_tabs_to_spaces</span></tt> is <tt class="docutils literal"><span class="pre">true</span></tt>, will make <tt class="kbd docutils literal"><span class="pre">Tab</span></tt> and
+<tt class="kbd docutils literal"><span class="pre">Backspace</span></tt> insert/delete <tt class="docutils literal"><span class="pre">tab_size</span></tt> number of spaces per key press.</dd>
+<dt><tt class="docutils literal"><span class="pre">trim_automatic_white_space</span></tt></dt>
+<dd>Toggles deletion of white space added by <tt class="docutils literal"><span class="pre">auto_indent</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">detect_indentation</span></tt></dt>
+<dd>Set to <tt class="docutils literal"><span class="pre">false</span></tt> to disable detection of tabs vs. spaces whenever a buffer
+is loaded. If set to <tt class="docutils literal"><span class="pre">true</span></tt>, it will automatically modify
+<tt class="docutils literal"><span class="pre">translate_tabs_to_spaces</span></tt> and <tt class="docutils literal"><span class="pre">tab_size</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">draw_white_space</span></tt></dt>
+<dd>Valid values: <tt class="docutils literal"><span class="pre">none</span></tt>, <tt class="docutils literal"><span class="pre">selection</span></tt>, <tt class="docutils literal"><span class="pre">all</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">trim_trailing_white_space_on_save</span></tt></dt>
+<dd>Set to <tt class="docutils literal"><span class="pre">true</span></tt> to remove white space on save.</dd>
+</dl>
+</div>
+<div class="section" id="visual-settings">
+<h3>Visual Settings<a class="headerlink" href="#visual-settings" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">color_scheme</span></tt></dt>
+<dd>Sets the colors used for text highlighting. Accepts a path rooted at the
+data directory (e. g.: <tt class="docutils literal"><span class="pre">Packages/Color</span> <span class="pre">Scheme</span> <span class="pre">-</span> <span class="pre">Default/Monokai</span> <span class="pre">Bright.tmTheme</span></tt>).</dd>
+<dt><tt class="docutils literal"><span class="pre">font_face</span></tt></dt>
+<dd>Font face to be used for editable text.</dd>
+<dt><tt class="docutils literal"><span class="pre">font_size</span></tt></dt>
+<dd>Size of the font for editable text.</dd>
+<dt><tt class="docutils literal"><span class="pre">font_options</span></tt></dt>
+<dd>Valid values: <tt class="docutils literal"><span class="pre">bold</span></tt>, <tt class="docutils literal"><span class="pre">italic</span></tt>, <tt class="docutils literal"><span class="pre">no_antialias</span></tt>, <tt class="docutils literal"><span class="pre">gray_antialias</span></tt>,
+<tt class="docutils literal"><span class="pre">subpixel_antialias</span></tt>, <tt class="docutils literal"><span class="pre">directwrite</span></tt> (Windows).</dd>
+<dt><tt class="docutils literal"><span class="pre">gutter</span></tt></dt>
+<dd>Toggles display of gutter.</dd>
+<dt><tt class="docutils literal"><span class="pre">rulers</span></tt></dt>
+<dd>Columns in which to display vertical rules. Accepts a list of numeric values
+(e. g. <tt class="docutils literal"><span class="pre">[79,</span> <span class="pre">89,</span> <span class="pre">99]</span></tt> or a single numeric value (e. g. <tt class="docutils literal"><span class="pre">79</span></tt>).</dd>
+<dt><tt class="docutils literal"><span class="pre">draw_minimap_border</span></tt></dt>
+<dd>Set to <tt class="docutils literal"><span class="pre">true</span></tt> to draw a border around the minimap&#8217;s region corresponding
+to the the view&#8217;s currently visible text. The active color scheme&#8217;s
+<tt class="docutils literal"><span class="pre">minimapBorder</span></tt> key controls the border&#8217;s color.</dd>
+<dt><tt class="docutils literal"><span class="pre">highlight_line</span></tt></dt>
+<dd>Set to <tt class="docutils literal"><span class="pre">false</span></tt> to stop highlighting lines with a cursor.</dd>
+<dt><tt class="docutils literal"><span class="pre">line_padding_top</span></tt></dt>
+<dd>Additional spacing at the top of each line, in pixels.</dd>
+<dt><tt class="docutils literal"><span class="pre">line_padding_bottom</span></tt></dt>
+<dd>Additional spacing at the bottom of each line, in pixels.</dd>
+<dt><tt class="docutils literal"><span class="pre">scroll_past_end</span></tt></dt>
+<dd>Set to <tt class="docutils literal"><span class="pre">false</span></tt> to disable scrolling past the end of the buffer. If <tt class="docutils literal"><span class="pre">true</span></tt>,
+Sublime Text will leave a wide, empty margin between the last line and the
+bottom of the window.</dd>
+<dt><tt class="docutils literal"><span class="pre">line_numbers</span></tt></dt>
+<dd>Toggles display of line numbers in the gutter.</dd>
+<dt><tt class="docutils literal"><span class="pre">word_wrap</span></tt></dt>
+<dd>If set to <tt class="docutils literal"><span class="pre">false</span></tt>, long lines will be clipped instead of wrapped. Scroll
+the screen horizontally to see the clipped text.</dd>
+<dt><tt class="docutils literal"><span class="pre">wrap_width</span></tt></dt>
+<dd>If greater than <tt class="docutils literal"><span class="pre">0</span></tt>, wraps long lines at the specified column as opposed
+to the window width. Only takes effect if <tt class="docutils literal"><span class="pre">wrap_width</span></tt> is set to <tt class="docutils literal"><span class="pre">true</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">indent_subsequent_lines</span></tt></dt>
+<dd>If set to <tt class="docutils literal"><span class="pre">false</span></tt>, wrapped lines will not be indented. Only takes effect
+if <tt class="docutils literal"><span class="pre">wrap_width</span></tt> is set to <tt class="docutils literal"><span class="pre">true</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">draw_centered</span></tt></dt>
+<dd>If set to <tt class="docutils literal"><span class="pre">true</span></tt>, text will be drawn centered rather than left-aligned.</dd>
+<dt><tt class="docutils literal"><span class="pre">match_brackets</span></tt></dt>
+<dd>Set to <tt class="docutils literal"><span class="pre">false</span></tt> to disable underlining the brackets surrounding the cursor.</dd>
+<dt><tt class="docutils literal"><span class="pre">match_brackets_content</span></tt></dt>
+<dd>Set to <tt class="docutils literal"><span class="pre">false</span></tt> is you&#8217;d rather only highlight the brackets when the cursor
+is next to one.</dd>
+<dt><tt class="docutils literal"><span class="pre">match_brackets_square</span></tt></dt>
+<dd>Set to <tt class="docutils literal"><span class="pre">false</span></tt> to stop highlighting square brackets. Only takes effect if
+<tt class="docutils literal"><span class="pre">match_brackets</span></tt> is <tt class="docutils literal"><span class="pre">true</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">match_bracktets_braces</span></tt></dt>
+<dd>Set to <tt class="docutils literal"><span class="pre">false</span></tt> to stop highlighting curly brackets. Only takes effect if
+<tt class="docutils literal"><span class="pre">match_brackets</span></tt> is <tt class="docutils literal"><span class="pre">true</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">match_bracktets_angle</span></tt></dt>
+<dd>Set to <tt class="docutils literal"><span class="pre">false</span></tt> to stop highlighting angle brackets. Only takes effect if
+<tt class="docutils literal"><span class="pre">match_brackets</span></tt> is <tt class="docutils literal"><span class="pre">true</span></tt>.</dd>
+</dl>
+</div>
+<div class="section" id="automatic-behavior">
+<h3>Automatic Behavior<a class="headerlink" href="#automatic-behavior" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">auto_match_enabled</span></tt></dt>
+<dd>Toggles automatic pairing of quotes, brackets, etc.</dd>
+<dt><tt class="docutils literal"><span class="pre">save_on_focus_lost</span></tt></dt>
+<dd>Set to true to automatically save files when switching to a different file
+or application.</dd>
+<dt><tt class="docutils literal"><span class="pre">find_selected_text</span></tt></dt>
+<dd>If <tt class="docutils literal"><span class="pre">true</span></tt>, the selected text will be copied into the find panel when it&#8217;s
+shown.</dd>
+<dt><tt class="docutils literal"><span class="pre">word_separators</span></tt></dt>
+<dd>Characters considered to separate words in actions like advancing the cursor,
+etc. They are not used in all contexts where a notion of a word separator is
+useful (e. g.: word wrapping). In such other contexts, the text might be
+tokenized based on other criteria (e. g. the syntax definition rules).</dd>
+<dt><tt class="docutils literal"><span class="pre">ensure_newline_at_eof_on_save</span></tt></dt>
+<dd>Always adds a new line at the end of the file if not present when saving.</dd>
+</dl>
+</div>
+<div class="section" id="system-and-miscellaneous-settings">
+<h3>System and Miscellaneous Settings<a class="headerlink" href="#system-and-miscellaneous-settings" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">is_widget</span></tt></dt>
+<dd>Returns <tt class="docutils literal"><span class="pre">true</span></tt> if the buffer is an input field in a dialog as opposed to
+a regular buffer.</dd>
+<dt><tt class="docutils literal"><span class="pre">spell_check</span></tt></dt>
+<dd>Toggles the spell checker.</dd>
+<dt><tt class="docutils literal"><span class="pre">dictionary</span></tt></dt>
+<dd>Word list to be used by the spell checker. Accepts a path rooted at the
+data directory (e. g.: <tt class="docutils literal"><span class="pre">Packages/Language</span> <span class="pre">-</span> <span class="pre">English/en_US.dic</span></tt>). You can
+<a class="reference external" href="http://extensions.services.openoffice.org/en/dictionaries">add more dictionaries</a>.</dd>
+<dt><tt class="docutils literal"><span class="pre">fallback_encoding</span></tt></dt>
+<dd>The encoding to use when the encoding can&#8217;t be determined automatically.
+ASCII, UTF-8 and UTF-16 encodings will be automatically detected.</dd>
+<dt><tt class="docutils literal"><span class="pre">default_line_ending</span></tt></dt>
+<dd>Determines what characters to use to designate new lines. Valid values:
+<tt class="docutils literal"><span class="pre">system</span></tt> (OS-dependant), <tt class="docutils literal"><span class="pre">windows</span></tt> (<tt class="docutils literal"><span class="pre">CRLF</span></tt>) and <tt class="docutils literal"><span class="pre">unix</span></tt> (<tt class="docutils literal"><span class="pre">LF</span></tt>).</dd>
+<dt><tt class="docutils literal"><span class="pre">tab_completion</span></tt></dt>
+<dd>Determines whether pressing <tt class="kbd docutils literal"><span class="pre">Tab</span></tt> will insert completions.</dd>
+</dl>
+</div>
+<div class="section" id="build-and-error-navigation-settings">
+<h3>Build and Error Navigation Settings<a class="headerlink" href="#build-and-error-navigation-settings" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">result_file_regex</span></tt></dt>
+<dd>Regular expression used to extract error information from some output dumped
+into a view or output panel. Follows the same rules as error capturing in
+build systems.º</dd>
+<dt><tt class="docutils literal"><span class="pre">result_line_regex</span></tt></dt>
+<dd>Regular expression used to extract error information from some output dumpºed
+into a view or output panel. Follows the same rules as error capturing in
+build systems.</dd>
+<dt><tt class="docutils literal"><span class="pre">result_base_dir</span></tt></dt>
+<dd>Directory to start looking for offending files in based on information
+extracted with <tt class="docutils literal"><span class="pre">result_file_regex</span></tt> and <tt class="docutils literal"><span class="pre">result_line_regex</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">build_env</span></tt></dt>
+<dd>List of paths to add to build systems by default.</dd>
+</dl>
+</div>
+<div class="section" id="file-and-directory-settings">
+<h3>File and Directory Settings<a class="headerlink" href="#file-and-directory-settings" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">default_dir</span></tt></dt>
+<dd>Sets the default save directory for the view.</dd>
+</dl>
+</div>
+<div class="section" id="input-settings">
+<h3>Input Settings<a class="headerlink" href="#input-settings" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">command_mode</span></tt></dt>
+<dd>If set to <tt class="docutils literal"><span class="pre">true</span></tt>, the buffer will ignore key strokes. Useful to emulate
+Vim.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Settings (Reference)</a><ul>
+<li><a class="reference internal" href="#global-settings">Global Settings</a></li>
+<li><a class="reference internal" href="#file-settings">File Settings</a><ul>
+<li><a class="reference internal" href="#whitespace-and-indentation">Whitespace and Indentation</a></li>
+<li><a class="reference internal" href="#visual-settings">Visual Settings</a></li>
+<li><a class="reference internal" href="#automatic-behavior">Automatic Behavior</a></li>
+<li><a class="reference internal" href="#system-and-miscellaneous-settings">System and Miscellaneous Settings</a></li>
+<li><a class="reference internal" href="#build-and-error-navigation-settings">Build and Error Navigation Settings</a></li>
+<li><a class="reference internal" href="#file-and-directory-settings">File and Directory Settings</a></li>
+<li><a class="reference internal" href="#input-settings">Input Settings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="key_bindings.html"
+                        title="previous chapter">Key Bindings</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="command_palette.html"
+                        title="next chapter">Command Palette</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/reference/settings.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="command_palette.html" title="Command Palette"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="key_bindings.html" title="Key Bindings"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" >Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

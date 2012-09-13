@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>Snippets &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="Syntax Definitions" href="syntaxdefs.html" />
+    <link rel="prev" title="Reference" href="reference.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="syntaxdefs.html" title="Syntax Definitions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="reference.html" title="Reference"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" accesskey="U">Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="snippets">
+<h1>Snippets<a class="headerlink" href="#snippets" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="compatibility-with-textmate">
+<h2>Compatibility with Textmate<a class="headerlink" href="#compatibility-with-textmate" title="Permalink to this headline">¶</a></h2>
+<p>Sublime Text snippets are generally compatible with Textmate snippets.</p>
+</div>
+<div class="section" id="file-format">
+<h2>File Format<a class="headerlink" href="#file-format" title="Permalink to this headline">¶</a></h2>
+<p>Snippet files are XML files with the <tt class="docutils literal"><span class="pre">sublime-snippet</span></tt> extension.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;snippet&gt;</span>
+    <span class="nt">&lt;content&gt;</span><span class="cp">&lt;![CDATA[]]&gt;</span><span class="nt">&lt;/content&gt;</span>
+    <span class="nt">&lt;tabTrigger&gt;&lt;/tabTrigger&gt;</span>
+    <span class="nt">&lt;scope&gt;&lt;/scope&gt;</span>
+    <span class="nt">&lt;description&gt;&lt;/description&gt;</span>
+<span class="nt">&lt;/snippet&gt;</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">content</span></tt></dt>
+<dd>Actual snippet content.</dd>
+<dt><tt class="docutils literal"><span class="pre">tabTrigger</span></tt></dt>
+<dd>Implicit keybinding for this snippet. Last key (implicit) is <tt class="docutils literal"><span class="pre">TAB</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">scope</span></tt></dt>
+<dd>Scope selector to activate this snippet.</dd>
+<dt><tt class="docutils literal"><span class="pre">description</span></tt></dt>
+<dd>User friendly description for menu item.</dd>
+</dl>
+</div>
+<div class="section" id="escape-sequences">
+<h2>Escape Sequences<a class="headerlink" href="#escape-sequences" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">\$</span></tt></dt>
+<dd>Literal <tt class="docutils literal"><span class="pre">$</span></tt>.</dd>
+</dl>
+</div>
+<div class="section" id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$PARAM1</span> <span class="pre">..</span> <span class="pre">$PARAMn</span></tt></td>
+<td>Arguments passed to the <tt class="docutils literal"><span class="pre">insertSnippet</span></tt> command.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$SELECTION</span></tt></td>
+<td>The text that was selected when the snippet was triggered.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$TM_CURRENT_LINE</span></tt></td>
+<td>Content of the line the cursor was in when the snippet was triggered.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$TM_CURRENT_WORD</span></tt></td>
+<td>Current word under the cursor when the snippet was triggered.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$TM_FILENAME</span></tt></td>
+<td>File name of the file being edited including extension.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$TM_FILEPATH</span></tt></td>
+<td>File path to the file being edited.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$TM_FULLNAME</span></tt></td>
+<td>User&#8217;s user name.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$TM_LINE_INDEX</span></tt></td>
+<td>Column the snippet is being inserted at, 0 based.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$TM_LINE_NUMBER</span></tt></td>
+<td>Row the snippet is being inserted at, 1 based.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$TM_SELECTED_TEXT</span></tt></td>
+<td>An alias for <tt class="docutils literal"><span class="pre">$SELECTION</span></tt>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$TM_SOFT_TABS</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">YES</span></tt> if <tt class="docutils literal"><span class="pre">translateTabsToSpaces</span></tt> is true, otherwise <tt class="docutils literal"><span class="pre">NO</span></tt>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$TM_TAB_SIZE</span></tt></td>
+<td>Spaces per-tab (controlled by the <tt class="docutils literal"><span class="pre">tabSize</span></tt> option).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fields">
+<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<p>Mark positions to cycle through by pressing <tt class="docutils literal"><span class="pre">TAB</span></tt> or <tt class="docutils literal"><span class="pre">SHIFT</span> <span class="pre">+</span> <span class="pre">TAB</span></tt>.</p>
+<p>Syntax: <tt class="docutils literal"><span class="pre">$1</span></tt> .. <tt class="docutils literal"><span class="pre">$n</span></tt></p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">$0</span></tt></dt>
+<dd>Exit mark. Position at which normal text editing should be resumed. By default,
+Sublime Text implicitly sets this mark at the end of the snippet&#8217;s <tt class="docutils literal"><span class="pre">content</span></tt> element.</dd>
+</dl>
+<p>Fields with the same name mirror each other.</p>
+</div>
+<div class="section" id="place-holders">
+<h2>Place Holders<a class="headerlink" href="#place-holders" title="Permalink to this headline">¶</a></h2>
+<p>Fields with a default value.</p>
+<p>Syntax: <tt class="docutils literal"><span class="pre">${1:PLACE_HOLDER}</span></tt> .. <tt class="docutils literal"><span class="pre">${n:PLACE_HOLDER}</span></tt></p>
+<p>Fields and place holders can be combined and nested within other place holders.</p>
+</div>
+<div class="section" id="substitutions">
+<h2>Substitutions<a class="headerlink" href="#substitutions" title="Permalink to this headline">¶</a></h2>
+<p>Syntax:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">${var_name/regex/format_string/}</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">${var_name/regex/format_string/options}</span></tt></li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">var_name</span></tt></dt>
+<dd>The field&#8217;s name to base the substitution on: 1, 2, 3…</dd>
+<dt><tt class="docutils literal"><span class="pre">regex</span></tt></dt>
+<dd>Perl-style regular expression: See the Boost library documentation for <a class="reference external" href="http://www.boost.org/doc/libs/1_44_0/libs/regex/doc/html/boost_regex/syntax/perl_syntax.html">regular expressions</a>.</dd>
+<dt><tt class="docutils literal"><span class="pre">format_string</span></tt></dt>
+<dd>See the Boost library documentation for <a class="reference external" href="http://www.boost.org/doc/libs/1_44_0/libs/regex/doc/html/boost_regex/format/perl_format.html">format strings</a>.</dd>
+<dt><tt class="docutils literal"><span class="pre">options</span></tt></dt>
+<dd><dl class="first last docutils">
+<dt>Optional. Any of the following:</dt>
+<dd><dl class="first last docutils">
+<dt><tt class="docutils literal"><span class="pre">i</span></tt></dt>
+<dd>Case-insensitive regex.</dd>
+<dt><tt class="docutils literal"><span class="pre">g</span></tt></dt>
+<dd>Replace all occurrences of <tt class="docutils literal"><span class="pre">regex</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">m</span></tt></dt>
+<dd>Don&#8217;t ignore newlines in the string.</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Snippets</a><ul>
+<li><a class="reference internal" href="#compatibility-with-textmate">Compatibility with Textmate</a></li>
+<li><a class="reference internal" href="#file-format">File Format</a></li>
+<li><a class="reference internal" href="#escape-sequences">Escape Sequences</a></li>
+<li><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
+<li><a class="reference internal" href="#fields">Fields</a></li>
+<li><a class="reference internal" href="#place-holders">Place Holders</a></li>
+<li><a class="reference internal" href="#substitutions">Substitutions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="reference.html"
+                        title="previous chapter">Reference</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="syntaxdefs.html"
+                        title="next chapter">Syntax Definitions</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/reference/snippets.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="syntaxdefs.html" title="Syntax Definitions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="reference.html" title="Reference"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" >Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

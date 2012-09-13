@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>Plugins &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="Python API" href="api.html" />
+    <link rel="prev" title="Completions" href="completions.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="api.html" title="Python API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="completions.html" title="Completions"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" accesskey="U">Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugins">
+<h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="api.html"><em>API Reference</em></a></dt>
+<dd>More information on the Python API.</dd>
+</dl>
+</div>
+<p>Plugins are Python scripts implementing <tt class="docutils literal"><span class="pre">*Command</span></tt> classes from
+<tt class="docutils literal"><span class="pre">sublime_plugin</span></tt>.</p>
+<div class="section" id="where-to-store-plugins">
+<h2>Where to Store Plugins<a class="headerlink" href="#where-to-store-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Sublime Text 2 will look for plugins in these places:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">Packages</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">Packages/&lt;pkg_name&gt;</span></tt></li>
+</ul>
+<p>Any plugin nested deeper in <tt class="docutils literal"><span class="pre">Packages</span></tt> won&#8217;t be loaded.</p>
+<p>All plugins should live inside a directory of their own and not directly
+under <tt class="docutils literal"><span class="pre">Packages</span></tt>.</p>
+</div>
+<div class="section" id="conventions-for-command-names">
+<h2>Conventions for Command Names<a class="headerlink" href="#conventions-for-command-names" title="Permalink to this headline">¶</a></h2>
+<p>Sublime Text 2 command class names are suffixed by convention with <tt class="docutils literal"><span class="pre">Command</span></tt>
+and written as <tt class="docutils literal"><span class="pre">CamelCasedPhrases</span></tt>.</p>
+<p>However, Sublime Text 2 transforms the class name from <tt class="docutils literal"><span class="pre">CamelCasedPhrases</span></tt>
+to <tt class="docutils literal"><span class="pre">camel_cased_phrases</span></tt>. So <tt class="docutils literal"><span class="pre">ExampleCommand</span></tt> would turn into <tt class="docutils literal"><span class="pre">example</span></tt>
+and <tt class="docutils literal"><span class="pre">AnotherExampleCommand</span></tt> would turn into <tt class="docutils literal"><span class="pre">another_example</span></tt>.</p>
+<p>For class definition names, use <tt class="docutils literal"><span class="pre">CamelCasedPhrasesCommand</span></tt>; to call a
+command from the API, use the normalized name (<tt class="docutils literal"><span class="pre">camel_cased_phrases</span></tt>).</p>
+</div>
+<div class="section" id="types-of-commands">
+<h2>Types of Commands<a class="headerlink" href="#types-of-commands" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">sublime_plugin.ApplicationCommand</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">sublime_plugin.WindowCommand</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">sublime_plugin.TextCommand</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">sublime_plugin.EventListener</span></tt></li>
+</ul>
+<p>Instances of <tt class="docutils literal"><span class="pre">WindowCommand</span></tt> have a <tt class="docutils literal"><span class="pre">.window</span></tt> attribute pointing to the
+window instance that created them. Similarly, instances of <tt class="docutils literal"><span class="pre">TextCommand</span></tt>
+have a <tt class="docutils literal"><span class="pre">.view</span></tt> attribute.</p>
+<div class="section" id="shared-traits-for-commands">
+<h3>Shared Traits for Commands<a class="headerlink" href="#shared-traits-for-commands" title="Permalink to this headline">¶</a></h3>
+<p>All commands must implement a <tt class="docutils literal"><span class="pre">.run()</span></tt> method.
+All commands can receive and arbitrarily long number of keyword arguments,
+but they must be valid JSON types.</p>
+</div>
+</div>
+<div class="section" id="how-to-call-commands-from-the-api">
+<h2>How to Call Commands from the API<a class="headerlink" href="#how-to-call-commands-from-the-api" title="Permalink to this headline">¶</a></h2>
+<p>Use a reference to a <tt class="docutils literal"><span class="pre">View</span></tt> or a <tt class="docutils literal"><span class="pre">Window</span></tt>, or <tt class="docutils literal"><span class="pre">sublime</span></tt> depending on
+the type of command, and call <tt class="docutils literal"><span class="pre">object.run_command('command_name')</span></tt>.
+In addition, you can pass a dictionary where keys are names of parameters
+to <tt class="docutils literal"><span class="pre">command_name</span></tt>.</p>
+<div class="highlight-python"><pre>  window.run_command("echo", {"Tempus": "Irreparabile", "Fugit": "."})
+
+
+Command Arguments
+*****************
+
+All user-provided arguments to commands must be valid JSON types. Only
+Sublime Text can pass other types of arguments to commands (such as edit
+objects, view instances, etc.).</pre>
+</div>
+</div>
+<div class="section" id="text-commands-and-the-edit-object">
+<h2>Text Commands and the <tt class="docutils literal"><span class="pre">edit</span></tt> Object<a class="headerlink" href="#text-commands-and-the-edit-object" title="Permalink to this headline">¶</a></h2>
+<p>The two API functions of interest are <tt class="docutils literal"><span class="pre">view.begin_edit()</span></tt>, which takes an
+optional command name and an optional dictionary of arguments, and
+<tt class="docutils literal"><span class="pre">view.end_edit()</span></tt>, which finishes the edit.</p>
+<p>All actions done within an edit are grouped as a single undo action. Callbacks
+such as <tt class="docutils literal"><span class="pre">on_modified()</span></tt> and <tt class="docutils literal"><span class="pre">on_selection_modified()</span></tt> are called when the
+edit is finished.</p>
+<p>It&#8217;s important to call <tt class="docutils literal"><span class="pre">view.end_edit()</span></tt> after each <tt class="docutils literal"><span class="pre">view.begin_edit()</span></tt>,
+otherwise the buffer will be in an inconsistent state. An attempt will be made
+to fix it automatically if the edit object gets collected, but that often
+doesn&#8217;t happen when you expect, and will result in a warning printed to the
+console. In other words, you should always bracket an edit in a
+<tt class="docutils literal"><span class="pre">try..finally</span></tt> block.</p>
+<p>The command name passed to <tt class="docutils literal"><span class="pre">begin_edit()</span></tt> is used for repeat, macro
+recording, and for describing the action when undoing/redoing it. If you&#8217;re
+making an edit outside of a <tt class="docutils literal"><span class="pre">TextCommand</span></tt>, you should almost never supply a
+command name.</p>
+<p>If you have created an edit object, and call a function that creates another
+one, that&#8217;s fine: the edit is only considered finished when the outermost call
+to <tt class="docutils literal"><span class="pre">end_edit()</span></tt> runs.</p>
+<p>As well as grouping modifications, you can use edit objects for grouping
+changes to the selection, so they&#8217;re undone in a single step.</p>
+</div>
+<div class="section" id="responding-to-events">
+<h2>Responding to Events<a class="headerlink" href="#responding-to-events" title="Permalink to this headline">¶</a></h2>
+<p>Any subclass of <tt class="docutils literal"><span class="pre">EventListener</span></tt> will be able to respond to events. You
+cannot make a class derive from both <tt class="docutils literal"><span class="pre">EventListener</span></tt> and any other type of
+command.</p>
+<div class="sidebar">
+<p class="first sidebar-title">A Word of Warning about <tt class="docutils literal"><span class="pre">EventListener</span></tt></p>
+<p class="last">Expensive operations in event listeners can cause Sublime Text 2 to become
+unresponsive, especially in events triggered frequently, like
+<tt class="docutils literal"><span class="pre">on_modified</span></tt> and <tt class="docutils literal"><span class="pre">on_selection_modified</span></tt>. Be careful of how much work
+is done in those and do not implement events you don&#8217;t need, even if they
+just <tt class="docutils literal"><span class="pre">pass</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="python-and-the-standard-library">
+<h2>Python and the Standard Library<a class="headerlink" href="#python-and-the-standard-library" title="Permalink to this headline">¶</a></h2>
+<p>Sublime Text ships with a trimmed down standard library. Notable missing
+modules are the <em>Tkinter</em>, <em>multiprocessing</em> and <em>sqlite3</em> modules.</p>
+</div>
+<div class="section" id="automatic-plugin-reload">
+<h2>Automatic Plugin Reload<a class="headerlink" href="#automatic-plugin-reload" title="Permalink to this headline">¶</a></h2>
+<p>Sublime Text will automatically reload top-level Python modules from packages
+as they change (perhaps because you are editing a <em>.py</em> file). Note that
+Python subpackages won&#8217;t be reloaded; this can lead to confusion while
+developing plugins. Generally, it&#8217;s best to restart Sublime Text after you&#8217;ve
+made changes to plugin files so all changes take effect.</p>
+</div>
+<div class="section" id="multithreading">
+<h2>Multithreading<a class="headerlink" href="#multithreading" title="Permalink to this headline">¶</a></h2>
+<p>Only the <tt class="docutils literal"><span class="pre">.set_timeout()</span></tt> function is safe to call from different threads.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugins</a><ul>
+<li><a class="reference internal" href="#where-to-store-plugins">Where to Store Plugins</a></li>
+<li><a class="reference internal" href="#conventions-for-command-names">Conventions for Command Names</a></li>
+<li><a class="reference internal" href="#types-of-commands">Types of Commands</a><ul>
+<li><a class="reference internal" href="#shared-traits-for-commands">Shared Traits for Commands</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-call-commands-from-the-api">How to Call Commands from the API</a></li>
+<li><a class="reference internal" href="#text-commands-and-the-edit-object">Text Commands and the <tt class="docutils literal"><span class="pre">edit</span></tt> Object</a></li>
+<li><a class="reference internal" href="#responding-to-events">Responding to Events</a></li>
+<li><a class="reference internal" href="#python-and-the-standard-library">Python and the Standard Library</a></li>
+<li><a class="reference internal" href="#automatic-plugin-reload">Automatic Plugin Reload</a></li>
+<li><a class="reference internal" href="#multithreading">Multithreading</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="completions.html"
+                        title="previous chapter">Completions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="next chapter">Python API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/reference/plugins.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="api.html" title="Python API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="completions.html" title="Completions"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" >Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

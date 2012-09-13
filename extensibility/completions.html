@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>Completions &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="up" title="Extending Sublime Text" href="extensibility.html" />
+    <link rel="next" title="Command Palette" href="command_palette.html" />
+    <link rel="prev" title="Snippets" href="snippets.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="command_palette.html" title="Command Palette"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="snippets.html" title="Snippets"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="extensibility.html" accesskey="U">Extending Sublime Text</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="completions">
+<h1>Completions<a class="headerlink" href="#completions" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="../reference/completions.html"><em>Reference for completions</em></a></dt>
+<dd>Complete documentation on all available options.</dd>
+<dt><a class="reference external" href="http://www.sublimetext.com/docs/2/tab_completion.html">Sublime Text Documentation</a></dt>
+<dd>Official documentation on this topic.</dd>
+</dl>
+</div>
+<p>Completions provide functionality in the spirit of IDEs to suggest terms and
+insert snippets. Completions work through the completions list or, optionally,
+by pressing <tt class="kbd docutils literal"><span class="pre">Tab</span></tt>.</p>
+<p>Note that completions in the broader sense of <em>words that Sublime Text will
+look up and insert for you</em> are not limited to completions files, because other
+sources contribute to the list of words to be completed, namely:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Snippets</li>
+<li>API-injected completions</li>
+<li>Buffer contents</li>
+</ul>
+</div></blockquote>
+<p>However, <tt class="docutils literal"><span class="pre">.sublime-completions</span></tt> files are the most explicit way Sublime Text
+provides you to feed it completions. This topic deals with the creation of
+<tt class="docutils literal"><span class="pre">.sublime-completions</span></tt> files as well as with the interaction between all
+sources for completions.</p>
+<div class="section" id="file-format">
+<h2>File Format<a class="headerlink" href="#file-format" title="Permalink to this headline">¶</a></h2>
+<p>Completions are JSON files with the <tt class="docutils literal"><span class="pre">.sublime-completions</span></tt> extension.
+Entries in completions files can contain either snippets or plain strings.</p>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>Here&#8217;s an excerpt from the HTML completions:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+        <span class="s2">&quot;scope&quot;</span><span class="o">:</span> <span class="s2">&quot;text.html - source - meta.tag, punctuation.definition.tag.begin&quot;</span><span class="p">,</span>
+
+        <span class="s2">&quot;completions&quot;</span><span class="o">:</span>
+        <span class="p">[</span>
+                <span class="p">{</span> <span class="s2">&quot;trigger&quot;</span><span class="o">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;contents&quot;</span><span class="o">:</span> <span class="s2">&quot;&lt;a href=\&quot;$1\&quot;&gt;$0&lt;/a&gt;&quot;</span> <span class="p">},</span>
+                <span class="p">{</span> <span class="s2">&quot;trigger&quot;</span><span class="o">:</span> <span class="s2">&quot;abbr&quot;</span><span class="p">,</span> <span class="s2">&quot;contents&quot;</span><span class="o">:</span> <span class="s2">&quot;&lt;abbr&gt;$0&lt;/abbr&gt;&quot;</span> <span class="p">},</span>
+                <span class="p">{</span> <span class="s2">&quot;trigger&quot;</span><span class="o">:</span> <span class="s2">&quot;acronym&quot;</span><span class="p">,</span> <span class="s2">&quot;contents&quot;</span><span class="o">:</span> <span class="s2">&quot;&lt;acronym&gt;$0&lt;/acronym&gt;&quot;</span> <span class="p">}</span>
+        <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">scope</span></tt></dt>
+<dd>Determines when the completions list will be populated with this
+list of completions. See <a class="reference internal" href="syntaxdefs.html#scopes-and-scope-selectors"><em>Scopes</em></a> for more
+information.</dd>
+</dl>
+<p>In the example above, we&#8217;ve used trigger-based completions only, but
+completions files support simple completions too. Simple completions are just
+plain strings. Expanding our example with a few simple completions, we&#8217;d end up
+with a list like so:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+        <span class="s2">&quot;scope&quot;</span><span class="o">:</span> <span class="s2">&quot;text.html - source - meta.tag, punctuation.definition.tag.begin&quot;</span><span class="p">,</span>
+
+        <span class="s2">&quot;completions&quot;</span><span class="o">:</span>
+        <span class="p">[</span>
+                <span class="p">{</span> <span class="s2">&quot;trigger&quot;</span><span class="o">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;contents&quot;</span><span class="o">:</span> <span class="s2">&quot;&lt;a href=\&quot;$1\&quot;&gt;$0&lt;/a&gt;&quot;</span> <span class="p">},</span>
+                <span class="p">{</span> <span class="s2">&quot;trigger&quot;</span><span class="o">:</span> <span class="s2">&quot;abbr&quot;</span><span class="p">,</span> <span class="s2">&quot;contents&quot;</span><span class="o">:</span> <span class="s2">&quot;&lt;abbr&gt;$0&lt;/abbr&gt;&quot;</span> <span class="p">},</span>
+                <span class="p">{</span> <span class="s2">&quot;trigger&quot;</span><span class="o">:</span> <span class="s2">&quot;acronym&quot;</span><span class="p">,</span> <span class="s2">&quot;contents&quot;</span><span class="o">:</span> <span class="s2">&quot;&lt;acronym&gt;$0&lt;/acronym&gt;&quot;</span> <span class="p">},</span>
+
+                <span class="s2">&quot;ninja&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;robot&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;pizza&quot;</span>
+        <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="sources-for-completions">
+<h2>Sources for Completions<a class="headerlink" href="#sources-for-completions" title="Permalink to this headline">¶</a></h2>
+<p>Completions not only originate in <tt class="docutils literal"><span class="pre">.sublime-completions</span></tt> files. This is the
+exhaustive list of sources for completions:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Snippets</li>
+<li>API-injected completions</li>
+<li><tt class="docutils literal"><span class="pre">.sublime-completions</span></tt> files</li>
+<li>Words in buffer</li>
+</ul>
+</div></blockquote>
+<div class="section" id="priority-of-sources-for-completions">
+<h3>Priority of Sources for Completions<a class="headerlink" href="#priority-of-sources-for-completions" title="Permalink to this headline">¶</a></h3>
+<p>This is the order in which completions are prioritized:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Snippets</li>
+<li>API-injected completions</li>
+<li><tt class="docutils literal"><span class="pre">.sublime-completions</span></tt> files</li>
+<li>Words in buffer</li>
+</ul>
+</div></blockquote>
+<p>Snippets will always win if the current prefix matches their tab trigger
+exactly. For the rest of the completions sources, a fuzzy match is performed.
+Also, snippets will always lose against a fuzzy match. Note that this is only
+relevant if the completion is going to be inserted automatically. When the
+completions list is shown, snippets will be listed along the other items, even
+if the prefix only partially matches the snippets&#8217; tab triggers.</p>
+</div>
+</div>
+<div class="section" id="how-to-use-completions">
+<h2>How to Use Completions<a class="headerlink" href="#how-to-use-completions" title="Permalink to this headline">¶</a></h2>
+<p>There are two methods to use completions, and although the priority given to
+completions when screening them is always the same, there is a difference in
+the result that will be explained below.</p>
+<p>Completions can be inserted in two ways:</p>
+<blockquote>
+<div><ul class="simple">
+<li>through the completions list (<tt class="kbd docutils literal"><span class="pre">Ctrl+spacebar</span></tt>);</li>
+<li>by pressing <tt class="kbd docutils literal"><span class="pre">Tab</span></tt>.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="the-completions-list">
+<h3>The Completions List<a class="headerlink" href="#the-completions-list" title="Permalink to this headline">¶</a></h3>
+<p>The completions list (<tt class="kbd docutils literal"><span class="pre">Ctrl+spacebar</span></tt>) may work in two ways: by bringing
+up a list of suggested words to be completed, or by inserting the best match
+directly.</p>
+<p>If the choice of best completion is ambiguous, an interactive list will be
+presented to the user, who will have to select an item himself. Unlike other
+items, snippets in this list are displayed in this format:
+<tt class="docutils literal"><span class="pre">&lt;tab_trigger&gt;</span> <span class="pre">:</span> <span class="pre">&lt;name&gt;</span></tt>, where <tt class="docutils literal"><span class="pre">&lt;tab_trigger&gt;</span></tt> and <tt class="docutils literal"><span class="pre">&lt;name&gt;</span></tt> are
+variable.</p>
+<p>The completion with <tt class="kbd docutils literal"><span class="pre">Ctrl+spacebar</span></tt> will only be automatic if the list of
+completion candidates can be narrowed down to one unambiguous choice given the
+current prefix.</p>
+</div>
+<div class="section" id="tab-completed-completions">
+<h3><tt class="kbd docutils literal"><span class="pre">Tab</span></tt>-completed Completions<a class="headerlink" href="#tab-completed-completions" title="Permalink to this headline">¶</a></h3>
+<p>If you want to be able to tab-complete completions, the setting
+<tt class="docutils literal"><span class="pre">tab_completion</span></tt> must be set to <tt class="docutils literal"><span class="pre">true</span></tt>. By default, <tt class="docutils literal"><span class="pre">tab_completion</span></tt> is
+set to <tt class="docutils literal"><span class="pre">true</span></tt>. Snippet tab-completion is unaffected by this setting: they
+will always be completed according to their tab trigger.</p>
+<p>With <tt class="docutils literal"><span class="pre">tab_completion</span></tt> enabled, completion of items is always automatic, which
+means that, unlike in the case of the completions list, Sublime Text will
+always make a decision for you. The rules to select the best completion are the
+same as above, but in case of ambiguity, Sublime Text will still insert the
+item deemed most suitable.</p>
+<div class="section" id="inserting-a-literal-tab-character">
+<h4>Inserting a Literal Tab Character<a class="headerlink" href="#inserting-a-literal-tab-character" title="Permalink to this headline">¶</a></h4>
+<p>When <tt class="docutils literal"><span class="pre">tab_completion</span></tt> is enabled, you can press <tt class="docutils literal"><span class="pre">Shift+Tab</span></tt> to insert a
+literal tab character.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Completions</a><ul>
+<li><a class="reference internal" href="#file-format">File Format</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sources-for-completions">Sources for Completions</a><ul>
+<li><a class="reference internal" href="#priority-of-sources-for-completions">Priority of Sources for Completions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-use-completions">How to Use Completions</a><ul>
+<li><a class="reference internal" href="#the-completions-list">The Completions List</a></li>
+<li><a class="reference internal" href="#tab-completed-completions"><tt class="kbd docutils literal"><span class="pre">Tab</span></tt>-completed Completions</a><ul>
+<li><a class="reference internal" href="#inserting-a-literal-tab-character">Inserting a Literal Tab Character</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="snippets.html"
+                        title="previous chapter">Snippets</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="command_palette.html"
+                        title="next chapter">Command Palette</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/extensibility/completions.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="command_palette.html" title="Command Palette"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="snippets.html" title="Snippets"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="extensibility.html" >Extending Sublime Text</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

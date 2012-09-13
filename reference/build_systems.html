@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>编译系统 &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="Key Bindings" href="key_bindings.html" />
+    <link rel="prev" title="Syntax Definitions" href="syntaxdefs.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="key_bindings.html" title="Key Bindings"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="syntaxdefs.html" title="Syntax Definitions"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" accesskey="U">Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="build-systems">
+<h1>编译系统<a class="headerlink" href="#build-systems" title="Permalink to this headline">¶</a></h1>
+<p>编译系统允许你运行你的文件通过外部程序并且输出到Sublime Text中。</p>
+<p>编译系统由两个或可选的第三部分构成:</p>
+<ul class="simple">
+<li>JSON格式的配置数据(<em>.sublime-build</em>文件内容)</li>
+<li>一个Sublime Text命令驱动的编译过程</li>
+<li>可选的外部可执行文件（脚本，二进制文件）</li>
+</ul>
+<p>本质上, <em>.sublime-build</em>文件是外部程序和刚才提到的Sublime Text命令的配置数据 。在它们中，你指定分支、选项和你想传递的环境信息。</p>
+<p>Sublime Text命令接收的数据存储在<em>.sublime-build</em>文件中。在这一点上，它可以做任何它需要的来<em>编译</em> 文件。默认的编译系统将使用<tt class="docutils literal"><span class="pre">exec</span></tt>命令, 实现
+<em>Packages/Default/exec.py</em>. 我们之后再解释, 你可以覆盖此命令。</p>
+<p>最后，外部程序可能是你已经创建了一个shell脚本来处理您的文件，或一个知名的工具，如<tt class="docutils literal"><span class="pre">make</span></tt>或<tt class="docutils literal"><span class="pre">tidy</span></tt>。通常，这些
+可执行文件将接收的文件或目录的路径，以及要运行开关和选项。</p>
+<p>请注意编译系统在没有任何原因的情况下不必调用任何外部程序;你可以完全用Sublime Text命令实现一个编译系统。</p>
+<div class="section" id="file-format">
+<h2>文件格式<a class="headerlink" href="#file-format" title="Permalink to this headline">¶</a></h2>
+<p><em>.build-system</em> 使用JSON. 下面是一个例子:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;python&quot;</span><span class="p">,</span> <span class="s">&quot;-u&quot;</span><span class="p">,</span> <span class="s">&quot;$file&quot;</span><span class="p">],</span>
+    <span class="s">&quot;file_regex&quot;</span><span class="p">:</span> <span class="s">&quot;^[ ]*File </span><span class="se">\&quot;</span><span class="s">(...*?)</span><span class="se">\&quot;</span><span class="s">, line ([0-9]*)&quot;</span><span class="p">,</span>
+    <span class="s">&quot;selector&quot;</span><span class="p">:</span> <span class="s">&quot;source.python&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">cmd</span></tt></dt>
+<dd><p class="first">数组，包含要执行的命令和其所需的参数。如果你不指定一个绝对路径外部程序将会去在你的<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>中搜索,一个你系统中的中的环境变量。</p>
+<p class="last">在Windows,图形界面是被抑制的。</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">file_regex</span></tt></dt>
+<dd>可选的。正则表达式(类Perl)来捕获错误输出在
+<tt class="docutils literal"><span class="pre">cmd</span></tt>中。有关详细信息，请参阅下一节。</dd>
+<dt><tt class="docutils literal"><span class="pre">line_regex</span></tt></dt>
+<dd>可选的。如果<tt class="docutils literal"><span class="pre">file_regex</span></tt>匹配不到当前行，但是<tt class="docutils literal"><span class="pre">line_regex</span></tt>存在,且能匹配到值，那么从缓冲区从后向前搜知道有一行匹配<tt class="docutils literal"><span class="pre">file</span> <span class="pre">regex</span></tt> , 然后用这2个匹配结果去决定要跳至的文件和行。</dd>
+<dt><tt class="docutils literal"><span class="pre">selector</span></tt></dt>
+<dd>可选的。 当<strong>Tools | Build System | Automatic</strong>是<tt class="docutils literal"><span class="pre">true</span></tt>时使用。
+Sublime Text使用这个范围选择器来找到适合当前活动视图的编译系统。</dd>
+<dt><tt class="docutils literal"><span class="pre">working_dir</span></tt></dt>
+<dd>可选的。运行<span class="pre">cmd</span>命令前改变当前目录到的目录 <tt class="docutils literal"></tt>.
+之后会还原原来的当前目录。</dd>
+<dt><tt class="docutils literal"><span class="pre">encoding</span></tt></dt>
+<dd>可选的。<tt class="docutils literal"><span class="pre">cmd</span></tt>输出的编码。必须是一个合法的python编码。
+默认是<tt class="docutils literal"><span class="pre">UTF-8</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">target</span></tt></dt>
+<dd><p class="first">可选的。 要运行的Sublime Text命令。 默认是<tt class="docutils literal"><span class="pre">exec</span></tt> (<em>Packages/Default/exec.py</em>).
+这个命令接收在<em>.build-system</em> 文件中指定的配置数据。</p>
+<p class="last">用于覆盖默认的编译系统命令。请注意，如果您选择覆盖编译系统的默认的命令，你可以添加任意的变量到<em>.sublime-build</em>文件中。</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">env</span></tt></dt>
+<dd><p class="first">可选的。环境变量中的目录与当前流程中的合并在传递它们到<tt class="docutils literal"><span class="pre">cmd</span></tt>。</p>
+<p class="last">使用此元素，举个例子，来增加或修改换环境变量而不用修改你系统里的配置。</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">shell</span></tt></dt>
+<dd>可选的。如果是<tt class="docutils literal"><span class="pre">true</span></tt>, <tt class="docutils literal"><span class="pre">cmd</span></tt>将会在shell中运行 (<tt class="docutils literal"><span class="pre">cmd.exe</span></tt>, <tt class="docutils literal"><span class="pre">bash</span></tt>…).</dd>
+<dt><tt class="docutils literal"><span class="pre">path</span></tt></dt>
+<dd><p class="first">可选的。这个字符串会在调用 <tt class="docutils literal"><span class="pre">cmd</span>之前替换当前流程的<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>。</tt>旧的<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> 值会在完成调用后还原。</p>
+<p class="last">使用这个可选项来添加目录到<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>而不用修改你系统的配置。</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">variants</span></tt></dt>
+<dd>可选的。列表的字典选项覆盖的主要构建系统的选项。变量们<a href="#id1"><span class="problematic" id="id2">``</span></a>name`` 将会在命令控制面板中显示和轻松访问如果编译系统匹配当前活动文件。</dd>
+<dt><tt class="docutils literal"><span class="pre">name</span></tt></dt>
+<dd><strong>变量们中唯一有效</strong> (见<tt class="docutils literal"><span class="pre">variants</span></tt>)。编译系统的标识。如果<tt class="docutils literal"><span class="pre">name</span></tt>是<em>Run</em>, 变体将出现在
+<strong>Tools | Build System</strong>菜单下面并被绑定<em>Ctrl + Shift + B</em>.</dd>
+</dl>
+<div class="section" id="capturing-error-output-with-file-regex">
+<h3>通过<tt class="docutils literal"><span class="pre">file_regex</span></tt>捕获输出异常<a class="headerlink" href="#capturing-error-output-with-file-regex" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">file_regex</span></tt> option uses a Perl-style regular expression to capture up
+to four fields of error information from the build program&#8217;s output, namely:
+<em>file name</em>, <em>line number</em>, <em>column number</em> and <em>error message</em>. Use
+groups in the pattern to capture this information. The <em>file name</em> field and
+the <em>line number</em> field are required.</p>
+<p>When error information is captured, you can navigate to error instances in
+your project&#8217;s files with <tt class="docutils literal"><span class="pre">F4</span></tt> and <tt class="docutils literal"><span class="pre">Shift+F4</span></tt>. If available, the captured
+<em>error message</em> will be displayed in the status bar.</p>
+</div>
+<div class="section" id="platform-specific-options">
+<h3>Platform-specific Options<a class="headerlink" href="#platform-specific-options" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">windows</span></tt>, <tt class="docutils literal"><span class="pre">osx</span></tt> and <tt class="docutils literal"><span class="pre">linux</span></tt> elements let you provide
+platform-specific data in the build system. Here&#8217;s an example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;ant&quot;</span><span class="p">],</span>
+    <span class="s">&quot;file_regex&quot;</span><span class="p">:</span> <span class="s">&quot;^ *</span><span class="se">\\</span><span class="s">[javac</span><span class="se">\\</span><span class="s">] (.+):([0-9]+):() (.*)$&quot;</span><span class="p">,</span>
+    <span class="s">&quot;working_dir&quot;</span><span class="p">:</span> <span class="s">&quot;${project_path:${folder}}&quot;</span><span class="p">,</span>
+    <span class="s">&quot;selector&quot;</span><span class="p">:</span> <span class="s">&quot;source.java&quot;</span><span class="p">,</span>
+
+    <span class="s">&quot;windows&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="s">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;ant.bat&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this case, <tt class="docutils literal"><span class="pre">ant</span></tt> will be executed for every platform except Windows,
+where <tt class="docutils literal"><span class="pre">ant.bat</span></tt> will be used instead.</p>
+</div>
+<div class="section" id="variants">
+<h3>Variants<a class="headerlink" href="#variants" title="Permalink to this headline">¶</a></h3>
+<p>Here&#8217;s a contrived example of a build system with variants:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;selector&quot;</span><span class="p">:</span> <span class="s">&quot;source.python&quot;</span><span class="p">,</span>
+    <span class="s">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;date&quot;</span><span class="p">],</span>
+
+    <span class="s">&quot;variants&quot;</span><span class="p">:</span> <span class="p">[</span>
+
+        <span class="p">{</span> <span class="s">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;ls -l *.py&quot;</span><span class="p">],</span>
+          <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;List Python Files&quot;</span><span class="p">,</span>
+          <span class="s">&quot;shell&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+
+        <span class="p">{</span> <span class="s">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;wc&quot;</span><span class="p">,</span> <span class="s">&quot;$file&quot;</span><span class="p">],</span>
+          <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Word Count (current file)&quot;</span>
+        <span class="p">},</span>
+
+        <span class="p">{</span> <span class="s">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;python&quot;</span><span class="p">,</span> <span class="s">&quot;-u&quot;</span><span class="p">,</span> <span class="s">&quot;$file&quot;</span><span class="p">],</span>
+          <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Given these settings, <em>Ctrl + B</em> would run the <em>date</em> command, <em>Crtl + Shift +
+B</em> would run the Python interpreter and the remaining variants would appear
+in the Command Palette whenever the build system was active.</p>
+</div>
+</div>
+<div class="section" id="build-system-variables">
+<span id="id3"></span><h2>Build System Variables<a class="headerlink" href="#build-system-variables" title="Permalink to this headline">¶</a></h2>
+<p>Build systems expand the following variables in <em>.sublime-build</em> files:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$file_path</span></tt></td>
+<td>The directory of the current file, e. g., <em>C:Files</em>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$file</span></tt></td>
+<td>The full path to the current file, e. g., <em>C:FilesChapter1.txt</em>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$file_name</span></tt></td>
+<td>The name portion of the current file, e. g., <em>Chapter1.txt</em>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$file_extension</span></tt></td>
+<td>The extension portion of the current file, e. g., <em>txt</em>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$file_base_name</span></tt></td>
+<td>The name only portion of the current file, e. g., <em>Document</em>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$packages</span></tt></td>
+<td>The full path to the <em>Packages</em> folder.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$project</span></tt></td>
+<td>The full path to the current project file.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$project_path</span></tt></td>
+<td>The directory of the current project file.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$project_name</span></tt></td>
+<td>The name portion of the current project file.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$project_extension</span></tt></td>
+<td>The extension portion of the current project file.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$project_base_name</span></tt></td>
+<td>The name only portion of the current project file.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="place-holders-for-variables">
+<h3>Place Holders for Variables<a class="headerlink" href="#place-holders-for-variables" title="Permalink to this headline">¶</a></h3>
+<p>Features found in snippets can be used with these variables. For example:</p>
+<div class="highlight-python"><pre>${project_name:Default}</pre>
+</div>
+<p>This will emit the name of the current project if there is one, otherwise <tt class="docutils literal"><span class="pre">Default</span></tt>.</p>
+<div class="highlight-python"><pre>${file/\.php/\.txt/}</pre>
+</div>
+<p>This will emit the full path of the current file, replacing <em>.php</em> with <em>.txt</em>.</p>
+</div>
+</div>
+<div class="section" id="running-build-systems">
+<h2>Running Build Systems<a class="headerlink" href="#running-build-systems" title="Permalink to this headline">¶</a></h2>
+<p>Select the desired build system from <strong>Tools | Build System</strong>, and then select
+<strong>Tools | Build</strong> or press <tt class="docutils literal"><span class="pre">F7</span></tt>.</p>
+</div>
+<div class="section" id="troubleshooting-build-systems">
+<span id="id4"></span><h2>Troubleshooting Build Systems<a class="headerlink" href="#troubleshooting-build-systems" title="Permalink to this headline">¶</a></h2>
+<p>Build systems will look for executables in your <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>, unless you specify
+an absolute path to the executable. Therefore, your <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> variable must be
+correctly set.</p>
+<p>On some operating systems, the value for <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> will vary from a terminal
+window to a graphical application. Thus, even if the command you are using in
+your build system works in the command line, it may not work from Sublime Text.
+This is due to user profiles in shells.</p>
+<p>To solve this issue, make sure you set the desired <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> so that graphical
+applications such as Sublime Text can find it. See the links below for more
+information.</p>
+<p>Alternatively, you can use the <tt class="docutils literal"><span class="pre">path</span></tt> element in <em>.sublime-build</em> files
+to override the <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> used to locate the executable specified in <tt class="docutils literal"><span class="pre">cmd</span></tt>.
+This new value for <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> will only be in effect for as long as your
+build system is running. After that, the old <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> will be restored.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="http://goo.gl/F77EM">Managing Environment Variables in Windows</a></dt>
+<dd>Search Microsoft knowledge base for this topic.</dd>
+<dt><a class="reference external" href="http://stackoverflow.com/q/135688/1670">Setting environment variables in OSX</a></dt>
+<dd>StackOverflow topic.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Build Systems</a><ul>
+<li><a class="reference internal" href="#file-format">File Format</a></li>
+<li><a class="reference internal" href="#options">Options</a><ul>
+<li><a class="reference internal" href="#capturing-error-output-with-file-regex">Capturing Error Output with <tt class="docutils literal"><span class="pre">file_regex</span></tt></a></li>
+<li><a class="reference internal" href="#platform-specific-options">Platform-specific Options</a></li>
+<li><a class="reference internal" href="#variants">Variants</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#build-system-variables">Build System Variables</a><ul>
+<li><a class="reference internal" href="#place-holders-for-variables">Place Holders for Variables</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-build-systems">Running Build Systems</a></li>
+<li><a class="reference internal" href="#troubleshooting-build-systems">Troubleshooting Build Systems</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="syntaxdefs.html"
+                        title="previous chapter">Syntax Definitions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="key_bindings.html"
+                        title="next chapter">Key Bindings</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/reference/build_systems.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="key_bindings.html" title="Key Bindings"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="syntaxdefs.html" title="Syntax Definitions"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li>
+          <li><a href="reference.html" >Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

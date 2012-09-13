@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>File Navigation and File Management &mdash; Sublime Text Unofficial Documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+    <link rel="next" title="Customizing Sublime Text" href="../customization/customization.html" />
+    <link rel="prev" title="Build Systems (Batch Processing)" href="../file_processing/build_systems.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../customization/customization.html" title="Customizing Sublime Text"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../file_processing/build_systems.html" title="Build Systems (Batch Processing)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="file-navigation-and-file-management">
+<h1>File Navigation and File Management<a class="headerlink" href="#file-navigation-and-file-management" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="goto-anything">
+<h2>Goto Anything<a class="headerlink" href="#goto-anything" title="Permalink to this headline">¶</a></h2>
+<p>Goto Anything lets you <strong>navigate files</strong> swiftly. Open it with <tt class="kbd docutils literal"><span class="pre">Ctrl+P</span></tt>.
+As you type into the input area, names of open files and files in open
+directories will be searched, and a preview of the best match will be shown.
+This preview is <em>transient</em>, that is, it won&#8217;t become the actual active buffer
+until you perform some operation on it. Transient views go away when you press
+<tt class="kbd docutils literal"><span class="pre">Esc</span></tt>. You will find transient views in other situations. They are like
+ghosts or something.</p>
+<p>Goto Anything lives up to its name &#8211;there&#8217;s more to it than locating files:</p>
+<p>To perform a <strong>fuzzy search</strong>, append <tt class="docutils literal"><span class="pre">#</span></tt> and then keep typing, like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">island</span><span class="c">#treasure</span>
+</pre></div>
+</div>
+<p>This instructs Sublime Text to perform a fuzzy search for <em>treasure</em> in the
+file whose name matches <em>island</em>. Pressing <tt class="kbd docutils literal"><span class="pre">Ctrl+;</span></tt> will open Goto
+Anything and type <tt class="docutils literal"><span class="pre">#</span></tt> for you.</p>
+<p>And there&#8217;s more:</p>
+<p>To <strong>search symbols</strong> in the active buffer, press <tt class="kbd docutils literal"><span class="pre">Ctrl+R</span></tt>. The operator
+<tt class="docutils literal"><span class="pre">&#64;</span></tt> can be used as explained above too.</p>
+<p>To <strong>go to a line number</strong>, press <tt class="kbd docutils literal"><span class="pre">Ctrl+G</span></tt>. The operator <tt class="docutils literal"><span class="pre">:</span></tt> can be
+used as explained above too.</p>
+<p>Searching for symbols will only work for file types that have symbols defined
+for them.</p>
+</div>
+<div class="section" id="sidebar">
+<h2>Sidebar<a class="headerlink" href="#sidebar" title="Permalink to this headline">¶</a></h2>
+<p>The sidebar gives you an overview of your project. Files and folders added to
+the sidebar will be available in Goto Anything and project-wide actions.
+Projects and the sidebar are closely related. There&#8217;s always an open project,
+whether it&#8217;s implicit or explicit.</p>
+<p>To <strong>open or close</strong> the sidebar, press <tt class="kbd docutils literal"><span class="pre">Ctrl+K,</span> <span class="pre">Ctrl+B</span></tt>.</p>
+<p>The sidebar can be navigated with the arrow keys, but first you need to give
+it the <strong>input focus</strong> by pressing <tt class="kbd docutils literal"><span class="pre">Ctrl+0</span></tt>. To return input focus to the
+buffer, press <tt class="kbd docutils literal"><span class="pre">Esc</span></tt>. Alternatively, you can use the mouse to the same
+effect, but why would you?</p>
+<p>The sidebar also provides basic file management operations through the context
+menu.</p>
+</div>
+<div class="section" id="projects">
+<h2>Projects<a class="headerlink" href="#projects" title="Permalink to this headline">¶</a></h2>
+<p>Projects group sets of files and directories you need to work on as a unit.
+Once you&#8217;ve set up your project the way that suits you by adding folders, save
+it and give it a name.</p>
+<p>To save a project, go to <strong>Project | Save Project As...</strong>.</p>
+<p>To quickly switch between projects, press <tt class="kbd docutils literal"><span class="pre">Ctrl+Alt+P</span></tt>.</p>
+<p>Project data are stored in JSON files with a <cite>.sublime-project</cite> extension.
+Wherever there&#8217;s a <cite>.sublime-project</cite> file, you will find an ancillary
+<cite>.sublime-workspace</cite> file too. The second one is used by Sublime Text and you
+shouldn&#8217;t edit it yourself.</p>
+<p>Project files can define settings specific to that project only. More on that
+in the <a class="reference external" href="http://www.sublimetext.com/docs/2/projects.html">official documentation</a>.</p>
+<p>You can open a project from the <strong>command line</strong> by passing the <em>.sublime-
+project</em> file as an argument.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">File Navigation and File Management</a><ul>
+<li><a class="reference internal" href="#goto-anything">Goto Anything</a></li>
+<li><a class="reference internal" href="#sidebar">Sidebar</a></li>
+<li><a class="reference internal" href="#projects">Projects</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../file_processing/build_systems.html"
+                        title="previous chapter">Build Systems (Batch Processing)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../customization/customization.html"
+                        title="next chapter">Customizing Sublime Text</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/file_management/file_management.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../customization/customization.html" title="Customizing Sublime Text"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../file_processing/build_systems.html" title="Build Systems (Batch Processing)"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sublime Text Docs</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

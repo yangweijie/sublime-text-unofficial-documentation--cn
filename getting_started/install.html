@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>安装 &mdash; Sublime Text 非官方文档</title>
+		<!-- RTD <head> -->
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+		<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+		<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+		<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+		<script type="text/javascript">
+			var doc_version = "latest";
+			var doc_slug = "sublime-text-unofficial-documentation";
+		</script>
+		<script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+		<!-- end RTD <head> -->
+		<link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+		<link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+		<script type="text/javascript">
+			var DOCUMENTATION_OPTIONS = {
+				URL_ROOT:    '../',
+				VERSION:     '2.0',
+				COLLAPSE_INDEX: false,
+				FILE_SUFFIX: '.html',
+				HAS_SOURCE:  true
+			};
+		</script>
+		<link rel="top" title="Sublime Text Unofficial Documentation" href="../index.html" />
+		<link rel="next" title="Basic Concepts" href="../basic_concepts.html" />
+		<link rel="prev" title="About This Documentation" href="../intro.html" /> 
+	</head>
+	<body>
+		<div class="related">
+			<h3>Navigation</h3>
+			<ul>
+				<li class="right" style="margin-right: 10px">
+					<a href="../genindex.html" title="General Index"
+					   accesskey="I">index</a></li>
+				<li class="right" >
+					<a href="../basic_concepts.html" title="Basic Concepts"
+					   accesskey="N">next</a> |</li>
+				<li class="right" >
+					<a href="../intro.html" title="About This Documentation"
+					   accesskey="P">previous</a> |</li>
+				<li><a href="../index.html">Sublime Text Docs</a> &raquo;</li> 
+			</ul>
+		</div>  
+
+		<div class="document">
+			<div class="documentwrapper">
+				<div class="bodywrapper">
+					<div class="body">
+						<div class="section" id="installation">
+							<h1>安装<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+							<p>每个平台上的Sublime Text安装流程是不同的。</p>
+							<p>确定已经读了官网上的<a class="reference external" href="http://www.sublimetext.com/buy">使用的条件</a>。 Sublime Text
+							不是免费的。</p>
+							<div class="section" id="bits-or-64-bits">
+								<h2>32位还是64位?<a class="headerlink" href="#bits-or-64-bits" title="Permalink to this headline">¶</a></h2>
+								<p>选择64-bit版本如果你使用了一个64-bit操作系统,
+									否则还是32-bit版本吧。</p>
+								<p>在<strong>Windows</strong> , 如果有顾虑,选择32-bit版本. 当下64-bit
+									版本Windows可以运行32-bit软件。</p>
+								<p>在<strong>Linux</strong> 终端里运行以下命令来检查你的系统类型:</p>
+								<div class="highlight-python"><div class="highlight"><pre><span class="n">uname</span> <span class="o">-</span><span class="n">m</span>
+										</pre></div>
+								</div>
+								<p>对于<strong>OS X</strong>, 你可以跳过这个选择: 只有一个OS X用的Sublime Text版本。</p>
+							</div>
+							<div class="section" id="windows">
+								<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+								<div class="section" id="portable-or-not-portable">
+									<h3>便携还是非便携?<a class="headerlink" href="#portable-or-not-portable" title="Permalink to this headline">¶</a></h3>
+									<p>Sublime Text 安装到Windows有两种形式: 正常和便携.。如果你需要便携式安装，你或许已经知道了。否则，用正常安装吧。</p>
+									<p><strong>正常安装</strong> 数据分开存放在单独的2个目录里: 适当的安装目录,和<em>data 目录</em>. 这些概念将在后面的指南中解释。正常安装也会集成Sublime Text到Windows 右键菜单。</p>
+									<p><strong>便携安装</strong> 将保留所有Sublime Text运行需要的文件在一个单独的目录。 你可以移除这个目录但是编辑仍然可以工作。</p>
+								</div>
+								<div class="section" id="how-to-install-the-normal-version-of-sublime-text">
+									<h3>如何安装正常版本的Sublime Text<a class="headerlink" href="#how-to-install-the-normal-version-of-sublime-text" title="Permalink to this headline">¶</a></h3>
+									<p>下载安装包, 双击它按照屏幕上的说明去做。</p>
+								</div>
+								<div class="section" id="how-to-install-the-portable-version-of-sublime-text">
+									<h3>如何安装便携版的Sublime Text<a class="headerlink" href="#how-to-install-the-portable-version-of-sublime-text" title="Permalink to this headline">¶</a></h3>
+									<p>下砸压缩包然后解压它到你指定的一个目录。你会发现<em>sublime_text.exe</em> 执行程序在那目录里。</p>
+								</div>
+							</div>
+							<div class="section" id="os-x">
+								<h2>OS X<a class="headerlink" href="#os-x" title="Permalink to this headline">¶</a></h2>
+								<p>下载并打开<em>.dmg</em> 文件, 并且拖动Sublime Text 2包到<em>Applications</em> 目录。</p>
+							</div>
+							<div class="section" id="linux">
+								<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+								<p>你可以下载安装包并手动解压。相反你也可以使用以下命令:</p>
+								<div class="highlight-python"><pre>cd /path/to/your/apps
+wget http://url/to/sublime.tar.bz2
+tar vxjf sublime.tar.bz2</pre>
+								</div>
+								<p>如果你需要,为了方便你也可以创建一个执行文件的符号链接:</p>
+								<div class="highlight-python"><pre>sudo ln -s /path/to/sublime_text /usr/bin/subl</pre>
+								</div>
+							</div>
+							<div class="section" id="living-dangerously-or-not">
+								<h2>活的危险点...或不<a class="headerlink" href="#living-dangerously-or-not" title="Permalink to this headline">¶</a></h2>
+								<p>Sublime Text有三个发行<em>渠道</em>:</p>
+								<ul class="simple">
+									<li><a class="reference external" href="http://www.sublimetext.com/2">稳定版</a> (默认的)</li>
+									<li><a class="reference external" href="http://www.sublimetext.com/dev">开发版</a></li>
+									<li><a class="reference external" href="http://www.sublimetext.com/nightly">每夜版</a></li>
+								</ul>
+								<p>如果你在做一个NASA项目或者有很短的期限,继续使用稳定版停止向下读。<strong>稳定版</strong>相比其他版本对于每天都用的人更好的测试了并且更可靠。他们大约每个月出一个稳定版。 <strong>大多数用户只想使用稳定版。</strong></p>
+								<p><em>开发版</em> 和 <em>每夜版</em>渠道是不稳定的，这意味着他们中发布的编译版极有可能包含bugs并且工作起来不可靠。
+									他们被更新的比稳定版更频繁。</p>
+								<p><strong>开发版</strong>每个人都能使用。平均地，他们被每个月发布2次。尽管还没有准备好用于日常使用,他们以多数不间断方式展现新的特性。</p>
+								<p>最后， <strong>每夜构建版</strong>处于最前沿，随着频繁的更新而带来频繁的不同严重性程度的问题。尝试他们很有趣，但是那么做也是在冒险。每夜构建版<strong>只给注册用户使用</strong>。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="sphinxsidebar">
+				<div class="sphinxsidebarwrapper">
+					<h3>Project Versions</h3>
+					<ul id="sidebar_versions">
+						<li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+					</ul>
+					<div id="searchbox" style="">
+						<h3>RTD Search</h3>
+						<form class="search" action="//readthedocs.org/search/project/" method="get">
+							<input type="text" name="q" size="18"/>
+							<input type="submit" value="Go"/>
+							<input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation"/>
+						</form>
+						<p class="searchtip" style="font-size: 90%">
+							Full-text doc search.
+						</p>
+					</div>
+					<h3><a href="../index.html">Table Of Contents</a></h3>
+					<ul>
+						<li><a class="reference internal" href="#">Installation</a><ul>
+								<li><a class="reference internal" href="#bits-or-64-bits">32 bits or 64 bits?</a></li>
+								<li><a class="reference internal" href="#windows">Windows</a>
+									<ul>
+										<li><a class="reference internal" href="#portable-or-not-portable">Portable or Not Portable?</a></li>
+										<li><a class="reference internal" href="#how-to-install-the-normal-version-of-sublime-text">How to Install the Normal Version of Sublime Text</a></li>
+										<li><a class="reference internal" href="#how-to-install-the-portable-version-of-sublime-text">How to Install the Portable Version of Sublime Text</a></li>
+									</ul>
+								</li>
+								<li><a class="reference internal" href="#os-x">OS X</a></li>
+								<li><a class="reference internal" href="#linux">Linux</a></li>
+								<li><a class="reference internal" href="#living-dangerously-or-not">Living Dangerously... or Not</a></li>
+							</ul>
+						</li>
+					</ul>
+					<h4>Previous topic</h4>
+					<p class="topless"><a href="../intro.html"
+										  title="previous chapter">About This Documentation</a></p>
+					<h4>Next topic</h4>
+					<p class="topless"><a href="../basic_concepts.html"
+										  title="next chapter">Basic Concepts</a></p>
+					<h3>This Page</h3>
+					<ul class="this-page-menu">
+						<li><a href="../_sources/getting_started/install.txt"
+							   rel="nofollow">Show Source</a></li>
+					</ul>
+					<div id="searchbox" style="display: none">
+						<h3>Quick search</h3>
+						<form class="search" action="../search.html" method="get">
+							<input type="text" name="q" />
+							<input type="submit" value="Go" />
+							<input type="hidden" name="check_keywords" value="yes" />
+							<input type="hidden" name="area" value="default" />
+						</form>
+						<p class="searchtip" style="font-size: 90%">
+							Enter search terms or a module, class or function name.
+						</p>
+					</div>
+					<script type="text/javascript">$('#searchbox').show(0);</script>
+				</div>
+			</div>
+			<div class="clearer"></div>
+		</div>
+		<div class="related">
+			<h3>Navigation</h3>
+			<ul>
+				<li class="right" style="margin-right: 10px">
+					<a href="../genindex.html" title="General Index"
+					   >index</a></li>
+				<li class="right" >
+					<a href="../basic_concepts.html" title="Basic Concepts"
+					   >next</a> |</li>
+				<li class="right" >
+					<a href="../intro.html" title="About This Documentation"
+					   >previous</a> |</li>
+				<li><a href="../index.html">Sublime Text Docs</a> &raquo;</li> 
+			</ul>
+		</div>
+
+		<div class="footer">
+			&copy; Copyright 2012, Sublime Text Community.
+		</div>
+		<!-- End original user content -->
+		<style type="text/css">
+			.badge {
+				position: fixed;
+				display: block;
+				bottom: 5px;
+				height: 40px;
+				text-indent: -9999em;
+				border-radius: 3px;
+				-moz-border-radius: 3px;
+				-webkit-border-radius: 3px;
+				box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+				-moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+				-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+			}
+			#version_menu {
+				position: fixed;
+				display: none;
+				bottom: 11px;
+				right: 166px;
+				list-style-type: none;
+				margin: 0;
+			}
+			.footer_popout:hover #version_menu {
+				display: block;
+			}
+			#version_menu li {
+				display: block;
+				float: right;
+			}
+			#version_menu li a {
+				display: block;
+				padding: 6px 10px 4px 10px;
+				margin: 7px 7px 0 0;
+				font-weight: bold;
+				font-size: 14px;
+				height: 20px;
+				line-height: 17px;
+				text-decoration: none;
+				color: #fff;
+				background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+				border-radius: 3px;
+				-moz-border-radius: 3px;
+				-webkit-border-radius: 3px;
+				box-shadow: 0 1px 1px #465158;
+				-moz-box-shadow: 0 1px 1px #465158;
+				-webkit-box-shadow: 0 1px 1px #465158;
+				text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+			}
+			#version_menu li a:hover {
+				text-decoration: none;
+				background-color: #697983;
+				box-shadow: 0 1px 0px #465158;
+				-moz-box-shadow: 0 1px 0px #465158;
+				-webkit-box-shadow: 0 1px 0px #465158;
+			}
+			.badge.rtd {
+				background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+				border: 1px solid #282E32;
+				width: 160px;
+				right: 5px;
+			}
+			.badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+							border: 1px solid #1C5871;
+							width: 290px;
+							right: 173px;
+			}
+			.badge.revsys-inline-sponsored {
+				position: inherit;
+				margin-left: auto;
+				margin-right: 175px;
+				margin-bottom: 5px;
+				background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+				border: 1px solid #1C5871;
+				width: 290px;
+				right: 173px;
+			}
+			.badge.revsys-inline {
+				position: inherit;
+				margin-left: auto;
+				margin-right: 175px;
+				margin-bottom: 5px;
+				background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+				border: 1px solid #1C5871;
+				width: 205px;
+				right: 173px;
+			}
+
+			.rtd_doc_footer { background-color: #465158;}
+
+		</style>
+		<div class="rtd_doc_footer">
+			<div class="footer_popout">
+				<a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+				<ul id="version_menu">
+					<li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- RTD Analytics Code -->
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-17997319-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+		<!-- User Analytics Code -->
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-29682491-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+	</body>
+</html>

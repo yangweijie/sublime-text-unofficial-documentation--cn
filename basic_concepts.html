@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>基本概念 &mdash; Sublime Text非官方文档</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="//media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sublime-text-unofficial-documentation";
+  </script>
+  <script type="text/javascript" src="//media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="Sublime Text Unofficial Documentation" href="index.html" />
+    <link rel="next" title="Editing" href="editing/editing.html" />
+    <link rel="prev" title="Installation" href="getting_started/install.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="editing/editing.html" title="Editing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="getting_started/install.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Sublime Text Docs</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="basic-concepts">
+<h1>基本概念<a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h1>
+<p>这里我们将解释为了完全理解本指南内容读者需要熟悉的概念。</p>
+<div class="section" id="conventions-in-this-guide">
+<h2>本指南中的约定<a class="headerlink" href="#conventions-in-this-guide" title="Permalink to this headline">¶</a></h2>
+<p>本指南是从一个WIndows用户的角度上写的，但是多数说明只需琐碎改变就能在其他平台上工作了。</p>
+<p>相对路径(e. g. <em>Packages/User</em>) 开始在<em>data directory</em> 除非其他地方说明。<em>data directory</em> 下面进一步说明。</p>
+<p>我们假设绑定默认的键时显示键盘快捷键。由于Sublime Text映射键到命令的方式, <strong>一些绑定的键不会符合你本地的键盘布局</strong>。</p>
+</div>
+<div class="section" id="with-great-power-comes-lots-of-questions">
+<h2>强大能力随之带来的问题<a class="headerlink" href="#with-great-power-comes-lots-of-questions" title="Permalink to this headline">¶</a></h2>
+<p>Sublime Text是一个非常可扩展和定制化的编辑器。它的许多事情开箱即用，但是如果你花一些时间修理它适应你的需要，它会给你超强的能力。本指南将会教你配置Sublime Text全部需要知道的事情。</p>
+<p>在下面的段落中，我们将简要介绍一些方面不会记在你的心中，直到你已经花了一些时间使用Sublime Text。不断探索编辑器和读读本指南，在某个时候你会有水到渠成的感觉。</p>
+<p>Sublime Text对于程序员来说无疑是个多功能的工具，但是你也可以不用它，甚至配置它使其成为你写作的完美工具。如果你是一耳光黑客，然而你会愿意花一整天玩弄这个编辑器。</p>
+</div>
+<div class="section" id="the-data-directory">
+<h2><em>Data</em>目录<a class="headerlink" href="#the-data-directory" title="Permalink to this headline">¶</a></h2>
+<p>Sublime Text 2存储几乎 所有和用户相关的文件在data目录。下面是各平台对应的位置:</p>
+<ul class="simple">
+<li><strong>Windows</strong>: <em>%APPDATA%\Sublime Text 2</em></li>
+<li><strong>OS X</strong>: <em>~/Library/Application Support/Sublime Text 2</em></li>
+<li><strong>Linux</strong>: <em>~/.config/sublime-text-2</em></li>
+</ul>
+<p>对于 <strong>便携安装版</strong>, 看<em>Sublime Text 2/Data</em>。这里，<em>Sublime Text 2</em> 部分指的是你解压压缩包生成的包含Sublime Text 2的目录。</p>
+<p>注意只有便携安装版有一个叫<em>Data</em>的目录。对其他类型的安装版，data目录还是在上面指定的位置。</p>
+</div>
+<div class="section" id="the-packages-directory">
+<h2><em>Packages</em>目录<a class="headerlink" href="#the-packages-directory" title="Permalink to this headline">¶</a></h2>
+<p>这是一个 <strong>关键目录</strong>: 所有被支持的编程语言和标记语言的资源都存储在这里。一个<em>package</em> 就是一个包含相关对Sublime Text有特别意义文件的目录。</p>
+<p>你可以访问packages目录通过Sublime Text 2菜单(<strong>Preferences | Browse Packages...</strong>), 或者调用一个api的方式:
+<tt class="docutils literal"><span class="pre">sublime.packages_path()</span></tt>. 在本指南中我们会用下面几种名词表示此目录
+<em>Packages</em>, <em>packages path</em>, <em>packages folder</em> or <em>packages directory</em>.</p>
+<div class="section" id="the-user-package">
+<h3> <tt class="docutils literal"><span class="pre">User</span></tt>包<a class="headerlink" href="#the-user-package" title="Permalink to this headline">¶</a></h3>
+<p><em>Packages/User</em>是一个集合目录存放自定义插件、代码片段、宏等等。把它当做packages folder中的私人领域。Sublime
+Text 2在升级时将永远不会覆盖<em>Packages/User</em>的内容。</p>
+</div>
+</div>
+<div class="section" id="the-python-console-and-the-python-api">
+<h2>Python终端和Python API<a class="headerlink" href="#the-python-console-and-the-python-api" title="Permalink to this headline">¶</a></h2>
+<p>这部分信息程序员会特别感兴趣。对于其他的Sublime Text 2用户,你只要知道Sublime Text允许用户使用编程技巧来添加自己的特性到编辑器上。(因此，去学如何编程吧，那非常有趣的!)</p>
+<p>Sublime Text 2带有一个嵌入式Python解释器。当你写插件时它是一个很有用的检测Sublime Text 2配置和快速测试API调用的工具。</p>
+<p>要打开Python终端,按<tt class="docutils literal"><span class="pre">Ctrl+`</span></tt>或者在菜单中选择<strong>View | Show Console</strong></p>
+<p>困惑吗？让我再一次慢慢地解释:</p>
+<p><em>Python</em>是一个初学者很有容易上手同时很强大的变成语言。<em>API</em>是‘Application Programming
+Interface&#8217;的缩写, 换种奇怪的说法，Sublime Text 2准备好让用户编程的。不同的是，Subime为用户提供了通过Python访问其内部的渠道。最后，一个<em>终端</em>是一个
+Sublime Text里的小窗口让你在其中输入短的Python代码片段然后可以运行它们。
+终端也会输出Sublime Text或它的插件输出的文本。</p>
+<div class="section" id="your-system-s-python-vs-the-sublime-text-2-embedded-python">
+<h3>你系统中的Python vs Sublime Text 2 嵌入的Python<a class="headerlink" href="#your-system-s-python-vs-the-sublime-text-2-embedded-python" title="Permalink to this headline">¶</a></h3>
+<p>在<strong>Windows</strong> 和<strong>Linux</strong>, Sublime Text 2带有自己的Python
+解释器它是独立于你系统里的Python解释器。</p>
+<p>在<strong>OS X</strong>,使用系统的Python解释器。修改你系统里的Python版本，比如替换成MacPorts版本,会给Sublime Text带来问题。</p>
+<p>嵌入式解释器只是为了与插件API,不是总体开发。</p>
+</div>
+</div>
+<div class="section" id="packages-plugins-resources-and-other-things-that-may-not-make-sense-to-you-now">
+<h2>包,插件,资源和其他一些现在可能对你没有意义的东东<a class="headerlink" href="#packages-plugins-resources-and-other-things-that-may-not-make-sense-to-you-now" title="Permalink to this headline">¶</a></h2>
+<p>从现在开始，请记在你脑中牢记几乎在Sublime Text中的一切都可以调整适应你的需要。这高度的灵活性是为什么你要记忆那么多的文件：必须有个地方简单指定你的喜好。</p>
+<p>Sublime Text中的配置文件让你改变编辑器的行为添加红，代码片段或者创造新的特性<em>特性</em>指的是你能想到的一切。好吧，也许不是<em>一切</em>,但是Sublime Text 肯定给你了大量的控制权。</p>
+<p>这些配置文件是简单的遵循指定结构或<em>格式</em>的文本
+: JSON占主导,但是你也会发现XML文件。</p>
+<p>在本指南，我们把所有单独配置文件集中视为<em>资源</em>。Sublime Text将会在packages目录中寻找资源。为了保持整洁，编辑器有一个<em>包</em>的概念，就是一个包含一类资源的目录（也许他们有助于加快写email或某种语言的速度）。
+.</p>
+</div>
+<div class="section" id="textmate-compatibility">
+<h2>Textmate兼容性<a class="headerlink" href="#textmate-compatibility" title="Permalink to this headline">¶</a></h2>
+<p>本信息主要对那些以前使用Textmate现在用SublimeText的用户有帮助。Textmate是一个Mac上的编辑器。</p>
+<p>Sublime Text 2相当兼容Textmate软件包除了一些列外的命令。此外, Sublime Text要求所有语法定义文件有<em>.tmLanguage</em> 扩展名,说有配置文件要有<em>.tmPreferences</em>扩展名。这意味着<em>.plist</em>文件将被忽略, 及时他们在一个<em>Syntaxes</em>或<em>Preferences</em>
+子目录。</p>
+</div>
+<div class="section" id="vi-emulation">
+<h2>Vi模拟<a class="headerlink" href="#vi-emulation" title="Permalink to this headline">¶</a></h2>
+<p>本信息主要对恐龙和那些在对话中喜欢用降级RSI的人有用。Vi是一个古董级编辑器是用户用键盘进行一切操作。 Vim, 现代版的vi,
+至今仍被广泛使用。</p>
+<p>Sublime Text 通过 <em>Vintage</em>包提供vi模拟。Vintage 包是 默认<em>忽略</em>。 想了解更多 <a class="reference external" href="http://www.sublimetext.com/docs/2/vintage.html">Vintage</a> 请看官方文档中的介绍。</p>
+</div>
+<div class="section" id="emacs">
+<h2>Emacs<a class="headerlink" href="#emacs" title="Permalink to this headline">¶</a></h2>
+<p>本信息对任何人无用。Emacs是... 额,没有人真正知道emacs是什么，尽管有的人用它编辑文本。</p>
+<p>如果你是一个emacs用户,你几乎不会读到这段。</p>
+</div>
+<div class="section" id="be-sublime-my-friend">
+<h2>用Sublime吧,我的朋友<a class="headerlink" href="#be-sublime-my-friend" title="Permalink to this headline">¶</a></h2>
+<p>欣赏<a class="reference external" href="http://www.youtube.com/watch?v=iO3sBulXpVw">Bruce Lee的智慧</a>, Sublime Text几乎可以变成任何你想要的。熟练的话，它可以轻轻松松地击败一支忍者大军。</p>
+<p>清空你的思想; 用sublime吧,我的朋友。</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+
+    </ul>
+
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="//readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:Sublime Text Unofficial Documentation">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">基本概念</a><ul>
+<li><a class="reference internal" href="#conventions-in-this-guide">Conventions in This Guide</a></li>
+<li><a class="reference internal" href="#with-great-power-comes-lots-of-questions">With Great Power Comes Lots of Questions</a></li>
+<li><a class="reference internal" href="#the-data-directory">The <em>Data</em> Directory</a></li>
+<li><a class="reference internal" href="#the-packages-directory">The <em>Packages</em> Directory</a><ul>
+<li><a class="reference internal" href="#the-user-package">The <tt class="docutils literal"><span class="pre">User</span></tt> Package</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-python-console-and-the-python-api">The Python Console and the Python API</a><ul>
+<li><a class="reference internal" href="#your-system-s-python-vs-the-sublime-text-2-embedded-python">Your System&#8217;s Python vs the Sublime Text 2 Embedded Python</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#packages-plugins-resources-and-other-things-that-may-not-make-sense-to-you-now">Packages, Plugins, Resources and Other Things That May Not Make Sense to You Now</a></li>
+<li><a class="reference internal" href="#textmate-compatibility">Textmate Compatibility</a></li>
+<li><a class="reference internal" href="#vi-emulation">Vi Emulation</a></li>
+<li><a class="reference internal" href="#emacs">Emacs</a></li>
+<li><a class="reference internal" href="#be-sublime-my-friend">Be Sublime, My Friend</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="getting_started/install.html"
+                        title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="editing/editing.html"
+                        title="next chapter">Editing</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/basic_concepts.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="editing/editing.html" title="Editing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="getting_started/install.html" title="Installation"
+             >previous</a> |</li>
+        <li><a href="index.html">Sublime Text Docs</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Sublime Text Community.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(//media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(//media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="//readthedocs.org/projects/sublime-text-unofficial-documentation/?fromdocs=sublime-text-unofficial-documentation" class="badge rtd"> TEST Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="//readthedocs.org/docs/sublime-text-unofficial-documentation/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29682491-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>
