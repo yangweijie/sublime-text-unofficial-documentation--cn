@@ -136,19 +136,14 @@ Sublime Text使用这个范围选择器来找到适合当前活动视图的编�
 </dl>
 <div class="section" id="capturing-error-output-with-file-regex">
 <h3>通过<tt class="docutils literal"><span class="pre">file_regex</span></tt>捕获输出异常<a class="headerlink" href="#capturing-error-output-with-file-regex" title="Permalink to this headline">¶</a></h3>
-<p>The <tt class="docutils literal"><span class="pre">file_regex</span></tt> option uses a Perl-style regular expression to capture up
-to four fields of error information from the build program&#8217;s output, namely:
-<em>file name</em>, <em>line number</em>, <em>column number</em> and <em>error message</em>. Use
-groups in the pattern to capture this information. The <em>file name</em> field and
-the <em>line number</em> field are required.</p>
-<p>When error information is captured, you can navigate to error instances in
-your project&#8217;s files with <tt class="docutils literal"><span class="pre">F4</span></tt> and <tt class="docutils literal"><span class="pre">Shift+F4</span></tt>. If available, the captured
-<em>error message</em> will be displayed in the status bar.</p>
+<p><tt class="docutils literal"><span class="pre">file_regex</span></tt>选项使用类Perl的正则表达式来从编译系统输出中捕获错误信息的最多4个字段，分别是:
+<em>file name</em>, <em>line number</em>, <em>column number</em> and 和<em>error message</em>. 使用组模式中来捕捉这一信息。<em>file name</em> 字段和<em>line number</em>字段是必须的。</p>
+<p>当错误信息被捕获到，你可以导航至你项目文件中错误实例出现的地方通过<tt class="docutils literal"><span class="pre">F4</span></tt>和<tt class="docutils literal"><span class="pre">Shift+F4</span></tt>。如果可以的话，捕获到的
+<em>错误信息</em>将被显示在状态栏上。</p>
 </div>
 <div class="section" id="platform-specific-options">
-<h3>Platform-specific Options<a class="headerlink" href="#platform-specific-options" title="Permalink to this headline">¶</a></h3>
-<p>The <tt class="docutils literal"><span class="pre">windows</span></tt>, <tt class="docutils literal"><span class="pre">osx</span></tt> and <tt class="docutils literal"><span class="pre">linux</span></tt> elements let you provide
-platform-specific data in the build system. Here&#8217;s an example:</p>
+<h3>平台特定选项<a class="headerlink" href="#platform-specific-options" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">windows</span></tt>, <tt class="docutils literal"><span class="pre">osx</span></tt>和<tt class="docutils literal"><span class="pre">linux</span></tt>元素让你在编译系统中提供平台特定数据 ，下面是个例子:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
     <span class="s">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;ant&quot;</span><span class="p">],</span>
     <span class="s">&quot;file_regex&quot;</span><span class="p">:</span> <span class="s">&quot;^ *</span><span class="se">\\</span><span class="s">[javac</span><span class="se">\\</span><span class="s">] (.+):([0-9]+):() (.*)$&quot;</span><span class="p">,</span>
@@ -162,12 +157,12 @@ platform-specific data in the build system. Here&#8217;s an example:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>In this case, <tt class="docutils literal"><span class="pre">ant</span></tt> will be executed for every platform except Windows,
-where <tt class="docutils literal"><span class="pre">ant.bat</span></tt> will be used instead.</p>
+<p>在这个例子里, <tt class="docutils literal"><span class="pre">ant</span></tt>将会被执行在每个平台里除了Windows,
+那时<tt class="docutils literal"><span class="pre">ant.bat</span></tt>将会被替代使用。</p>
 </div>
 <div class="section" id="variants">
 <h3>Variants<a class="headerlink" href="#variants" title="Permalink to this headline">¶</a></h3>
-<p>Here&#8217;s a contrived example of a build system with variants:</p>
+<p>下面是编译系统变量的人为例子:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
     <span class="s">&quot;selector&quot;</span><span class="p">:</span> <span class="s">&quot;source.python&quot;</span><span class="p">,</span>
     <span class="s">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;date&quot;</span><span class="p">],</span>
@@ -190,14 +185,13 @@ where <tt class="docutils literal"><span class="pre">ant.bat</span></tt> will be
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Given these settings, <em>Ctrl + B</em> would run the <em>date</em> command, <em>Crtl + Shift +
-B</em> would run the Python interpreter and the remaining variants would appear
-in the Command Palette whenever the build system was active.</p>
+<p>有了这些配置, <em>Ctrl + B</em> 将会运行<em>date</em>命令, <em>Crtl + Shift +
+B</em>将会运行Python解释器并且上面出现的变量将会在命里面吧里出现命令面板当编译系统活动。</p>
 </div>
 </div>
 <div class="section" id="build-system-variables">
-<span id="id3"></span><h2>Build System Variables<a class="headerlink" href="#build-system-variables" title="Permalink to this headline">¶</a></h2>
-<p>Build systems expand the following variables in <em>.sublime-build</em> files:</p>
+<span id="id3"></span><h2>编译系统变量<a class="headerlink" href="#build-system-variables" title="Permalink to this headline">¶</a></h2>
+<p>编译系统识别的变量在<em>.sublime-build</em>文件中:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="21%" />
@@ -205,61 +199,59 @@ in the Command Palette whenever the build system was active.</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$file_path</span></tt></td>
-<td>The directory of the current file, e. g., <em>C:Files</em>.</td>
+<td>当前文件的目录, e. g., <em>C:Files</em>.</td>
 </tr>
 <tr class="row-even"><td><tt class="docutils literal"><span class="pre">$file</span></tt></td>
-<td>The full path to the current file, e. g., <em>C:FilesChapter1.txt</em>.</td>
+<td>当前文件的全路径, e. g., <em>C:FilesChapter1.txt</em>.</td>
 </tr>
 <tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$file_name</span></tt></td>
-<td>The name portion of the current file, e. g., <em>Chapter1.txt</em>.</td>
+<td>在当前文件的名称部分, e. g., <em>Chapter1.txt</em>.</td>
 </tr>
 <tr class="row-even"><td><tt class="docutils literal"><span class="pre">$file_extension</span></tt></td>
-<td>The extension portion of the current file, e. g., <em>txt</em>.</td>
+<td>当前文件的扩展名部分, e. g., <em>txt</em>.</td>
 </tr>
 <tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$file_base_name</span></tt></td>
-<td>The name only portion of the current file, e. g., <em>Document</em>.</td>
+<td>当前的文件名唯一的名字部分, e. g., <em>Document</em>.</td>
 </tr>
 <tr class="row-even"><td><tt class="docutils literal"><span class="pre">$packages</span></tt></td>
-<td>The full path to the <em>Packages</em> folder.</td>
+<td><em>Packages</em>目录的完整路径。</td>
 </tr>
 <tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$project</span></tt></td>
-<td>The full path to the current project file.</td>
+<td>当前项目文件的完整路径。</td>
 </tr>
 <tr class="row-even"><td><tt class="docutils literal"><span class="pre">$project_path</span></tt></td>
-<td>The directory of the current project file.</td>
+<td>当前项目文件的目录。</td>
 </tr>
 <tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$project_name</span></tt></td>
-<td>The name portion of the current project file.</td>
+<td>当前项目文件的名称部分。</td>
 </tr>
 <tr class="row-even"><td><tt class="docutils literal"><span class="pre">$project_extension</span></tt></td>
-<td>The extension portion of the current project file.</td>
+<td>当前项目文件的扩展名部分。</td>
 </tr>
 <tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$project_base_name</span></tt></td>
-<td>The name only portion of the current project file.</td>
+<td>当前项目文件名唯一的名字部分。</td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="place-holders-for-variables">
-<h3>Place Holders for Variables<a class="headerlink" href="#place-holders-for-variables" title="Permalink to this headline">¶</a></h3>
-<p>Features found in snippets can be used with these variables. For example:</p>
+<h3>变量占位<a class="headerlink" href="#place-holders-for-variables" title="Permalink to this headline">¶</a></h3>
+<p>snippet中的功能可以使用这些变量。举个例子:</p>
 <div class="highlight-python"><pre>${project_name:Default}</pre>
 </div>
-<p>This will emit the name of the current project if there is one, otherwise <tt class="docutils literal"><span class="pre">Default</span></tt>.</p>
+<p>这里将使用当前项目名如果有的话，没有则使用<tt class="docutils literal"><span class="pre">Default</span></tt>.</p>
 <div class="highlight-python"><pre>${file/\.php/\.txt/}</pre>
 </div>
-<p>This will emit the full path of the current file, replacing <em>.php</em> with <em>.txt</em>.</p>
+<p>这儿将在当前文件的全路径里替换<em>.php</em>为<em>.txt</em>.</p>
 </div>
 </div>
 <div class="section" id="running-build-systems">
-<h2>Running Build Systems<a class="headerlink" href="#running-build-systems" title="Permalink to this headline">¶</a></h2>
-<p>Select the desired build system from <strong>Tools | Build System</strong>, and then select
-<strong>Tools | Build</strong> or press <tt class="docutils literal"><span class="pre">F7</span></tt>.</p>
+<h2>运行编译系统<a class="headerlink" href="#running-build-systems" title="Permalink to this headline">¶</a></h2>
+<p>选择需要的编译系统通过<strong>Tools | Build System</strong>, 然后选择
+<strong>Tools | Build</strong> 或按<tt class="docutils literal"><span class="pre">F7</span></tt>。</p>
 </div>
 <div class="section" id="troubleshooting-build-systems">
-<span id="id4"></span><h2>Troubleshooting Build Systems<a class="headerlink" href="#troubleshooting-build-systems" title="Permalink to this headline">¶</a></h2>
-<p>Build systems will look for executables in your <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>, unless you specify
-an absolute path to the executable. Therefore, your <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> variable must be
-correctly set.</p>
+<span id="id4"></span><h2>故障诊断编译系统<a class="headerlink" href="#troubleshooting-build-systems" title="Permalink to this headline">¶</a></h2>
+<p>编译系统键会在你的<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>中勋章可执行文件, 除非你指定了一个可执行文件的绝对路径。因此,你的<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>变量必须设置正确。</p>
 <p>On some operating systems, the value for <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> will vary from a terminal
 window to a graphical application. Thus, even if the command you are using in
 your build system works in the command line, it may not work from Sublime Text.
