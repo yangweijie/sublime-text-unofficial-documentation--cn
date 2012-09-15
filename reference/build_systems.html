@@ -252,23 +252,17 @@ B</em>将会运行Python解释器并且上面出现的变量将会在命里面�
 <div class="section" id="troubleshooting-build-systems">
 <span id="id4"></span><h2>故障诊断编译系统<a class="headerlink" href="#troubleshooting-build-systems" title="Permalink to this headline">¶</a></h2>
 <p>编译系统键会在你的<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>中勋章可执行文件, 除非你指定了一个可执行文件的绝对路径。因此,你的<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>变量必须设置正确。</p>
-<p>On some operating systems, the value for <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> will vary from a terminal
-window to a graphical application. Thus, even if the command you are using in
-your build system works in the command line, it may not work from Sublime Text.
-This is due to user profiles in shells.</p>
-<p>To solve this issue, make sure you set the desired <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> so that graphical
-applications such as Sublime Text can find it. See the links below for more
-information.</p>
-<p>Alternatively, you can use the <tt class="docutils literal"><span class="pre">path</span></tt> element in <em>.sublime-build</em> files
-to override the <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> used to locate the executable specified in <tt class="docutils literal"><span class="pre">cmd</span></tt>.
-This new value for <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> will only be in effect for as long as your
-build system is running. After that, the old <tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> will be restored.</p>
+<p>在一些系统中<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>的值将会在从一个终端窗口切换到图形应用时改变。因此，即使在命令行里你的编译系统命令有效，通过Sublime Text编译也许会无效。
+这个取决于shell里的用户配置文件（信息？）。</p>
+<p>为了解决问题，确定你设置了你想要的<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt> 那样图形应用程序比如Sublime Text找到它。想了解更多信息看以下链接。</p>
+<p>或者,你可以使用<tt class="docutils literal"><span class="pre">path</span></tt>元素在<em>.sublime-build</em>文件中来覆盖<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>用来定位<tt class="docutils literal"><span class="pre">cmd</span></tt>中指定的可执行程序。
+这个<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>的新值将只会在编译系统运行时有效。在那以后旧的<tt class="xref py py-const docutils literal"><span class="pre">PATH</span></tt>将被还原。</p>
 <div class="admonition-see-also admonition seealso">
-<p class="first admonition-title">See also</p>
+<p class="first admonition-title">你也许感兴趣</p>
 <dl class="last docutils">
-<dt><a class="reference external" href="http://goo.gl/F77EM">Managing Environment Variables in Windows</a></dt>
-<dd>Search Microsoft knowledge base for this topic.</dd>
-<dt><a class="reference external" href="http://stackoverflow.com/q/135688/1670">Setting environment variables in OSX</a></dt>
+<dt><a class="reference external" href="http://goo.gl/F77EM">在Windows中管理环境变量</a></dt>
+<dd>搜索该主题在Microsoft knowledge base中。</dd>
+<dt><a class="reference external" href="http://stackoverflow.com/q/135688/1670">在OSX中设置环境变量</a></dt>
 <dd>StackOverflow topic.</dd>
 </dl>
 </div>
