@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
 
-    <title>File Navigation and File Management &mdash; Sublime Text Unofficial Documentation</title>
+    <title>文件导航和文件管理 &mdash; Sublime Text Unofficial Documentation</title>
 <!-- RTD <head> -->
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script type="text/javascript" src="//media.readthedocs.org/javascript/underscore.js"></script>
@@ -65,61 +65,44 @@
           <div class="body">
             
   <div class="section" id="file-navigation-and-file-management">
-<h1>File Navigation and File Management<a class="headerlink" href="#file-navigation-and-file-management" title="Permalink to this headline">¶</a></h1>
+<h1>文件导航和文件管理<a class="headerlink" href="#file-navigation-and-file-management" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="goto-anything">
-<h2>Goto Anything<a class="headerlink" href="#goto-anything" title="Permalink to this headline">¶</a></h2>
-<p>Goto Anything lets you <strong>navigate files</strong> swiftly. Open it with <tt class="kbd docutils literal"><span class="pre">Ctrl+P</span></tt>.
-As you type into the input area, names of open files and files in open
-directories will be searched, and a preview of the best match will be shown.
-This preview is <em>transient</em>, that is, it won&#8217;t become the actual active buffer
-until you perform some operation on it. Transient views go away when you press
-<tt class="kbd docutils literal"><span class="pre">Esc</span></tt>. You will find transient views in other situations. They are like
-ghosts or something.</p>
-<p>Goto Anything lives up to its name &#8211;there&#8217;s more to it than locating files:</p>
-<p>To perform a <strong>fuzzy search</strong>, append <tt class="docutils literal"><span class="pre">#</span></tt> and then keep typing, like this:</p>
+<h2>跳转到任何地方<a class="headerlink" href="#goto-anything" title="Permalink to this headline">¶</a></h2>
+<p>跳转到任何地方可以让你迅速<strong>浏览文件</strong>。打开它通过<tt class="kbd docutils literal"><span class="pre">Ctrl+P</span></tt>.
+当你在输入区域键入时，打开文件和打开目录的名字将会被搜索，然后显示最匹配结果的预览。
+预览是<em>暂时的</em>,也就是说, 它不会成为实际有效的缓冲区，直到你执行一些操作。当你按
+<tt class="kbd docutils literal"><span class="pre">Esc</span></tt>退出暂时视图。在其他情况你也会发现暂时视图。它们就像幽灵之类的东西。</p>
+<p>跳转到任何地方不会徒有虚名--还有比它更好的定位文件方式:</p>
+<p>要进行一次<strong>模糊搜索</strong>, 添加<tt class="docutils literal"><span class="pre">#</span></tt> 然后继续输入，像这样:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">island</span><span class="c">#treasure</span>
 </pre></div>
 </div>
-<p>This instructs Sublime Text to perform a fuzzy search for <em>treasure</em> in the
-file whose name matches <em>island</em>. Pressing <tt class="kbd docutils literal"><span class="pre">Ctrl+;</span></tt> will open Goto
-Anything and type <tt class="docutils literal"><span class="pre">#</span></tt> for you.</p>
-<p>And there&#8217;s more:</p>
-<p>To <strong>search symbols</strong> in the active buffer, press <tt class="kbd docutils literal"><span class="pre">Ctrl+R</span></tt>. The operator
-<tt class="docutils literal"><span class="pre">&#64;</span></tt> can be used as explained above too.</p>
-<p>To <strong>go to a line number</strong>, press <tt class="kbd docutils literal"><span class="pre">Ctrl+G</span></tt>. The operator <tt class="docutils literal"><span class="pre">:</span></tt> can be
-used as explained above too.</p>
-<p>Searching for symbols will only work for file types that have symbols defined
-for them.</p>
+<p>这会让Sublime Text模糊搜索<em>treasure</em>在文件名匹配<em>island</em>中。按<tt class="kbd docutils literal"><span class="pre">Ctrl+;</span></tt> 将会打开跳至任何地方并且为你输入了<tt class="docutils literal"><span class="pre">#</span></tt>。</p>
+<p>还有更多:</p>
+<p>要<strong>搜素符号</strong>在激活缓冲区里,请按<tt class="kbd docutils literal"><span class="pre">Ctrl+R</span></tt>。操作符
+<tt class="docutils literal"><span class="pre">&#64;</span></tt>就像上面解释的一样的作用。</p>
+<p>要<strong>调至某一行号</strong>, 按<tt class="kbd docutils literal"><span class="pre">Ctrl+G</span></tt>.操作符<tt class="docutils literal"><span class="pre">:</span></tt>就像上面解释的一样的作用。</p>
+<p>搜索符号只会在定义过待搜索符号的文件中起作用。</p>
 </div>
 <div class="section" id="sidebar">
-<h2>Sidebar<a class="headerlink" href="#sidebar" title="Permalink to this headline">¶</a></h2>
-<p>The sidebar gives you an overview of your project. Files and folders added to
-the sidebar will be available in Goto Anything and project-wide actions.
-Projects and the sidebar are closely related. There&#8217;s always an open project,
-whether it&#8217;s implicit or explicit.</p>
-<p>To <strong>open or close</strong> the sidebar, press <tt class="kbd docutils literal"><span class="pre">Ctrl+K,</span> <span class="pre">Ctrl+B</span></tt>.</p>
-<p>The sidebar can be navigated with the arrow keys, but first you need to give
-it the <strong>input focus</strong> by pressing <tt class="kbd docutils literal"><span class="pre">Ctrl+0</span></tt>. To return input focus to the
-buffer, press <tt class="kbd docutils literal"><span class="pre">Esc</span></tt>. Alternatively, you can use the mouse to the same
-effect, but why would you?</p>
-<p>The sidebar also provides basic file management operations through the context
-menu.</p>
+<h2>侧边栏<a class="headerlink" href="#sidebar" title="Permalink to this headline">¶</a></h2>
+<p>侧边栏为您提供了您的项目的概述。添加到侧边栏的文件和文件夹可以在跳至任何地方和项目范围中使用。
+项目和侧边栏是密切相关的。总有一个开放的项目，无论是显式或隐式的。</p>
+<p>要<strong>打开或关闭</strong>侧边栏,按<tt class="kbd docutils literal"><span class="pre">Ctrl+K,</span> <span class="pre">Ctrl+B</span></tt>。</p>
+<p>可以通过上下箭头键导航侧边栏，但是你先要给它<strong>输入聚焦</strong>通过按<tt class="kbd docutils literal"><span class="pre">Ctrl+0</span></tt>.要回到缓冲区的输入聚焦，按<tt class="kbd docutils literal"><span class="pre">Esc</span></tt>. 或者，你也可以用鼠标相同的效果，但你会吗？</p>
+<p>通过右键菜单侧边栏也提供了文件管理操作。</p>
 </div>
 <div class="section" id="projects">
-<h2>Projects<a class="headerlink" href="#projects" title="Permalink to this headline">¶</a></h2>
-<p>Projects group sets of files and directories you need to work on as a unit.
-Once you&#8217;ve set up your project the way that suits you by adding folders, save
-it and give it a name.</p>
-<p>To save a project, go to <strong>Project | Save Project As...</strong>.</p>
-<p>To quickly switch between projects, press <tt class="kbd docutils literal"><span class="pre">Ctrl+Alt+P</span></tt>.</p>
-<p>Project data are stored in JSON files with a <cite>.sublime-project</cite> extension.
-Wherever there&#8217;s a <cite>.sublime-project</cite> file, you will find an ancillary
-<cite>.sublime-workspace</cite> file too. The second one is used by Sublime Text and you
-shouldn&#8217;t edit it yourself.</p>
-<p>Project files can define settings specific to that project only. More on that
-in the <a class="reference external" href="http://www.sublimetext.com/docs/2/projects.html">official documentation</a>.</p>
-<p>You can open a project from the <strong>command line</strong> by passing the <em>.sublime-
-project</em> file as an argument.</p>
+<h2>项目<a class="headerlink" href="#projects" title="Permalink to this headline">¶</a></h2>
+<p>项目组把你工作所需的文件和目录看作一个单元。
+一旦你用适合你的方式建立项目，通过向其中添加目录，保存它给它一个名字。</p>
+<p>要保存一个项目, 选择<strong>Project | Save Project As...</strong>。</p>
+<p>项目中快速切换, 按<tt class="kbd docutils literal"><span class="pre">Ctrl+Alt+P</span></tt>.</p>
+<p>项目数据存储在有<cite>.sublime-project</cite>后缀的JSON文件里。
+在有<cite>.sublime-project</cite> 文件的地方,你也会发现一个配套的<cite>.sublime-workspace</cite>文件。第二个是给Sublime Text用的，你不能自己编辑它。</p>
+<p>项目文件可以定义项目独有的配置。更多见<a class="reference external" href="http://www.sublimetext.com/docs/2/projects.html">官方文档</a>。</p>
+<p>你可以通过<strong>命令行</strong>打开一个项目，只要把<em>.sublime-
+project</em>文件当做一个参数传入。</p>
 </div>
 </div>
 
