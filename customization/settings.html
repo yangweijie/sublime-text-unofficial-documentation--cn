@@ -67,45 +67,32 @@
           <div class="body">
             
   <div class="section" id="settings">
-<h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
-<p>Sublime Text stores configuration data in <em>.sublime-settings</em> files.
-Flexibility comes at the price of a slightly complex system for applying
-settings. However, here&#8217;s a rule of thumb:</p>
-<p>Always place your personal settings files under <em>Packages/User</em> to guarantee
-that they will take precedence over any other conflicting settings files.</p>
-<p>With that out of the way, let&#8217;s unveil the mysteries of how settings work to
-please masochistic readers.</p>
+<h1>配置<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<p>Sublime Text在<em>.sublime-settings</em>文件中存储的数据。
+以稍微复杂地设置配置的代价实现了灵活性。当然，有一条黄金原则:</p>
+<p>永远把你个人的配置文件放在<em>Packages/User</em>下来保证他们将会优先覆盖其他冲突的配置文件。</p>
+<p>有了这样的方式，让我们来揭开的奥秘，如何设置工作，满足自虐的读者。</p>
 <div class="section" id="format">
-<h2>Format<a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h2>
-<p>Settings files use JSON and have the <em>.sublime-settings</em> extension.</p>
+<h2>格式<a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h2>
+<p>配置文件使用JSON并且以<em>.sublime-settings</em>为扩展名。</p>
 </div>
 <div class="section" id="types-of-settings">
-<h2>Types of Settings<a class="headerlink" href="#types-of-settings" title="Permalink to this headline">¶</a></h2>
-<p>The purpose of each <em>.sublime-settings</em> file is determined by its name. These
-names can be descriptive (like <em>Preferences (Windows).sublime-settings</em>
-or <em>Minimap.sublime-settings</em>), or they can be related to what the settings
-file is controlling. For example, file type settings need to carry the name
-of the <em>.tmLanguage</em> syntax definition for the file type. Thus, for the
-<em>.py</em> file type, whose syntax definition is contained in <em>Python.tmLanguage</em>,
-the corresponding settings files would be called <em>Python.sublime-settings</em>.</p>
-<p>Also, some settings files only apply for specific platforms. This can be
-inferred from the file names: <em>Preferences (Windows).sublime-settings</em>,
-<em>Preferences (Linux).sublime-settings</em>, etc.</p>
-<p>This is <strong>important</strong>: Platform-specific settings files in the <em>Packages/User</em>
-folder are ignored. This way, you can be sure a single settings file overrides
-all the others.</p>
+<h2>配置的类型<a class="headerlink" href="#types-of-settings" title="Permalink to this headline">¶</a></h2>
+<p>每个<em>.sublime-settings</em>文件的用途有它的名字决定了。这些名字可以是描述性的(像<em>Preferences (Windows).sublime-settings</em>
+或<em>Minimap.sublime-settings</em>), 也可以是和它所控制的相关。举个例子,用来加载与<em>.tmLanguage</em>语法定义文件类型同名的文件类型的配置文件。因此对于
+<em>.py</em>文件类型, 它的语法定义在<em>Python.tmLanguage</em>中,
+它相关的配置文件就会是<em>Python.sublime-settings</em>。</p>
+<p>当然,一些配置文件只适用于指定平台。这个可以通过文件名识别: <em>Preferences (Windows).sublime-settings</em>,
+<em>Preferences (Linux).sublime-settings</em>, 等等。</p>
+<p>这是很<strong>重要的</strong>: 位于<em>Packages/User</em>目录的特定平台的配置文件
+将被忽略。 通过这种方式，你可以确保一个配置文件覆盖其他所有的配置。</p>
 </div>
 <div class="section" id="how-to-access-and-edit-common-settings-files">
-<h2>How to Access and Edit Common Settings Files<a class="headerlink" href="#how-to-access-and-edit-common-settings-files" title="Permalink to this headline">¶</a></h2>
-<p>Unless you need very fine-grained control over settings, you can access the main
-configuration files through the <strong>Preferences | Settings - User</strong> and
-<strong>Preferences | Settings - More</strong> menu items. Editing <strong>Preferences - Settings Default</strong>
-isn&#8217;t a smart thing to do, because changes will be reverted with every update
-to the software. However, you can use that file for reference: it contains comments
-explaining the purpose of all available global and file type settings.</p>
+<h2>如何编辑普通的配置文件<a class="headerlink" href="#how-to-access-and-edit-common-settings-files" title="Permalink to this headline">¶</a></h2>
+<p>除非你想要通过配置文件实现粒度非常细的控制，你可以访问主要的配置文件通过<strong>Preferences | Settings - User</strong> 和<strong>Preferences | Settings - More</strong> 菜单项目。修改<strong>Preferences - Settings Default</strong>不是一件明智的事情,因为每次升级软件它都会被覆盖。然而你可以把它当做参考:它包含了解释所有全局和文件类型配置的注释。</p>
 </div>
 <div class="section" id="order-of-precedence-of-sublime-settings-files">
-<h2>Order of Precedence of <em>.sublime-settings</em> Files<a class="headerlink" href="#order-of-precedence-of-sublime-settings-files" title="Permalink to this headline">¶</a></h2>
+<h2><em>.sublime-settings</em>文件的顺序<a class="headerlink" href="#order-of-precedence-of-sublime-settings-files" title="Permalink to this headline">¶</a></h2>
 <p>The same settings file (such as <em>Python.sublime-settings</em>) can appear in multiple
 places. All settings defined in identically named files will be merged together
 and overwritten according to predefined rules. See
