@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -67,14 +66,14 @@
           <div class="body">
             
   <div class="section" id="snippets">
-<h1>Snippets<a class="headerlink" href="#snippets" title="Permalink to this headline">¶</a></h1>
+<h1>代码片段<a class="headerlink" href="#snippets" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="compatibility-with-textmate">
-<h2>Compatibility with Textmate<a class="headerlink" href="#compatibility-with-textmate" title="Permalink to this headline">¶</a></h2>
-<p>Sublime Text snippets are generally compatible with Textmate snippets.</p>
+<h2>和Textmate兼容<a class="headerlink" href="#compatibility-with-textmate" title="Permalink to this headline">¶</a></h2>
+<p>Sublime Text的代码片段和Textmate兼容.</p>
 </div>
 <div class="section" id="file-format">
-<h2>File Format<a class="headerlink" href="#file-format" title="Permalink to this headline">¶</a></h2>
-<p>Snippet files are XML files with the <tt class="docutils literal"><span class="pre">sublime-snippet</span></tt> extension.</p>
+<h2>文件格式<a class="headerlink" href="#file-format" title="Permalink to this headline">¶</a></h2>
+<p>代码片段文件是以<tt class="docutils literal"><span class="pre">sublime-snippet</span></tt>为后缀的XML文件.</p>
 <div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;snippet&gt;</span>
     <span class="nt">&lt;content&gt;</span><span class="cp">&lt;![CDATA[]]&gt;</span><span class="nt">&lt;/content&gt;</span>
     <span class="nt">&lt;tabTrigger&gt;&lt;/tabTrigger&gt;</span>
@@ -85,24 +84,24 @@
 </div>
 <dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">content</span></tt></dt>
-<dd>Actual snippet content.</dd>
+<dd>表示实际代码片段的内容.</dd>
 <dt><tt class="docutils literal"><span class="pre">tabTrigger</span></tt></dt>
-<dd>Implicit keybinding for this snippet. Last key (implicit) is <tt class="docutils literal"><span class="pre">TAB</span></tt>.</dd>
+<dd>此片段的缩写代码,可以按 <tt class="docutils literal"><span class="pre">TAB</span></tt>键触发.</dd>
 <dt><tt class="docutils literal"><span class="pre">scope</span></tt></dt>
-<dd>Scope selector to activate this snippet.</dd>
+<dd>指在何种文件类型中使用.</dd>
 <dt><tt class="docutils literal"><span class="pre">description</span></tt></dt>
-<dd>User friendly description for menu item.</dd>
+<dd>在菜单中的友好提示.(注:不可用)</dd>
 </dl>
 </div>
 <div class="section" id="escape-sequences">
-<h2>Escape Sequences<a class="headerlink" href="#escape-sequences" title="Permalink to this headline">¶</a></h2>
+<h2>转义字符<a class="headerlink" href="#escape-sequences" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">\$</span></tt></dt>
-<dd>Literal <tt class="docutils literal"><span class="pre">$</span></tt>.</dd>
+<dd>表示 <tt class="docutils literal"><span class="pre">$</span></tt>符号.</dd>
 </dl>
 </div>
 <div class="section" id="environment-variables">
-<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h2>
+<h2>环境变量<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="24%" />
@@ -110,37 +109,37 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$PARAM1</span> <span class="pre">..</span> <span class="pre">$PARAMn</span></tt></td>
-<td>Arguments passed to the <tt class="docutils literal"><span class="pre">insertSnippet</span></tt> command.</td>
+<td>通过<tt class="docutils literal"><span class="pre">insertSnippet</span></tt> 命令可传递该参数.</td>
 </tr>
 <tr class="row-even"><td><tt class="docutils literal"><span class="pre">$SELECTION</span></tt></td>
-<td>The text that was selected when the snippet was triggered.</td>
+<td>按键触发时选中的文字.</td>
 </tr>
 <tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$TM_CURRENT_LINE</span></tt></td>
-<td>Content of the line the cursor was in when the snippet was triggered.</td>
+<td>按键触发时当前行的内容.</td>
 </tr>
 <tr class="row-even"><td><tt class="docutils literal"><span class="pre">$TM_CURRENT_WORD</span></tt></td>
-<td>Current word under the cursor when the snippet was triggered.</td>
+<td>按键触发时当前光标所在的单词.</td>
 </tr>
 <tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$TM_FILENAME</span></tt></td>
-<td>File name of the file being edited including extension.</td>
+<td>当前编辑的文件名,含后缀.</td>
 </tr>
 <tr class="row-even"><td><tt class="docutils literal"><span class="pre">$TM_FILEPATH</span></tt></td>
-<td>File path to the file being edited.</td>
+<td>当前编辑文件的路径.</td>
 </tr>
 <tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$TM_FULLNAME</span></tt></td>
-<td>User&#8217;s user name.</td>
+<td>当前用户名.</td>
 </tr>
 <tr class="row-even"><td><tt class="docutils literal"><span class="pre">$TM_LINE_INDEX</span></tt></td>
-<td>Column the snippet is being inserted at, 0 based.</td>
+<td>光标插入处的列数,默认为0.</td>
 </tr>
 <tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$TM_LINE_NUMBER</span></tt></td>
-<td>Row the snippet is being inserted at, 1 based.</td>
+<td>光标插入处的行数,默认为1.</td>
 </tr>
 <tr class="row-even"><td><tt class="docutils literal"><span class="pre">$TM_SELECTED_TEXT</span></tt></td>
-<td>An alias for <tt class="docutils literal"><span class="pre">$SELECTION</span></tt>.</td>
+<td> 与<tt class="docutils literal"><span class="pre">$SELECTION</span></tt>表示同样的含义.</td>
 </tr>
 <tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$TM_SOFT_TABS</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">YES</span></tt> if <tt class="docutils literal"><span class="pre">translateTabsToSpaces</span></tt> is true, otherwise <tt class="docutils literal"><span class="pre">NO</span></tt>.</td>
+<td> 如果<tt class="docutils literal"><span class="pre">translateTabsToSpaces</span></tt>为真的时候,值为<tt class="docutils literal"><span class="pre">YES</span></tt>, 否则为 <tt class="docutils literal"><span class="pre">NO</span></tt>.</td>
 </tr>
 <tr class="row-even"><td><tt class="docutils literal"><span class="pre">$TM_TAB_SIZE</span></tt></td>
 <td>Spaces per-tab (controlled by the <tt class="docutils literal"><span class="pre">tabSize</span></tt> option).</td>
@@ -149,25 +148,24 @@
 </table>
 </div>
 <div class="section" id="fields">
-<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
-<p>Mark positions to cycle through by pressing <tt class="docutils literal"><span class="pre">TAB</span></tt> or <tt class="docutils literal"><span class="pre">SHIFT</span> <span class="pre">+</span> <span class="pre">TAB</span></tt>.</p>
-<p>Syntax: <tt class="docutils literal"><span class="pre">$1</span></tt> .. <tt class="docutils literal"><span class="pre">$n</span></tt></p>
+<h2>变量<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<p>片段中可编辑位置,可以使用<tt class="docutils literal"><span class="pre">TAB</span></tt> 或者 <tt class="docutils literal"><span class="pre">SHIFT</span> <span class="pre">+</span> <span class="pre">TAB</span></tt>进行切换.</p>
+<p>语法: <tt class="docutils literal"><span class="pre">$1</span></tt> .. <tt class="docutils literal"><span class="pre">$n</span></tt></p>
 <dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">$0</span></tt></dt>
-<dd>Exit mark. Position at which normal text editing should be resumed. By default,
-Sublime Text implicitly sets this mark at the end of the snippet&#8217;s <tt class="docutils literal"><span class="pre">content</span></tt> element.</dd>
+<dd>退出编辑. 从这个位置开始以后进行正常文本编辑. 默认到达代码段的 <tt class="docutils literal"><span class="pre">content</span></tt>元素结束处即可退出编辑.</dd>
 </dl>
-<p>Fields with the same name mirror each other.</p>
+<p>同名的变量会同时输出.</p>
 </div>
 <div class="section" id="place-holders">
-<h2>Place Holders<a class="headerlink" href="#place-holders" title="Permalink to this headline">¶</a></h2>
-<p>Fields with a default value.</p>
-<p>Syntax: <tt class="docutils literal"><span class="pre">${1:PLACE_HOLDER}</span></tt> .. <tt class="docutils literal"><span class="pre">${n:PLACE_HOLDER}</span></tt></p>
-<p>Fields and place holders can be combined and nested within other place holders.</p>
+<h2>占位符<a class="headerlink" href="#place-holders" title="Permalink to this headline">¶</a></h2>
+<p>带默认值的变量.</p>
+<p>语法: <tt class="docutils literal"><span class="pre">${1:PLACE_HOLDER}</span></tt> .. <tt class="docutils literal"><span class="pre">${n:PLACE_HOLDER}</span></tt></p>
+<p>变量与占位符可以混合并嵌套在其他占位符中.</p>
 </div>
 <div class="section" id="substitutions">
-<h2>Substitutions<a class="headerlink" href="#substitutions" title="Permalink to this headline">¶</a></h2>
-<p>Syntax:</p>
+<h2>替换<a class="headerlink" href="#substitutions" title="Permalink to this headline">¶</a></h2>
+<p>语法:</p>
 <blockquote>
 <div><ul class="simple">
 <li><tt class="docutils literal"><span class="pre">${var_name/regex/format_string/}</span></tt></li>
@@ -176,21 +174,21 @@ Sublime Text implicitly sets this mark at the end of the snippet&#8217;s <tt cla
 </div></blockquote>
 <dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">var_name</span></tt></dt>
-<dd>The field&#8217;s name to base the substitution on: 1, 2, 3…</dd>
+<dd>根据变量名称中的 1, 2, 3… 进行替换</dd>
 <dt><tt class="docutils literal"><span class="pre">regex</span></tt></dt>
-<dd>Perl-style regular expression: See the Boost library documentation for <a class="reference external" href="http://www.boost.org/doc/libs/1_44_0/libs/regex/doc/html/boost_regex/syntax/perl_syntax.html">regular expressions</a>.</dd>
+<dd>Perl风格的正则表达式: 参考 Boost library documentation 的 <a class="reference external" href="http://www.boost.org/doc/libs/1_44_0/libs/regex/doc/html/boost_regex/syntax/perl_syntax.html">正则表达式</a>.</dd>
 <dt><tt class="docutils literal"><span class="pre">format_string</span></tt></dt>
-<dd>See the Boost library documentation for <a class="reference external" href="http://www.boost.org/doc/libs/1_44_0/libs/regex/doc/html/boost_regex/format/perl_format.html">format strings</a>.</dd>
+<dd>参考 Boost library documentation 的 <a class="reference external" href="http://www.boost.org/doc/libs/1_44_0/libs/regex/doc/html/boost_regex/format/perl_format.html">字符格式化</a>.</dd>
 <dt><tt class="docutils literal"><span class="pre">options</span></tt></dt>
 <dd><dl class="first last docutils">
-<dt>Optional. Any of the following:</dt>
+<dt>可选项. 下面的参数任选:</dt>
 <dd><dl class="first last docutils">
 <dt><tt class="docutils literal"><span class="pre">i</span></tt></dt>
-<dd>Case-insensitive regex.</dd>
+<dd>大小写敏感的正则.</dd>
 <dt><tt class="docutils literal"><span class="pre">g</span></tt></dt>
-<dd>Replace all occurrences of <tt class="docutils literal"><span class="pre">regex</span></tt>.</dd>
+<dd>替换的正则所有处 .</dd>
 <dt><tt class="docutils literal"><span class="pre">m</span></tt></dt>
-<dd>Don&#8217;t ignore newlines in the string.</dd>
+<dd>不忽略字符中的新行.</dd>
 </dl>
 </dd>
 </dl>
