@@ -55,9 +55,9 @@
 当你按下`Enter`键时，自动缩进功能将会根据当前行空格的数量来猜测新增行的缩进并根据此猜测来插入新增行。此功能通过下列配置来控制：
 
 auto_indent： 布尔类型, 默认启用。 启用自动缩进功能
-smart_indent： 布尔类型, 默认启用。使自动缩进变得更智能, `e.g., by indenting the next line after an if statement in C.`
+smart_indent： 布尔类型, 默认启用。使自动缩进变得更智能, `比如, 在C中if语句换行后自动缩进一次。`
 trim_automatic_white_space: 布尔类型，默认启用。当移动插入符移出一行时移除`auto_indent`生成的空白格。    
-indent_to_bracket：布尔类型，默认禁用. `Adds whitespace up to the first open bracket when indenting. Use when indenting like this`:
+indent_to_bracket：布尔类型，默认禁用. `添加白空格直道到对齐第一个闭合括号当像下面的缩进时`:
 
 	use_indent_to_bracket(to_indent,
-    	                  like_this);
+                              like_this);
